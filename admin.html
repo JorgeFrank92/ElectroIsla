@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ElectroIsla | Administración</title><link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-page">
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">EI</span><span>Electro<span>Isla</span></span></a><a class="btn secondary" href="index.html">← Ver tienda</a></header>
+<main class="admin-wrap">
+  <section id="loginBox" class="admin-card narrow">
+    <p class="eyebrow">ZONA PRIVADA</p><h1>Administrar ElectroIsla</h1>
+    <p>Esta primera versión usa una clave local de demostración. Antes de publicar el panel para uso real, conéctalo a autenticación segura.</p>
+    <label>Clave de administrador<input type="password" id="adminPass" placeholder="admin123"></label>
+    <button class="btn primary full" id="loginBtn">Entrar</button>
+    <small>Clave inicial de demostración: <b>admin123</b></small>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <div class="admin-title"><div><p class="eyebrow">PANEL</p><h1>Productos</h1></div><button id="logoutBtn" class="btn secondary">Salir</button></div>
+    <div class="admin-grid">
+      <form id="productForm" class="admin-card">
+        <input type="hidden" id="editId">
+        <h2 id="formTitle">➕ Agregar producto</h2>
+        <label>Nombre<input required id="pName" placeholder="Ej. Carne de cerdo"></label>
+        <label>Categoría<select id="pCategory"><option>Alimentos</option><option>Electrodomésticos</option></select></label>
+        <label>Precio<input required type="number" min="0" step="0.01" id="pPrice" placeholder="0.00"></label>
+        <label>Unidad / presentación<input id="pUnit" placeholder="kg, unidad, caja..."></label>
+        <label>Imagen (URL)<input id="pImage" placeholder="https://..."></label>
+        <label>Descripción<textarea id="pDescription" rows="3"></textarea></label>
+        <label class="check"><input type="checkbox" id="pAvailable" checked> Disponible</label>
+        <div class="row"><button class="btn primary" type="submit">Guardar producto</button><button class="btn secondary" type="button" id="cancelEdit">Limpiar</button></div>
+      </form>
+      <div class="admin-card"><h2>📦 Catálogo actual</h2><div id="adminProducts"></div></div>
+    </div>
+  </section>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>
