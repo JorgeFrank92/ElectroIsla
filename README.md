@@ -1,49 +1,27 @@
-# ElectroIsla — tienda online
+# ElectroIsla — tienda online v7.2 Supabase
 
-Primera versión funcional y gratuita de la tienda.
+Esta versión conserva las funciones de v7.1 y añade conexión con Supabase.
 
-## Incluye
-- Dos categorías: Alimentos y Electrodomésticos.
-- Catálogo responsive para móvil y PC.
-- Carrito.
-- Formulario de pedido.
-- Generación automática del mensaje de WhatsApp al +53 52017110.
-- Panel de administración para agregar, editar, ocultar y eliminar productos.
-- Persistencia local para prototipo.
+## Conservado
+- Alimentos y Electrodomésticos.
+- Catálogo, filtros y carrito.
+- Pedidos por WhatsApp al +53 52017110.
+- Panel para agregar, editar, ocultar y eliminar productos.
+- Fotos desde la galería de Android con vista previa.
+- Unidades y presentaciones, incluida lb, ½ lb y "Otra...".
+- USD, CUP y EUR.
+- Precio normal y precio de descuento.
 
-## Importante sobre esta primera versión
-El panel de administración usa `localStorage` y la clave de demostración `admin123`. Esto sirve para probar la interfaz, pero **no debe considerarse seguridad real** si la página se publica para clientes.
+## Supabase
+- Los productos se leen desde `public.products`.
+- El primer inicio del panel conserva el catálogo local y lo sube a Supabase si la tabla está vacía.
+- Los cambios del panel se guardan en Supabase y en el almacenamiento local.
+- La tienda pública usa Supabase y conserva el catálogo local como respaldo si no puede conectarse.
+- Realtime actualiza catálogo cuando hay cambios.
+- El panel usa Supabase Auth con correo y contraseña; ya no depende de una clave hardcodeada.
 
-Para una versión de producción, la siguiente etapa es conectar el catálogo y el panel a Supabase (plan gratuito): base de datos + autenticación + almacenamiento de imágenes. Así los cambios que hagas desde el teléfono quedan guardados en la nube y no dependen del navegador.
+## Seguridad pendiente antes de publicar como producción
+La tabla actual permite escritura a usuarios autenticados. Como solo debe existir el administrador, conviene desactivar nuevos registros y/o restringir las políticas a un usuario administrador antes de una publicación pública definitiva.
 
-## Publicación gratuita
-Puedes publicar `index.html`, `styles.css` y `app.js` con GitHub Pages. El panel `admin.html` y `admin.js` puede publicarse junto con ellos, pero para producción debe usar autenticación y base de datos.
-
-## WhatsApp
-El número está configurado como `+53 52017110` en `app.js`.
-
-
-## v4 - Fotos desde Android
-El panel permite seleccionar una imagen con el selector de archivos del Android, comprimirla y guardarla en el producto mediante almacenamiento local.
-
-
-## Versión 6
-- Mantiene las dos opciones de imagen: URL o galería del Android.
-- La galería usa FileReader y muestra una vista previa real antes de guardar.
-- La URL también tiene vista previa.
-- Se evita mezclar URL y archivo al cambiar de opción.
-
-
-## Versión 7
-- Unidad/presentación ahora es una lista desplegable organizada por categorías.
-- Incluye libra (lb), media libra (½ lb), onza, gramo, kilogramo y otras unidades.
-- Incluye opción “Otra...” para escribir una presentación personalizada.
-
-
-## Cambios de esta revisión v7.1
-- Cada producto puede usar USD, CUP o EUR.
-- Cada producto puede tener un precio normal y un precio en descuento opcional.
-- Los descuentos muestran el precio normal tachado y el precio rebajado.
-- El carrito y el pedido por WhatsApp usan el precio efectivo del descuento.
-- Si un carrito contiene monedas diferentes, los totales se muestran separados por moneda en lugar de sumarlas entre sí.
-- Los productos existentes sin moneda siguen funcionando y se interpretan como USD.
+## Imágenes
+Esta etapa mantiene las imágenes como datos dentro del campo `image` para no romper el funcionamiento existente. La siguiente mejora recomendada es migrarlas a Supabase Storage para reducir el tamaño de la base de datos.

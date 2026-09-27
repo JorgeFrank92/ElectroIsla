@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ElectroIsla | Administración</title><link rel="stylesheet" href="styles.css">
+<style>
+.photo-picker{border:1px dashed #b9c2cc;border-radius:14px;padding:14px;margin-top:6px}
+.photo-btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.photo-btn input{display:none}.photo-preview img{width:120px;height:120px;object-fit:cover;border-radius:12px;margin-top:10px}
+.photo-status{display:block;margin-top:7px;font-size:.85rem;color:#5b6670}
+</style>
+</head>
+<body class="admin-page">
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">EI</span><span>Electro<span>Isla</span></span></a><a class="btn secondary" href="index.html">← Ver tienda</a></header>
+<main class="admin-wrap">
+<section id="loginBox" class="admin-card narrow">
+<p class="eyebrow">ZONA PRIVADA</p><h1>Administrar ElectroIsla</h1>
+<p>Panel de administración conectado a la nube.</p>
+<label>Correo electrónico<input type="email" id="adminEmail" placeholder="Tu correo de Supabase" autocomplete="username"></label>
+<label>Contraseña<input type="password" id="adminPass" placeholder="Contraseña" autocomplete="current-password"></label>
+<p class="login-status" style="min-height:1.2em;font-size:.9rem;color:#5b6670"></p>
+<button class="btn primary full" id="loginBtn">Entrar</button>
+</section>
+<section id="dashboard" class="hidden">
+<div class="admin-title"><div><p class="eyebrow">PANEL</p><h1>Productos</h1></div><button id="logoutBtn" class="btn secondary">Salir</button></div>
+<div class="admin-grid">
+<form id="productForm" class="admin-card">
+<input type="hidden" id="editId"><h2 id="formTitle">➕ Agregar producto</h2>
+<label>Nombre<input required id="pName" placeholder="Ej. Carne de cerdo"></label>
+<label>Categoría<select id="pCategory"><option>Alimentos</option><option>Electrodomésticos</option></select></label>
+<div class="price-fields">
+<label>Moneda<select id="pCurrency"><option value="USD">USD — Dólar estadounidense</option><option value="CUP">CUP — Peso cubano</option><option value="EUR">EUR — Euro</option></select></label>
+<label>Precio<input required type="number" min="0" step="0.01" id="pPrice" placeholder="0.00"></label>
+<label>Precio en descuento (opcional)<input type="number" min="0" step="0.01" id="pDiscountPrice" placeholder="Dejar vacío si no hay descuento"></label>
+</div>
+<label>Unidad / presentación
+      <select id="pUnit">
+        <option value="">Selecciona una unidad o presentación</option>
+        <optgroup label="⚖️ Peso">
+          <option value="mg">Miligramo (mg)</option>
+          <option value="g">Gramo (g)</option>
+          <option value="oz">Onza (oz)</option>
+          <option value="lb">Libra (lb)</option>
+          <option value="½ lb">Media libra (½ lb)</option>
+          <option value="kg">Kilogramo (kg)</option>
+          <option value="t">Tonelada (t)</option>
+        </optgroup>
+        <optgroup label="🥤 Volumen">
+          <option value="ml">Mililitro (ml)</option>
+          <option value="L">Litro (L)</option>
+          <option value="galón">Galón</option>
+          <option value="fl oz">Onza líquida (fl oz)</option>
+        </optgroup>
+        <optgroup label="📦 Cantidad / presentación">
+          <option value="unidad">Unidad</option>
+          <option value="pieza">Pieza</option>
+          <option value="par">Par</option>
+          <option value="½ docena">Media docena</option>
+          <option value="docena">Docena</option>
+          <option value="paquete">Paquete</option>
+          <option value="caja">Caja</option>
+          <option value="bolsa">Bolsa</option>
+          <option value="saco">Saco</option>
+          <option value="bulto">Bulto</option>
+          <option value="bandeja">Bandeja</option>
+          <option value="cartón">Cartón</option>
+          <option value="lata">Lata</option>
+          <option value="botella">Botella</option>
+          <option value="frasco">Frasco</option>
+          <option value="envase">Envase</option>
+          <option value="tarro">Tarro</option>
+          <option value="rollo">Rollo</option>
+          <option value="blíster">Blíster</option>
+          <option value="kit">Kit</option>
+          <option value="combo">Combo</option>
+        </optgroup>
+        <optgroup label="📏 Longitud">
+          <option value="cm">Centímetro (cm)</option>
+          <option value="m">Metro (m)</option>
+        </optgroup>
+        <option value="__otra__">Otra...</option>
+      </select>
+      <input id="pUnitCustom" placeholder="Escribe otra unidad o presentación" style="display:none;margin-top:8px">
+    </label>
+<label>Foto del producto
+<div class="photo-picker">
+<label class="btn primary photo-btn">📷 Elegir foto de la galería
+<input id="pImageFile" type="file" accept="image/*">
+</label>
+<span id="photoStatus" class="photo-status">Toca el botón y selecciona una imagen de tu Android.</span>
+<div id="imagePreview" class="photo-preview"></div>
+</div>
+<input type="hidden" id="pImage">
+</label>
+<label>Descripción<textarea id="pDescription" rows="3"></textarea></label>
+<label class="check"><input type="checkbox" id="pAvailable" checked> Disponible</label>
+<div class="row"><button class="btn primary" type="submit">Guardar producto</button><button class="btn secondary" type="button" id="cancelEdit">Limpiar</button></div>
+</form>
+<div class="admin-card"><h2>📦 Catálogo actual</h2><div id="adminProducts"></div></div>
+</div></section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js?v=1"></script>
+<script src="admin.js?v=7"></script>
+</body></html>
