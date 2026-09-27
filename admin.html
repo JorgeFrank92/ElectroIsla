@@ -27,7 +27,55 @@
 <label>Nombre<input required id="pName" placeholder="Ej. Carne de cerdo"></label>
 <label>Categoría<select id="pCategory"><option>Alimentos</option><option>Electrodomésticos</option></select></label>
 <label>Precio<input required type="number" min="0" step="0.01" id="pPrice" placeholder="0.00"></label>
-<label>Unidad / presentación<input id="pUnit" placeholder="kg, unidad, caja..."></label>
+<label>Unidad / presentación
+      <select id="pUnit">
+        <option value="">Selecciona una unidad o presentación</option>
+        <optgroup label="⚖️ Peso">
+          <option value="mg">Miligramo (mg)</option>
+          <option value="g">Gramo (g)</option>
+          <option value="oz">Onza (oz)</option>
+          <option value="lb">Libra (lb)</option>
+          <option value="½ lb">Media libra (½ lb)</option>
+          <option value="kg">Kilogramo (kg)</option>
+          <option value="t">Tonelada (t)</option>
+        </optgroup>
+        <optgroup label="🥤 Volumen">
+          <option value="ml">Mililitro (ml)</option>
+          <option value="L">Litro (L)</option>
+          <option value="galón">Galón</option>
+          <option value="fl oz">Onza líquida (fl oz)</option>
+        </optgroup>
+        <optgroup label="📦 Cantidad / presentación">
+          <option value="unidad">Unidad</option>
+          <option value="pieza">Pieza</option>
+          <option value="par">Par</option>
+          <option value="½ docena">Media docena</option>
+          <option value="docena">Docena</option>
+          <option value="paquete">Paquete</option>
+          <option value="caja">Caja</option>
+          <option value="bolsa">Bolsa</option>
+          <option value="saco">Saco</option>
+          <option value="bulto">Bulto</option>
+          <option value="bandeja">Bandeja</option>
+          <option value="cartón">Cartón</option>
+          <option value="lata">Lata</option>
+          <option value="botella">Botella</option>
+          <option value="frasco">Frasco</option>
+          <option value="envase">Envase</option>
+          <option value="tarro">Tarro</option>
+          <option value="rollo">Rollo</option>
+          <option value="blíster">Blíster</option>
+          <option value="kit">Kit</option>
+          <option value="combo">Combo</option>
+        </optgroup>
+        <optgroup label="📏 Longitud">
+          <option value="cm">Centímetro (cm)</option>
+          <option value="m">Metro (m)</option>
+        </optgroup>
+        <option value="__otra__">Otra...</option>
+      </select>
+      <input id="pUnitCustom" placeholder="Escribe otra unidad o presentación" style="display:none;margin-top:8px">
+    </label>
 <label>Foto del producto
 <div class="photo-picker">
 <label class="btn primary photo-btn">📷 Elegir foto de la galería

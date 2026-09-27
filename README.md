@@ -32,3 +32,9 @@ El panel permite seleccionar una imagen con el selector de archivos del Android,
 - La galería usa FileReader y muestra una vista previa real antes de guardar.
 - La URL también tiene vista previa.
 - Se evita mezclar URL y archivo al cambiar de opción.
+
+
+## Versión 7
+- Unidad/presentación ahora es una lista desplegable organizada por categorías.
+- Incluye libra (lb), media libra (½ lb), onza, gramo, kilogramo y otras unidades.
+- Incluye opción “Otra...” para escribir una presentación personalizada.
