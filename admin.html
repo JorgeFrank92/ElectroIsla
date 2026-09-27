@@ -15,8 +15,10 @@
 <main class="admin-wrap">
 <section id="loginBox" class="admin-card narrow">
 <p class="eyebrow">ZONA PRIVADA</p><h1>Administrar ElectroIsla</h1>
-<p>Panel local de administración.</p>
-<label>Clave de administrador<input type="password" id="adminPass" placeholder="Contraseña"></label>
+<p>Panel de administración conectado a la nube.</p>
+<label>Correo electrónico<input type="email" id="adminEmail" placeholder="Tu correo de Supabase" autocomplete="username"></label>
+<label>Contraseña<input type="password" id="adminPass" placeholder="Contraseña" autocomplete="current-password"></label>
+<p class="login-status" style="min-height:1.2em;font-size:.9rem;color:#5b6670"></p>
 <button class="btn primary full" id="loginBtn">Entrar</button>
 </section>
 <section id="dashboard" class="hidden">
@@ -96,5 +98,7 @@
 </form>
 <div class="admin-card"><h2>📦 Catálogo actual</h2><div id="adminProducts"></div></div>
 </div></section></main>
-<script src="admin.js?v=6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js?v=1"></script>
+<script src="admin.js?v=7"></script>
 </body></html>
