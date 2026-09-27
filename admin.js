@@ -28,12 +28,19 @@ function fromRow(r){
 async function loadCloud(){
  const {data,error}=await supabaseClient.from("products").select("*").order("created_at",{ascending:true});
  if(error) throw error;
- if(data&&data.length){products=data.map(fromRow);saveLocal();return "cloud";}
- // Primera conexión: conserva el catálogo local y lo sube a la nube.
+ if(data && data.length){
+   products=data.map(fromRow);
+   saveLocal();
+   return "cloud";
+ }
+ // Solo migra el catálogo local si la nube está realmente vacía.
  const local=products.length?products:defaultProducts;
+ if(!local.length) return "empty";
  const {error:upErr}=await supabaseClient.from("products").upsert(local.map(toRow),{onConflict:"id"});
  if(upErr) throw upErr;
- products=local;saveLocal();return "migrated";
+ products=local;
+ saveLocal();
+ return "migrated";
 }
 async function cloudUpsert(p){
  const {error}=await supabaseClient.from("products").upsert(toRow(p),{onConflict:"id"});
@@ -59,8 +66,18 @@ async function show(){
  document.getElementById("loginBox").classList.add("hidden");
  document.getElementById("dashboard").classList.remove("hidden");
  loginBoxMessage("");
- try{await loadCloud();render();}
- catch(err){console.error(err);alert("No se pudo cargar el catálogo de Supabase. Se mantendrá el catálogo local hasta que se pueda conectar.\n\n"+(err.message||err));render();}
+ const status=document.getElementById("cloudStatus");
+ if(status) status.textContent="☁️ Conectando con Supabase…";
+ try{
+   const source=await loadCloud();
+   render();
+   if(status) status.textContent=source==="cloud"?`☁️ Sincronizado con Supabase · ${products.length} productos`:source==="migrated"?`☁️ Catálogo local enviado a Supabase · ${products.length} productos`:"☁️ Supabase conectado · catálogo vacío";
+ }catch(err){
+   console.error(err);
+   render();
+   if(status) status.textContent="⚠️ No se pudo leer Supabase: "+(err.message||err);
+   alert("No se pudo cargar el catálogo de Supabase.\n\n"+(err.message||err));
+ }
 }
 function render(){
  const box=document.getElementById("adminProducts");
@@ -79,12 +96,12 @@ function edit(id){
 async function toggle(id){
  const p=products.find(x=>x.id===id);if(!p)return;
  const old=p.available;p.available=!p.available;saveLocal();render();
- try{await cloudUpsert(p)}catch(err){p.available=old;saveLocal();render();alert("No se pudo sincronizar el cambio con Supabase.\n\n"+(err.message||err));}
+ try{await cloudUpsert(p);const status=document.getElementById("cloudStatus");if(status)status.textContent=`☁️ Sincronizado con Supabase · ${products.length} productos`;}catch(err){p.available=old;saveLocal();render();alert("No se pudo sincronizar el cambio con Supabase.\n\n"+(err.message||err));}
 }
 async function removeP(id){
  if(!confirm("¿Eliminar este producto?"))return;
  const old=[...products];products=products.filter(x=>x.id!==id);saveLocal();render();
- try{await cloudDelete(id)}catch(err){products=old;saveLocal();render();alert("No se pudo eliminar el producto de Supabase.\n\n"+(err.message||err));}
+ try{await cloudDelete(id);const status=document.getElementById("cloudStatus");if(status)status.textContent=`☁️ Sincronizado con Supabase · ${products.length} productos`;}catch(err){products=old;saveLocal();render();alert("No se pudo eliminar el producto de Supabase.\n\n"+(err.message||err));}
 }
 function showPreview(src){
  const box=document.getElementById("imagePreview"),status=document.getElementById("photoStatus");
@@ -113,11 +130,17 @@ document.getElementById("productForm").addEventListener("submit",async e=>{
  const p={id:document.getElementById("editId").value||Date.now().toString(),name:document.getElementById("pName").value.trim(),category:document.getElementById("pCategory").value,price:regularPrice,currency:document.getElementById("pCurrency").value,discountPrice:discountPrice,unit:unit,image:document.getElementById("pImage").value,description:document.getElementById("pDescription").value.trim(),available:document.getElementById("pAvailable").checked};
  if(!p.name){alert("Escribe el nombre del producto.");return}
  const id=document.getElementById("editId").value;const old=[...products];if(id)products=products.map(x=>x.id===id?p:x);else products.push(p);saveLocal();render();
- try{await cloudUpsert(p);reset();render();alert("✅ Producto guardado y sincronizado en la nube.")}catch(err){products=old;saveLocal();render();alert("No se pudo guardar en Supabase. El cambio local fue revertido.\n\n"+(err.message||err))}
+ try{await cloudUpsert(p);reset();render();const status=document.getElementById("cloudStatus");if(status)status.textContent=`☁️ Sincronizado con Supabase · ${products.length} productos`;alert("✅ Producto guardado y sincronizado en la nube.")}catch(err){products=old;saveLocal();render();alert("No se pudo guardar en Supabase. El cambio local fue revertido.\n\n"+(err.message||err))}
 });
 function reset(){document.getElementById("productForm").reset();document.getElementById("editId").value="";document.getElementById("pImage").value="";document.getElementById("formTitle").textContent="➕ Agregar producto";document.getElementById("pAvailable").checked=true;document.getElementById("pCurrency").value="USD";document.getElementById("pDiscountPrice").value="";document.getElementById("pUnitCustom").value="";document.getElementById("pUnitCustom").style.display="none";showPreview("")}
 document.getElementById("cancelEdit").onclick=reset;
 document.getElementById("loginBtn").onclick=login;
+document.getElementById("refreshCloud").onclick=async()=>{
+ const status=document.getElementById("cloudStatus");
+ if(status)status.textContent="☁️ Actualizando…";
+ try{const source=await loadCloud();render();if(status)status.textContent=`☁️ ${source==="cloud"?"Sincronizado con Supabase":"Catálogo actualizado"} · ${products.length} productos`;}
+ catch(err){if(status)status.textContent="⚠️ "+(err.message||err);alert("No se pudo actualizar el catálogo.\n\n"+(err.message||err));}
+};
 document.getElementById("logoutBtn").onclick=async()=>{await supabaseClient.auth.signOut();location.reload()};
 (async()=>{const {data:{session}}=await supabaseClient.auth.getSession();if(session)await show()})();
 supabaseClient.channel("products-admin").on("postgres_changes",{event:"*",schema:"public",table:"products"},async()=>{try{const {data,error}=await supabaseClient.from("products").select("*").order("created_at",{ascending:true});if(!error&&data){products=data.map(fromRow);saveLocal();render()}}catch(e){console.warn(e)}}).subscribe();

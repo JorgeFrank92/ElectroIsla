@@ -96,9 +96,9 @@
 <label class="check"><input type="checkbox" id="pAvailable" checked> Disponible</label>
 <div class="row"><button class="btn primary" type="submit">Guardar producto</button><button class="btn secondary" type="button" id="cancelEdit">Limpiar</button></div>
 </form>
-<div class="admin-card"><h2>📦 Catálogo actual</h2><div id="adminProducts"></div></div>
+<div class="admin-card"><h2>📦 Catálogo actual</h2><p id="cloudStatus" style="font-size:.9rem;color:#5b6670;margin-top:-6px;margin-bottom:12px">☁️ Esperando conexión…</p><button type="button" class="btn secondary" id="refreshCloud" style="margin-bottom:12px">🔄 Actualizar catálogo</button><div id="adminProducts"></div></div>
 </div></section></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js?v=1"></script>
-<script src="admin.js?v=7"></script>
+<script src="supabase-config.js?v=2"></script>
+<script src="admin.js?v=8"></script>
 </body></html>
