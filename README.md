@@ -21,3 +21,7 @@ Puedes publicar `index.html`, `styles.css` y `app.js` con GitHub Pages. El panel
 
 ## WhatsApp
 El número está configurado como `+53 52017110` en `app.js`.
+
+
+## v4 - Fotos desde Android
+El panel permite seleccionar una imagen con el selector de archivos del Android, comprimirla y guardarla en el producto mediante almacenamiento local.
