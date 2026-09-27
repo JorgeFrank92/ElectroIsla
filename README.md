@@ -25,3 +25,10 @@ El número está configurado como `+53 52017110` en `app.js`.
 
 ## v4 - Fotos desde Android
 El panel permite seleccionar una imagen con el selector de archivos del Android, comprimirla y guardarla en el producto mediante almacenamiento local.
+
+
+## Versión 6
+- Mantiene las dos opciones de imagen: URL o galería del Android.
+- La galería usa FileReader y muestra una vista previa real antes de guardar.
+- La URL también tiene vista previa.
+- Se evita mezclar URL y archivo al cambiar de opción.
