@@ -1,5 +1,4 @@
 const WHATSAPP="5352017110";
-const defaultProducts
 let products=JSON.parse(localStorage.getItem("electroisla_products")||"null")||defaultProducts;
 let cart=JSON.parse(localStorage.getItem("electroisla_cart")||"[]");
 const currencySymbols={USD:"$",CUP:"$",EUR:"€"};
