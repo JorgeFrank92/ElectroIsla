@@ -35,34 +35,59 @@ function showPreview(src){
 }
 function compressImage(file){
  return new Promise((resolve,reject)=>{
-   const reader=new FileReader();
-   reader.onerror=()=>reject(new Error("No se pudo leer la foto."));
-   reader.onload=()=>{
-     const img=new Image();
-     img.onerror=()=>reject(new Error("La imagen no es válida."));
-     img.onload=()=>{
-       const max=900,scale=Math.min(1,max/Math.max(img.width,img.height));
-       const c=document.createElement("canvas");c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));
-       c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-       resolve(c.toDataURL("image/jpeg",.78));
-     };
-     img.src=reader.result;
+   if(!file || !file.type.startsWith("image/")){reject(new Error("El archivo seleccionado no es una imagen compatible."));return}
+   const url=URL.createObjectURL(file);
+   const finish=(img)=>{
+     try{
+       const max=1000,scale=Math.min(1,max/Math.max(img.width,img.height));
+       const c=document.createElement("canvas");
+       c.width=Math.max(1,Math.round(img.width*scale));
+       c.height=Math.max(1,Math.round(img.height*scale));
+       const ctx=c.getContext("2d");
+       ctx.drawImage(img,0,0,c.width,c.height);
+       // JPEG keeps the stored image small and is broadly supported on Android.
+       const data=c.toDataURL("image/jpeg",.82);
+       URL.revokeObjectURL(url);
+       if(!data || data.length<100){reject(new Error("No se pudo convertir la foto."));return}
+       resolve(data);
+     }catch(err){URL.revokeObjectURL(url);reject(err)}
    };
-   reader.readAsDataURL(file);
+   if("createImageBitmap" in window){
+     createImageBitmap(file).then(finish).catch(()=>{
+       const img=new Image(); img.onload=()=>finish(img); img.onerror=()=>reject(new Error("Tu navegador no puede leer esta imagen. Prueba con JPG o PNG.")); img.src=url;
+     });
+   }else{
+     const img=new Image(); img.onload=()=>finish(img); img.onerror=()=>reject(new Error("Tu navegador no puede leer esta imagen. Prueba con JPG o PNG.")); img.src=url;
+   }
  });
 }
-document.getElementById("pImageFile").addEventListener("change",async e=>{
- const file=e.target.files&&e.target.files[0];if(!file)return;
- if(!file.type.startsWith("image/")){alert("Selecciona una foto o imagen.");e.target.value="";return}
- const status=document.getElementById("photoStatus");status.textContent="Procesando foto…";
- try{const data=await compressImage(file);document.getElementById("pImage").value=data;showPreview(data)}
- catch(err){alert(err.message);status.textContent="No se pudo cargar la foto."}
+const picker=document.getElementById("pImageFile");
+picker.addEventListener("change",async e=>{
+ const file=e.target.files&&e.target.files[0];
+ if(!file)return;
+ const status=document.getElementById("photoStatus");
+ status.textContent="Leyendo la foto…";
+ try{
+   const data=await compressImage(file);
+   document.getElementById("pImage").value=data;
+   showPreview(data);
+   status.textContent="✅ Foto cargada. Ahora pulsa «Guardar producto».";
+ }catch(err){
+   document.getElementById("pImage").value="";
+   document.getElementById("imagePreview").innerHTML="";
+   status.textContent="❌ No se pudo cargar la foto.";
+   alert(err.message||"No se pudo cargar la foto.");
+ }finally{
+   // Allows selecting the same photo again on Android.
+   picker.value="";
+ }
 });
+
 document.getElementById("productForm").addEventListener("submit",e=>{
  e.preventDefault();
  const p={id:document.getElementById("editId").value||Date.now().toString(),name:document.getElementById("pName").value.trim(),category:document.getElementById("pCategory").value,price:Number(document.getElementById("pPrice").value),unit:document.getElementById("pUnit").value.trim(),image:document.getElementById("pImage").value,description:document.getElementById("pDescription").value.trim(),available:document.getElementById("pAvailable").checked};
  const id=document.getElementById("editId").value;if(id)products=products.map(x=>x.id===id?p:x);else products.push(p);
- try{save()}catch(err){alert("No hay espacio suficiente en el almacenamiento del navegador. Prueba con una foto más pequeña.");return}
+ try{save(); const saved=products.find(x=>x.id===p.id); if(saved?.image!==p.image){throw new Error("La foto no se guardó.")}}catch(err){alert("No se pudo guardar la foto. Prueba otra imagen JPG/PNG más pequeña.");return}
  reset();render()
 });
 function reset(){document.getElementById("productForm").reset();document.getElementById("editId").value="";document.getElementById("pImage").value="";document.getElementById("formTitle").textContent="➕ Agregar producto";document.getElementById("pAvailable").checked=true;showPreview("")}

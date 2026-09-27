@@ -17,7 +17,7 @@ function render(filter="Todos"){
  const box=document.getElementById("products"); if(!box)return;
  const list=products.filter(p=>p.available&&(filter==="Todos"||p.category===filter));
  box.innerHTML=list.map(p=>`<article class="product">
- <div class="product-img">${p.image?`<img src="${esc(p.image)}" alt="">`:(p.category==="Alimentos"?"🥩":"🏠")}</div>
+ <div class="product-img">${p.image?`<img src="${p.image}" alt="">`:(p.category==="Alimentos"?"🥩":"🏠")}</div>
  <div class="product-body"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description||"")}</p><div class="price">${money(p.price)} <small>${esc(p.unit||"")}</small></div><button class="btn primary add" onclick="add('${p.id}')">🛒 Agregar</button></div></article>`).join("")||"<p>No hay productos disponibles en esta categoría.</p>";
 }
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
