@@ -38,3 +38,12 @@ El panel permite seleccionar una imagen con el selector de archivos del Android,
 - Unidad/presentación ahora es una lista desplegable organizada por categorías.
 - Incluye libra (lb), media libra (½ lb), onza, gramo, kilogramo y otras unidades.
 - Incluye opción “Otra...” para escribir una presentación personalizada.
+
+
+## Cambios de esta revisión v7.1
+- Cada producto puede usar USD, CUP o EUR.
+- Cada producto puede tener un precio normal y un precio en descuento opcional.
+- Los descuentos muestran el precio normal tachado y el precio rebajado.
+- El carrito y el pedido por WhatsApp usan el precio efectivo del descuento.
+- Si un carrito contiene monedas diferentes, los totales se muestran separados por moneda en lugar de sumarlas entre sí.
+- Los productos existentes sin moneda siguen funcionando y se interpretan como USD.

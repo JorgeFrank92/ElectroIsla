@@ -26,7 +26,11 @@
 <input type="hidden" id="editId"><h2 id="formTitle">➕ Agregar producto</h2>
 <label>Nombre<input required id="pName" placeholder="Ej. Carne de cerdo"></label>
 <label>Categoría<select id="pCategory"><option>Alimentos</option><option>Electrodomésticos</option></select></label>
+<div class="price-fields">
+<label>Moneda<select id="pCurrency"><option value="USD">USD — Dólar estadounidense</option><option value="CUP">CUP — Peso cubano</option><option value="EUR">EUR — Euro</option></select></label>
 <label>Precio<input required type="number" min="0" step="0.01" id="pPrice" placeholder="0.00"></label>
+<label>Precio en descuento (opcional)<input type="number" min="0" step="0.01" id="pDiscountPrice" placeholder="Dejar vacío si no hay descuento"></label>
+</div>
 <label>Unidad / presentación
       <select id="pUnit">
         <option value="">Selecciona una unidad o presentación</option>
@@ -92,5 +96,5 @@
 </form>
 <div class="admin-card"><h2>📦 Catálogo actual</h2><div id="adminProducts"></div></div>
 </div></section></main>
-<script src="admin.js?v=5"></script>
+<script src="admin.js?v=6"></script>
 </body></html>
