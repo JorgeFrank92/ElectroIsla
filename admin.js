@@ -21,7 +21,7 @@ function priceHtml(p){
  return discounted?`<span class="old-price">${sym}${Number(p.price).toFixed(2)} ${cur}</span> <span class="discount-price">${sym}${Number(p.discountPrice).toFixed(2)} ${cur}</span>`:`${sym}${Number(p.price).toFixed(2)} ${cur}`;
 }
 function toRow(p){
- return {id:String(p.id),name:p.name||"",category:p.category||"Alimentos",price:Number(p.price)||0,discount_price:p.discountPrice===null||p.discountPrice===undefined||p.discountPrice===""?null:Number(p.discountPrice),currency:p.currency||"USD",unit:p.unit||"",image:p.image||"",description:p.description||"",available:p.available!==false};
+ return {id:String(p.id),name:p.name||"",category:p.category||"Alimentos",price:Number(p.price)||0,discount_price:p.discountPrice===null||p.discountPrice===undefined||p.discountPrice===""||Number(p.discountPrice)<=0?null:Number(p.discountPrice),currency:p.currency||"USD",unit:p.unit||"",image:p.image||"",description:p.description||"",available:p.available!==false};
 }
 function fromRow(r){
  return {id:String(r.id),name:r.name||"",category:r.category||"Alimentos",price:Number(r.price)||0,currency:r.currency||"USD",discountPrice:r.discount_price===null||r.discount_price===undefined?null:Number(r.discount_price),unit:r.unit||"",image:r.image||"",description:r.description||"",available:r.available!==false};
@@ -156,8 +156,9 @@ document.getElementById("pUnit").addEventListener("change",()=>{const other=docu
 
 document.getElementById("productForm").addEventListener("submit",async e=>{
  e.preventDefault();
- const discountRaw=document.getElementById("pDiscountPrice").value.trim();const regularPrice=Number(document.getElementById("pPrice").value);const discountPrice=discountRaw===""?null:Number(discountRaw);
- if(discountPrice!==null&&(discountPrice<0||discountPrice>=regularPrice)){alert("El precio en descuento debe ser menor que el precio normal.");return}
+ const discountRaw=document.getElementById("pDiscountPrice").value.trim();const regularPrice=Number(document.getElementById("pPrice").value);let discountPrice=discountRaw===""?null:Number(discountRaw);
+ if(discountPrice!==null&&discountPrice<=0){discountPrice=null}
+ if(discountPrice!==null&&discountPrice>=regularPrice){alert("El precio en descuento debe ser mayor que 0 y menor que el precio normal.");return}
  const unitSelect=document.getElementById("pUnit").value;const unit=unitSelect==="__otra__"?document.getElementById("pUnitCustom").value.trim():unitSelect;
  if(!unit){alert("Selecciona una unidad o escribe una presentación personalizada.");return}
  const p={id:document.getElementById("editId").value||Date.now().toString(),name:document.getElementById("pName").value.trim(),category:document.getElementById("pCategory").value,price:regularPrice,currency:document.getElementById("pCurrency").value,discountPrice:discountPrice,unit:unit,image:document.getElementById("pImage").value,description:document.getElementById("pDescription").value.trim(),available:document.getElementById("pAvailable").checked};
