@@ -46,3 +46,8 @@
  .cart-thumb-wrap,.cart-thumb{width:68px;height:68px}
  .cart-head{padding-top:4px}
 }
+
+/* v9.5: carrito superior solo con icono */
+.shop-topbar .cart-btn{min-width:46px;width:46px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;gap:3px;font-size:23px}
+.shop-topbar .cart-btn b{font-size:11px;padding:2px 6px;margin-left:0}
+@media(max-width:700px){.shop-topbar .cart-btn{width:44px;min-width:44px;height:42px;padding:0}.shop-topbar .cart-btn b{font-size:10px}}
