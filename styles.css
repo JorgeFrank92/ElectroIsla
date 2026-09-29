@@ -201,28 +201,30 @@
 
 /* v9.6.0 — Paleta de interfaz alineada con el logo de ElectroIsla */
 :root{
-  --logo-green:#0b8f5b;
-  --logo-green-dark:#075f3d;
-  --logo-green-light:#eaf7f1;
-  --logo-green-pale:#f4fbf7;
+  --logo-blue:#074899;
+  --logo-blue-dark:#072b79;
+  --logo-blue-light:#edf3fb;
+  --logo-blue-pale:#f7f9fd;
   --logo-ink:#17202a;
-  --accent:var(--logo-green);
-  --accent2:var(--logo-green-dark);
+  --logo-orange:#ca6223;
+  --logo-orange-dark:#a94f1b;
+  --accent:var(--logo-blue);
+  --accent2:var(--logo-blue-dark);
   --ink:var(--logo-ink);
 }
 
 /* Áreas principales */
 .store-banner{
-  background:linear-gradient(120deg,var(--logo-green-dark) 0%,var(--logo-green) 58%,#12a66d 100%);
+  background:linear-gradient(120deg,var(--logo-blue-dark) 0%,var(--logo-blue) 58%,#12a66d 100%);
 }
-.store-info{background:var(--logo-green-pale)}
+.store-info{background:var(--logo-blue-pale)}
 .category-tabs .filter.active,
 .filter.active{
-  color:var(--logo-green-dark);
-  background:var(--logo-green-light);
-  border-color:#b9dfce;
+  color:var(--logo-blue-dark);
+  background:var(--logo-blue-light);
+  border-color:#c7d8ef;
 }
-.category-tabs .filter.active:after{background:var(--logo-green)}
+.category-tabs .filter.active:after{background:var(--logo-blue)}
 
 /* Botones y acentos */
 .primary,
@@ -231,35 +233,40 @@
 .recommendation-add,
 .contact .btn,
 .sticky-order-btn{
-  background:var(--logo-green);
+  background:var(--logo-blue);
 }
-.primary:hover{background:var(--logo-green-dark)}
+.primary:hover{background:var(--logo-blue-dark)}
 
 /* Fondos suaves */
-.payment-box{background:var(--logo-green-pale)}
+.payment-box{background:var(--logo-blue-pale)}
 .payment-option:has(input:checked){
-  border-color:var(--logo-green);
-  background:var(--logo-green-light);
+  border-color:var(--logo-blue);
+  background:var(--logo-blue-light);
 }
 
 /* Estado abierto y pequeños detalles */
 .store-badge,
 .eyebrow,
-.tag{color:var(--logo-green)}
+.tag{color:var(--logo-blue)}
 
 /* Ayuda WhatsApp */
-.contact{border-color:#cfe9dc}
-.contact .eyebrow{color:var(--logo-green)}
+.contact{border-color:#d5e0ef}
+.contact .eyebrow{color:var(--logo-blue)}
 
 /* Icono de carrito */
-.shop-topbar .cart-btn b{background:var(--logo-green);color:#fff}
+.shop-topbar .cart-btn b{background:var(--logo-blue);color:#fff}
 
 /* Enfoques y campos */
-input:focus,select:focus,textarea:focus{border-color:var(--logo-green)}
+input:focus,select:focus,textarea:focus{border-color:var(--logo-blue)}
 
 /* ElectroIsla 360 palette and responsive logo */
-.store-banner{background:linear-gradient(135deg,#063b86 0%,#0b4ea2 62%,#f58220 150%) !important}
-.store-badge{color:#0b4ea2 !important}
-.category-tabs .filter.active{color:#0b4ea2 !important;border-bottom-color:#f58220 !important}
-.add,.sticky-order-btn{background:#f58220 !important}.add:hover,.sticky-order-btn:hover{background:#d96c0d !important}
+.store-banner{background:linear-gradient(135deg,#072b79 0%,#074899 62%,#ca6223 150%) !important}
+.store-badge{color:#074899 !important}
+.category-tabs .filter.active{color:#074899 !important;border-bottom-color:#ca6223 !important}
+.add,.sticky-order-btn{background:#ca6223 !important}.add:hover,.sticky-order-btn:hover{background:#a94f1b !important}
 @media(max-width:700px){.topbar{padding:0 4%;height:72px}.brand-logo{width:155px;height:52px}.topbar nav{display:none}.cart-btn{margin-left:auto}.cart-icon{width:29px;height:29px}}
+
+/* v9.6.2 — Logo real de ElectroIsla 360 y paleta extraída del logo */
+.brand-logo{width:170px;height:78px;object-fit:contain;object-position:left center}
+.topbar{height:88px}
+@media(max-width:700px){.topbar{height:82px}.brand-logo{width:145px;height:72px}}
