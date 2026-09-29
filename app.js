@@ -132,11 +132,11 @@ function renderCart(){
    const p=products.find(x=>x.id===i.id); if(!p)return"";
    const cur=p.currency||"USD",unitPrice=effectivePrice(p),lineTotal=unitPrice*i.qty;
    if(cur==="USD")usdTotal+=lineTotal;
-   const img=p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}">`:`<div class="cart-thumb placeholder">🛍️</div>`;
+   const img=p.image?`<img class="cart-thumb" src="${esc(p.image)}" alt="${esc(p.name)}">`:`<div class="cart-thumb placeholder">🛍️</div>`;
    return `<div class="cart-item">
      <div class="cart-thumb-wrap">${img}</div>
      <div class="cart-item-main">
-       <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">✕</button></div>
+       <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">🗑️</button></div>
        <small>${money(unitPrice,cur)} c/u</small>
        <div class="cart-item-bottom">
          <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
@@ -146,8 +146,25 @@ function renderCart(){
    </div>`;
  }).join(""):`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
  document.getElementById("cartTotal").innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"— USD"):"$0.00 USD";
+ const topTotal=document.getElementById("cartTopTotal");
+ if(topTotal)topTotal.textContent=`US$ ${usdTotal.toFixed(2)}`;
+ renderCartRecommendations();
  updateStickyOrder();
  updatePaymentSummary();
+}
+function renderCartRecommendations(){
+ const box=document.getElementById("cartRecommendations");
+ if(!box)return;
+ const cartIds=new Set(cart.map(i=>i.id));
+ const list=products.filter(p=>p.available&&!cartIds.has(p.id)).slice(0,6);
+ box.innerHTML=list.map(p=>{
+   const img=p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}">`:`<div class="recommendation-placeholder">${p.category==="Alimentos"?"🥫":"🏠"}</div>`;
+   return `<article class="recommendation-card">
+     <div class="recommendation-image">${img}<button class="recommendation-add" onclick="add('${esc(p.id)}')" aria-label="Agregar ${esc(p.name)}">+</button></div>
+     <div class="recommendation-name">${esc(p.name)}</div>
+     <strong class="recommendation-price">${money(effectivePrice(p),p.currency||"USD")}</strong>
+   </article>`;
+ }).join("")||`<div class="recommendation-empty">No hay productos adicionales para mostrar.</div>`;
 }
 function removeFromCart(id){cart=cart.filter(i=>i.id!==String(id));save();renderCart();render();}
 

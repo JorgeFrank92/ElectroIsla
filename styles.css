@@ -51,3 +51,55 @@
 .shop-topbar .cart-btn{min-width:46px;width:46px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;gap:3px;font-size:23px}
 .shop-topbar .cart-btn b{font-size:11px;padding:2px 6px;margin-left:0}
 @media(max-width:700px){.shop-topbar .cart-btn{width:44px;min-width:44px;height:42px;padding:0}.shop-topbar .cart-btn b{font-size:10px}}
+
+
+/* v9.5.4 — Carrito móvil inspirado en la referencia Eglis */
+.cart-panel{background:#fff;overflow:hidden}
+.cart-head{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:#fff;border-bottom:1px solid #eceff1}
+.cart-back{border:0;background:transparent;color:#111;font-size:18px;font-weight:600;padding:8px 0;display:flex;align-items:center;gap:12px}
+.cart-back span{font-size:18px}
+.cart-head-total{display:flex;flex-direction:column;align-items:flex-end;line-height:1.05}
+.cart-head-total span{font-size:13px;color:#777;margin-bottom:5px}
+.cart-head-total strong{font-size:25px;color:#111}
+.cart-items{padding:10px 22px 0;overflow:auto;flex:1}
+.cart-item{grid-template-columns:100px minmax(0,1fr);gap:18px;padding:14px 0;border-bottom:1px solid #dedede}
+.cart-thumb-wrap,.cart-thumb{width:100px;height:100px}
+.cart-thumb{display:block;object-fit:contain;border-radius:13px;background:#f5f5f5}
+.cart-item-top{gap:7px}
+.cart-item-top strong{font-size:17px;color:#111;line-height:1.25}
+.cart-item-main small{font-size:15px;color:#111;margin-top:12px;font-weight:700}
+.cart-remove{color:#111;font-size:18px;padding:0 2px}
+.cart-item-bottom{margin-top:14px}
+.cart-item-bottom>strong{font-size:17px;color:#111}
+.cart-item .qty{border:1px solid #222;border-radius:13px;padding:0 5px;gap:4px;background:#fff}
+.cart-item .qty button{width:34px;height:34px;background:#fff;border-radius:9px;font-size:22px;color:#111}
+.cart-item .qty b{min-width:23px;text-align:center;font-size:17px;color:#111}
+.cart-summary{padding:10px 22px 18px;border-top:1px solid #e2e2e2;box-shadow:0 -5px 18px rgba(0,0,0,.05);flex-shrink:0}
+.cart-total{padding:7px 0 12px;font-size:18px}
+.cart-total strong{font-size:24px;color:#111}
+.cart-summary .btn.primary{background:#0b8f5b;border-radius:12px;min-height:50px;font-size:16px}
+.cart-recommendations{padding:20px 0 14px;background:#fff}
+.cart-recommendations h3{font-size:24px;margin:0 22px 14px;color:#111}
+.recommendation-list{display:flex;gap:16px;overflow-x:auto;padding:0 22px 4px;scrollbar-width:none}
+.recommendation-list::-webkit-scrollbar{display:none}
+.recommendation-card{min-width:150px;width:150px}
+.recommendation-image{height:150px;border-radius:14px;background:#f5f5f7;position:relative;overflow:visible}
+.recommendation-image img{width:100%;height:100%;object-fit:contain;border-radius:14px}
+.recommendation-placeholder{width:100%;height:100%;display:grid;place-items:center;font-size:48px}
+.recommendation-add{position:absolute;right:-1px;top:7px;width:48px;height:48px;border:0;border-radius:14px;background:#59c500;color:#fff;font-size:31px;line-height:1;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.recommendation-name{font-size:16px;line-height:1.18;margin-top:9px;color:#111;min-height:38px}
+.recommendation-price{display:block;font-size:18px;margin-top:7px;color:#111}
+.recommendation-empty{color:#777;padding:0 22px}
+
+@media(max-width:700px){
+ .cart-panel{width:100%;height:100dvh;top:0;bottom:auto;border-radius:0;transform:translateY(105%);display:flex;flex-direction:column}
+ .cart-panel.open{transform:translateY(0)}
+ .cart-head{height:78px;flex:0 0 78px;padding:0 26px}
+ .cart-items{min-height:0}
+ .cart-recommendations{flex-shrink:0}
+ .cart-summary{padding-bottom:max(16px,env(safe-area-inset-bottom))}
+ .cart-total{display:flex;justify-content:space-between;align-items:center}
+ .cart-recommendations h3{font-size:22px}
+ .recommendation-card{min-width:145px;width:145px}
+ .recommendation-image{height:145px}
+}
