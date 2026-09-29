@@ -23,6 +23,18 @@
 </section>
 <section id="dashboard" class="hidden">
 <div class="admin-title"><div><p class="eyebrow">PANEL</p><h1>Productos</h1></div><button id="logoutBtn" class="btn secondary">Salir</button></div>
+<section class="admin-card settings-card">
+<h2>💱 Precios y tasa de cambio</h2>
+<p class="settings-help">Configura aquí cuánto vale 1 USD en CUP y el recargo para pagos por transferencia. Los cambios se sincronizan con la tienda pública.</p>
+<div class="price-fields">
+<label>1 USD = <span>
+<input id="usdToCup" type="number" min="0" step="0.01" placeholder="700">
+</span> CUP</label>
+<label>Recargo por transferencia (%)<input id="transferMarkup" type="number" min="0" step="0.01" placeholder="30"></label>
+</div>
+<div class="row settings-actions"><button type="button" class="btn primary" id="saveSettings">💾 Guardar configuración</button><span id="settingsStatus" class="settings-status">☁️ Cargando configuración…</span></div>
+</section>
+
 <div class="admin-grid">
 <form id="productForm" class="admin-card">
 <input type="hidden" id="editId"><h2 id="formTitle">➕ Agregar producto</h2>
@@ -100,5 +112,5 @@
 </div></section></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js?v=2"></script>
-<script src="admin.js?v=8"></script>
+<script src="admin.js?v=9"></script>
 </body></html>

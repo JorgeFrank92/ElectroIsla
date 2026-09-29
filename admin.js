@@ -9,6 +9,7 @@ const defaultProducts=[
 {id:"e4",name:"Cocina",category:"Electrodomésticos",price:180,currency:"USD",discountPrice:null,unit:"unidad",image:"",description:"Cocina doméstica.",available:true}
 ];
 let products=JSON.parse(localStorage.getItem("electroisla_products")||"null")||defaultProducts;
+let storeSettings={usd_to_cup:700,transfer_markup_percent:0};
 const saveLocal=()=>localStorage.setItem("electroisla_products",JSON.stringify(products));
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const currencySymbols={USD:"$",CUP:"$",EUR:"€"};
@@ -24,6 +25,37 @@ function toRow(p){
 }
 function fromRow(r){
  return {id:String(r.id),name:r.name||"",category:r.category||"Alimentos",price:Number(r.price)||0,currency:r.currency||"USD",discountPrice:r.discount_price===null||r.discount_price===undefined?null:Number(r.discount_price),unit:r.unit||"",image:r.image||"",description:r.description||"",available:r.available!==false};
+}
+async function loadSettings(){
+ const {data,error}=await supabaseClient.from("store_settings").select("usd_to_cup,transfer_markup_percent").eq("id",1).maybeSingle();
+ if(error) throw error;
+ if(data){
+   storeSettings={usd_to_cup:Number(data.usd_to_cup)||0,transfer_markup_percent:Number(data.transfer_markup_percent)||0};
+ }
+ const rate=document.getElementById("usdToCup"),markup=document.getElementById("transferMarkup");
+ if(rate) rate.value=storeSettings.usd_to_cup;
+ if(markup) markup.value=storeSettings.transfer_markup_percent;
+ const status=document.getElementById("settingsStatus");
+ if(status) status.textContent=`☁️ Tasa: ${storeSettings.usd_to_cup} CUP/USD · Transferencia: ${storeSettings.transfer_markup_percent}%`;
+}
+async function saveSettings(){
+ const rate=Number(document.getElementById("usdToCup").value);
+ const markup=Number(document.getElementById("transferMarkup").value);
+ if(!Number.isFinite(rate)||rate<=0){alert("La tasa USD → CUP debe ser mayor que 0.");return}
+ if(!Number.isFinite(markup)||markup<0){alert("El recargo de transferencia no puede ser negativo.");return}
+ const btn=document.getElementById("saveSettings"),status=document.getElementById("settingsStatus");
+ if(btn) btn.disabled=true;
+ if(status) status.textContent="☁️ Guardando…";
+ try{
+   const {error}=await supabaseClient.from("store_settings").upsert({id:1,usd_to_cup:rate,transfer_markup_percent:markup,updated_at:new Date().toISOString()},{onConflict:"id"});
+   if(error) throw error;
+   storeSettings={usd_to_cup:rate,transfer_markup_percent:markup};
+   if(status) status.textContent=`✅ Guardado · ${rate} CUP/USD · Transferencia: ${markup}%`;
+   alert("✅ Configuración de precios guardada y sincronizada.");
+ }catch(err){
+   if(status) status.textContent="⚠️ No se pudo guardar la configuración.";
+   alert("No se pudo guardar la configuración en Supabase.\n\n"+(err.message||err));
+ }finally{if(btn) btn.disabled=false}
 }
 async function loadCloud(){
  const {data,error}=await supabaseClient.from("products").select("*").order("created_at",{ascending:true});
@@ -69,6 +101,7 @@ async function show(){
  const status=document.getElementById("cloudStatus");
  if(status) status.textContent="☁️ Conectando con Supabase…";
  try{
+   await loadSettings();
    const source=await loadCloud();
    render();
    if(status) status.textContent=source==="cloud"?`☁️ Sincronizado con Supabase · ${products.length} productos`:source==="migrated"?`☁️ Catálogo local enviado a Supabase · ${products.length} productos`:"☁️ Supabase conectado · catálogo vacío";
@@ -134,13 +167,15 @@ document.getElementById("productForm").addEventListener("submit",async e=>{
 });
 function reset(){document.getElementById("productForm").reset();document.getElementById("editId").value="";document.getElementById("pImage").value="";document.getElementById("formTitle").textContent="➕ Agregar producto";document.getElementById("pAvailable").checked=true;document.getElementById("pCurrency").value="USD";document.getElementById("pDiscountPrice").value="";document.getElementById("pUnitCustom").value="";document.getElementById("pUnitCustom").style.display="none";showPreview("")}
 document.getElementById("cancelEdit").onclick=reset;
+document.getElementById("saveSettings").onclick=saveSettings;
 document.getElementById("loginBtn").onclick=login;
 document.getElementById("refreshCloud").onclick=async()=>{
  const status=document.getElementById("cloudStatus");
  if(status)status.textContent="☁️ Actualizando…";
- try{const source=await loadCloud();render();if(status)status.textContent=`☁️ ${source==="cloud"?"Sincronizado con Supabase":"Catálogo actualizado"} · ${products.length} productos`;}
+ try{await loadSettings();const source=await loadCloud();render();if(status)status.textContent=`☁️ ${source==="cloud"?"Sincronizado con Supabase":"Catálogo actualizado"} · ${products.length} productos`;}
  catch(err){if(status)status.textContent="⚠️ "+(err.message||err);alert("No se pudo actualizar el catálogo.\n\n"+(err.message||err));}
 };
 document.getElementById("logoutBtn").onclick=async()=>{await supabaseClient.auth.signOut();location.reload()};
 (async()=>{const {data:{session}}=await supabaseClient.auth.getSession();if(session)await show()})();
 supabaseClient.channel("products-admin").on("postgres_changes",{event:"*",schema:"public",table:"products"},async()=>{try{const {data,error}=await supabaseClient.from("products").select("*").order("created_at",{ascending:true});if(!error&&data){products=data.map(fromRow);saveLocal();render()}}catch(e){console.warn(e)}}).subscribe();
+supabaseClient.channel("settings-admin").on("postgres_changes",{event:"*",schema:"public",table:"store_settings"},async()=>{try{await loadSettings()}catch(e){console.warn(e)}}).subscribe();

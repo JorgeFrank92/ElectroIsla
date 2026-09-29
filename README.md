@@ -25,3 +25,11 @@ La tabla actual permite escritura a usuarios autenticados. Como solo debe existi
 
 ## Imágenes
 Esta etapa mantiene las imágenes como datos dentro del campo `image` para no romper el funcionamiento existente. La siguiente mejora recomendada es migrarlas a Supabase Storage para reducir el tamaño de la base de datos.
+
+## Configuración de precios USD → CUP
+
+Esta versión añade una tabla `public.store_settings` en Supabase con:
+- `usd_to_cup`: valor de 1 USD en CUP.
+- `transfer_markup_percent`: recargo porcentual para pagos por transferencia.
+
+El panel de administración permite editar ambos valores. La tienda pública los lee desde Supabase y muestra el precio base, el precio en CUP para efectivo y el precio en CUP para transferencia. Los cambios de configuración se sincronizan mediante Supabase Realtime cuando está habilitado para la tabla.

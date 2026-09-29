@@ -4,3 +4,5 @@
 @media(max-width:480px){.product-grid{grid-template-columns:1fr 1fr}.product-img{height:145px}.hero h1{letter-spacing:-2px}.cart-btn span{display:none}}
 
 .old-price{text-decoration:line-through;color:var(--muted);font-size:.75em;font-weight:600;margin-right:6px}.discount-price{font-weight:900}.price-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.price-fields label{margin-bottom:0}@media(max-width:480px){.price-fields{grid-template-columns:1fr}}
+
+.settings-card{margin-bottom:20px}.settings-card h2{margin-top:0}.settings-help{color:var(--muted);line-height:1.5;margin-top:-8px}.settings-actions{align-items:center;flex-wrap:wrap;margin-top:8px}.settings-status{font-size:.85rem;color:var(--muted)}.cup-price{font-size:.82em;font-weight:750;color:var(--muted);margin-top:4px}.cup-note{font-size:.75em;font-weight:600;color:var(--muted);margin-top:5px}.cart-total{gap:15px;align-items:start}.cart-total>div{font-size:13px;color:var(--muted)}.cart-total>div strong{font-size:18px;color:var(--ink)}
