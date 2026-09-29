@@ -103,3 +103,17 @@
  .recommendation-card{min-width:145px;width:145px}
  .recommendation-image{height:145px}
 }
+
+/* v9.5.7 — Bloque de ayuda/WhatsApp más discreto */
+.contact{margin:18px 7% 28px;padding:16px 18px;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:18px;box-shadow:none}
+.contact .eyebrow{font-size:10px;letter-spacing:1.5px;margin:0 0 4px;color:var(--accent)}
+.contact h2{font-size:17px;line-height:1.2;margin:0 0 3px}
+.contact p:not(.eyebrow){font-size:12px;line-height:1.35;color:var(--muted);margin:0;max-width:520px}
+.contact .btn{flex:0 0 auto;padding:10px 15px;border-radius:10px;font-size:13px;background:var(--accent);color:#fff}
+@media(max-width:700px){
+ .contact{margin:14px 5% 24px;padding:13px 14px;gap:10px}
+ .contact .eyebrow{font-size:9px;margin-bottom:3px}
+ .contact h2{font-size:15px;margin-bottom:2px}
+ .contact p:not(.eyebrow){font-size:11px;line-height:1.25}
+ .contact .btn{padding:9px 11px;font-size:12px;white-space:nowrap}
+}
