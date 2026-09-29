@@ -144,7 +144,7 @@ function renderCart(){
        </div>
      </div>
    </div>`;
- }).join(""):"<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>";
+ }).join(""):`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
  document.getElementById("cartTotal").innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"— USD"):"$0.00 USD";
  updateStickyOrder();
  updatePaymentSummary();
