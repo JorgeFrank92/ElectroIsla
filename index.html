@@ -84,9 +84,29 @@
     <form id="orderForm">
       <label>Nombre<input required id="customerName" placeholder="Tu nombre"></label>
       <label>Teléfono<input required id="customerPhone" placeholder="Tu teléfono"></label>
-      <label>Municipio<select required id="municipality">
-        <option value="">Selecciona...</option><option>Nueva Gerona</option><option>Otros municipios</option>
+      <label>Zona de entrega<select required id="municipality">
+        <option value="">Selecciona...</option>
+        <option>Nueva Gerona</option>
+        <option>Micro 70</option>
+        <option>Micro 2</option>
+        <option>Abel Santa María</option>
+        <option>Pueblo Nuevo</option>
+        <option>Francoi</option>
+        <option>Sierra Caballos</option>
+        <option>Nazareno</option>
+        <option>Chacón</option>
+        <option>Patria</option>
+        <option>Los Colonos</option>
+        <option>Los Bejeranos</option>
+        <option>La Fe</option>
+        <option>Demajagua</option>
+        <option>La Victoria</option>
+        <option>Atanagildo</option>
+        <option>Mella</option>
+        <option>Ciro Redondo</option>
+        <option>Otro</option>
       </select></label>
+      <label id="otherZoneWrap" class="hidden">Especifique la zona<input id="otherZone" placeholder="Escriba cuál es su zona de entrega"></label>
       <label>¿Necesitas entrega?<select id="delivery"><option value="Sí">Sí</option><option value="No">No</option></select></label>
       <div class="payment-box">
         <div class="payment-title">💳 Método de pago</div>

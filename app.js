@@ -17,6 +17,50 @@ const money=(n,currency="USD")=>(currencySymbols[currency]||"")+Number(n).toFixe
 const effectivePrice=p=>Number.isFinite(Number(p.discountPrice))&&Number(p.discountPrice)>0&&Number(p.discountPrice)<Number(p.price)?Number(p.discountPrice):Number(p.price);
 const cashCup=p=>{const base=effectivePrice(p);if((p.currency||"USD")==="USD")return base*Number(storeSettings.usd_to_cup||0);if((p.currency||"USD")==="CUP")return base;return null};
 const transferCup=p=>{const cash=cashCup(p);return cash===null?null:cash*(1+Number(storeSettings.transfer_markup_percent||0)/100)};
+const DELIVERY_FEES={
+ "Nueva Gerona":0,
+ "Micro 70":0,
+ "Micro 2":0,
+ "Abel Santa María":0,
+ "Pueblo Nuevo":0,
+ "Francoi":0,
+ "Sierra Caballos":0,
+ "Nazareno":0,
+ "Chacón":5,
+ "Patria":5,
+ "Los Colonos":5,
+ "Los Bejeranos":5,
+ "La Fe":10,
+ "Demajagua":10,
+ "La Victoria":10,
+ "Atanagildo":10,
+ "Mella":10,
+ "Ciro Redondo":10,
+ "Otro":10
+};
+function getDeliveryZone(){
+ const zone=document.getElementById("municipality")?.value||"";
+ const other=document.getElementById("otherZone")?.value.trim()||"";
+ return zone==="Otro"?(other?`Otro: ${other}`:"Otro"):zone;
+}
+function getDeliveryFeeUSD(){
+ const delivery=document.getElementById("delivery")?.value||"Sí";
+ const zone=document.getElementById("municipality")?.value||"";
+ if(delivery!=="Sí"||!zone)return 0;
+ return Number(DELIVERY_FEES[zone]||0);
+}
+function updateDeliveryFields(){
+ const zone=document.getElementById("municipality")?.value||"";
+ const wrap=document.getElementById("otherZoneWrap");
+ const input=document.getElementById("otherZone");
+ if(wrap)wrap.classList.toggle("hidden",zone!=="Otro");
+ if(input){
+  input.required=zone==="Otro";
+  if(zone!=="Otro")input.value="";
+ }
+ updatePaymentSummary();
+}
+
 function priceMarkup(p){const cur=p.currency||"USD",sym=currencySymbols[cur]||"";const discounted=effectivePrice(p)<Number(p.price);const original=discounted?`<span class="old-price">${sym}${Number(p.price).toFixed(2)} ${cur}</span> `:"";const base=`${original}<span class="discount-price">${sym}${effectivePrice(p).toFixed(2)} ${cur}</span>`;const cash=cashCup(p),transfer=transferCup(p);if(cash===null)return `${base}<div class="cup-note">CUP: configura una tasa para ${cur}</div>`;return `${base}<div class="cup-price">💵 Efectivo: ${money(cash,"CUP")}</div><div class="cup-price">💳 Transferencia: ${money(transfer,"CUP")}</div>`;}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 async function loadStoreSettings(){const {data,error}=await supabaseClient.from("store_settings").select("usd_to_cup,transfer_markup_percent").eq("id",1).maybeSingle();if(error)throw error;if(data){storeSettings={usd_to_cup:Number(data.usd_to_cup)||0,transfer_markup_percent:Number(data.transfer_markup_percent)||0}}}
@@ -37,7 +81,13 @@ function getOrderTotals(){
   if(cash===null||transfer===null){cupAvailable=false;return}
   cashTotal+=cash*qty; transferTotal+=transfer*qty;
  });
- return {usdTotal,cashTotal,transferTotal,usdAvailable,cupAvailable};
+ const deliveryFeeUSD=getDeliveryFeeUSD();
+ const deliveryFeeCUP=deliveryFeeUSD*Number(storeSettings.usd_to_cup||0);
+ const deliveryFeeTransfer=deliveryFeeCUP*(1+Number(storeSettings.transfer_markup_percent||0)/100);
+ usdTotal+=deliveryFeeUSD;
+ cashTotal+=deliveryFeeCUP;
+ transferTotal+=deliveryFeeTransfer;
+ return {usdTotal,cashTotal,transferTotal,deliveryFeeUSD,deliveryFeeCUP,deliveryFeeTransfer,usdAvailable,cupAvailable};
 }
 function updatePaymentSummary(){
  const box=document.getElementById("paymentSummary"); if(!box)return;
@@ -56,7 +106,9 @@ function updatePaymentSummary(){
  const method=document.querySelector('input[name="paymentMethod"]:checked')?.value||"USD";
  const amount=method==="USD"?money(totals.usdTotal,"USD"):method==="CUP"?money(totals.cashTotal,"CUP"):money(totals.transferTotal,"CUP");
  const label=method==="USD"?"USD":method==="CUP"?"CUP (efectivo)":"Transferencia";
- box.innerHTML=`<strong>Total a pagar: ${amount}</strong><span>Método seleccionado: ${label}</span>`;
+ const fee=totals.deliveryFeeUSD;
+ const feeText=fee>0?`Domicilio: ${money(fee,"USD")}`:"Domicilio: Gratis";
+ box.innerHTML=`<strong>Total a pagar: ${amount}</strong><span>${feeText}</span><span>Método seleccionado: ${label}</span>`;
 }
 function renderCart(){
  const box=document.getElementById("cartItems"),count=cart.reduce((s,i)=>s+i.qty,0);document.getElementById("cartCount").textContent=count;
@@ -68,8 +120,11 @@ function renderCart(){
 function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden")}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden")}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
 document.querySelectorAll(".filter,.store-card").forEach(b=>b.addEventListener("click",()=>{const f=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===f));render(f);document.getElementById("ofertas").scrollIntoView({behavior:"smooth"})}));
 document.getElementById("cartBtn").onclick=openCart;document.getElementById("closeCart").onclick=closeCart;document.getElementById("cartOverlay").onclick=closeCart;document.getElementById("checkoutBtn").onclick=openCheckout;document.getElementById("closeModal").onclick=()=>document.getElementById("checkoutModal").classList.add("hidden");
-document.getElementById("orderForm").addEventListener("submit",e=>{e.preventDefault();const totals=getOrderTotals();const method=document.querySelector('input[name="paymentMethod"]:checked')?.value;if(!method){alert("Selecciona un método de pago.");return}if(method==="USD"&&!totals.usdAvailable){alert("El pago en USD no está disponible para este pedido.");return}if((method==="CUP"||method==="TRANSFERENCIA")&&!totals.cupAvailable){alert("Los precios en CUP no están disponibles para todos los productos de este pedido.");return}const lines=cart.map(i=>{const p=products.find(x=>x.id===i.id);if(!p)return"";const cur=p.currency||"USD",unitPrice=effectivePrice(p),lineTotal=unitPrice*i.qty,cash=cashCup(p),transfer=transferCup(p);let selectedLine="";if(method==="USD")selectedLine=money(lineTotal,"USD");else if(method==="CUP")selectedLine=money(cash*i.qty,"CUP");else selectedLine=money(transfer*i.qty,"CUP");return `• ${p.name} — ${i.qty} ${p.unit||"unidad"} — ${selectedLine}`}).join("\n");const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),mun=document.getElementById("municipality").value,del=document.getElementById("delivery").value,note=document.getElementById("note").value.trim();const paymentLabel=method==="USD"?"USD":method==="CUP"?"CUP (efectivo)":"TRANSFERENCIA";const paymentTotal=method==="USD"?money(totals.usdTotal,"USD"):method==="CUP"?money(totals.cashTotal,"CUP"):money(totals.transferTotal,"CUP");const msg=`🛒 NUEVO PEDIDO\n\n👤 Cliente: ${name}\n📱 Teléfono: ${phone}\n\n🛍️ PRODUCTOS:\n${lines}\n\n💳 MÉTODO DE PAGO: ${paymentLabel}\n💰 TOTAL A PAGAR: ${paymentTotal}\n\n📍 Municipio: ${mun}\n🚚 Entrega: ${del}${note?`\n📝 Nota: ${note}`:""}`;window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank")});
+document.getElementById("orderForm").addEventListener("submit",e=>{e.preventDefault();const totals=getOrderTotals();const method=document.querySelector('input[name="paymentMethod"]:checked')?.value;if(!method){alert("Selecciona un método de pago.");return}if(method==="USD"&&!totals.usdAvailable){alert("El pago en USD no está disponible para este pedido.");return}if((method==="CUP"||method==="TRANSFERENCIA")&&!totals.cupAvailable){alert("Los precios en CUP no están disponibles para todos los productos de este pedido.");return}const zone=document.getElementById("municipality").value,other=document.getElementById("otherZone").value.trim(),delivery=document.getElementById("delivery").value;if(!zone){alert("Selecciona la zona de entrega.");return}if(zone==="Otro"&&!other){alert("Escribe cuál es tu zona de entrega.");return}const lines=cart.map(i=>{const p=products.find(x=>x.id===i.id);if(!p)return"";const cur=p.currency||"USD",unitPrice=effectivePrice(p),lineTotal=unitPrice*i.qty,cash=cashCup(p),transfer=transferCup(p);let selectedLine="";if(method==="USD")selectedLine=money(lineTotal,"USD");else if(method==="CUP")selectedLine=money(cash*i.qty,"CUP");else selectedLine=money(transfer*i.qty,"CUP");return `• ${p.name} — ${i.qty} ${p.unit||"unidad"} — ${selectedLine}`}).join("\n");const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),zoneName=zone==="Otro"?other:zone,note=document.getElementById("note").value.trim();const paymentLabel=method==="USD"?"USD":method==="CUP"?"CUP (efectivo)":"TRANSFERENCIA";const paymentTotal=method==="USD"?money(totals.usdTotal,"USD"):method==="CUP"?money(totals.cashTotal,"CUP"):money(totals.transferTotal,"CUP");const deliveryText=delivery==="Sí"?(totals.deliveryFeeUSD>0?money(totals.deliveryFeeUSD,"USD"):"Gratis"):"No requiere entrega";const msg=`🛒 NUEVO PEDIDO\n\n👤 Cliente: ${name}\n📱 Teléfono: ${phone}\n\n🛍️ PRODUCTOS:\n${lines}\n\n💳 MÉTODO DE PAGO: ${paymentLabel}\n💰 TOTAL A PAGAR: ${paymentTotal}\n\n📍 Zona de entrega: ${zoneName}\n🚚 Entrega: ${delivery}\n💵 Domicilio: ${deliveryText}${note?`\n📝 Nota: ${note}`:""}`;window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank")});
 document.querySelectorAll('input[name="paymentMethod"]').forEach(r=>r.addEventListener("change",updatePaymentSummary));
+document.getElementById("municipality")?.addEventListener("change",updateDeliveryFields);
+document.getElementById("delivery")?.addEventListener("change",updatePaymentSummary);
+document.getElementById("otherZone")?.addEventListener("input",updatePaymentSummary);
 
 render();renderCart();startCloud();
 supabaseClient.channel("settings-store").on("postgres_changes",{event:"*",schema:"public",table:"store_settings"},async()=>{try{await loadStoreSettings();render();renderCart()}catch(e){console.warn(e)}}).subscribe();

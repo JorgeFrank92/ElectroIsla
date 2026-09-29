@@ -33,3 +33,7 @@ Esta versión añade una tabla `public.store_settings` en Supabase con:
 - `transfer_markup_percent`: recargo porcentual para pagos por transferencia.
 
 El panel de administración permite editar ambos valores. La tienda pública los lee desde Supabase y muestra el precio base, el precio en CUP para efectivo y el precio en CUP para transferencia. Los cambios de configuración se sincronizan mediante Supabase Realtime cuando está habilitado para la tabla.
+
+
+## v8.4 - Zonas de entrega
+Se agregó Zona de entrega con tarifas de domicilio: gratis, 5 USD, 10 USD y opción Otro con nombre personalizado y tarifa de 10 USD. El domicilio se suma al total y se convierte según el método de pago.
