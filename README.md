@@ -37,3 +37,7 @@ El panel de administración permite editar ambos valores. La tienda pública los
 
 ## v8.4 - Zonas de entrega
 Se agregó Zona de entrega con tarifas de domicilio: gratis, 5 USD, 10 USD y opción Otro con nombre personalizado y tarifa de 10 USD. El domicilio se suma al total y se convierte según el método de pago.
+
+
+## v8.9 - Zelle
+Se agregó Zelle como método de pago. Zelle utiliza exactamente el mismo total en USD que USD, incluyendo el costo del domicilio, sin conversión ni recargo. El método aparece junto a USD, CUP y Transferencia y se refleja también en el pedido enviado por WhatsApp.
