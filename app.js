@@ -72,7 +72,7 @@ function fromRow(r){return{id:String(r.id),name:r.name||"",category:r.category||
 async function loadCloudProducts(){const {data,error}=await supabaseClient.from("products").select("*").order("created_at",{ascending:true});if(error)throw error;if(data&&data.length){products=data.map(fromRow);save();return true}return false}
 async function startCloud(){try{await loadStoreSettings();await loadCloudProducts();render();renderCart()}catch(err){console.warn("Supabase no disponible; usando catálogo local.",err);render();renderCart()}}
 function render(filter="Todos"){const box=document.getElementById("products");if(!box)return;const list=products.filter(p=>p.available&&(filter==="Todos"||p.category===filter));box.innerHTML=list.map(p=>`<article class="product"><div class="product-img">${p.image?`<img src="${p.image}" alt="">`:(p.category==="Alimentos"?"🥩":"🏠")}</div><div class="product-body"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description||"")}</p><div class="price">${priceMarkup(p)} <small>${esc(p.unit||"")}</small></div><button class="btn primary add" onclick="add('${esc(p.id)}')">🛒 Agregar</button></div></article>`).join("")||"<p>No hay productos disponibles en esta categoría.</p>"}
-function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();renderCart();openCart()}
+function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();renderCart()}
 function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart()}
 function getOrderTotals(){
  const canPayCupTransfer=cart.length>0&&cart.every(i=>{const p=products.find(x=>x.id===i.id);return p&&p.category==="Electrodomésticos";});
