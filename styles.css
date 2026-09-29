@@ -347,3 +347,92 @@ input:focus,select:focus,textarea:focus{border-color:var(--logo-blue)}
 
 /* v9.6.9 — total por producto en el pedido */
 .cart-line-total{display:block;font-size:15px;color:#111;margin-top:7px;font-weight:800}
+
+/* v9.7.0 — Paleta ElectroIsla 360 en carrito y pantalla de pedido */
+.cart-panel{
+  background:var(--logo-blue-pale);
+}
+.cart-head{
+  background:#fff;
+  border-bottom:2px solid var(--logo-blue);
+}
+.cart-back{color:var(--logo-blue-dark)!important}
+.cart-back:hover{color:var(--logo-orange)!important}
+.cart-head-total span{color:var(--logo-blue)!important}
+.cart-head-total strong{color:var(--logo-blue-dark)!important}
+.cart-items{background:var(--logo-blue-pale)}
+.cart-item{border-bottom-color:#cbd9ea}
+.cart-thumb{background:#fff;border:1px solid #d7e3f2}
+.cart-item-top strong{color:var(--logo-ink)}
+.cart-item-main small{color:var(--logo-blue-dark)}
+.cart-line-total{color:var(--logo-orange-dark)!important}
+.cart-remove{color:var(--logo-blue-dark)!important}
+.cart-item .qty{
+  border-color:var(--logo-blue)!important;
+  background:#fff;
+}
+.cart-item .qty button{color:var(--logo-blue-dark)!important}
+.cart-item .qty button:hover{color:var(--logo-orange)!important}
+.cart-service-bar{
+  background:#fff;
+  border-top-color:#cbd9ea;
+}
+.cart-previous-btn{
+  background:var(--logo-blue)!important;
+  border:0!important;
+  box-shadow:0 3px 10px rgba(7,72,153,.25)!important;
+}
+.cart-previous-btn:hover{background:var(--logo-blue-dark)!important}
+
+/* Pantalla siguiente: datos y confirmación del pedido */
+.modal{
+  background:rgba(7,43,121,.52);
+}
+.modal-card{
+  border:1px solid #c7d8ef;
+  box-shadow:0 18px 50px rgba(7,43,121,.22);
+  background:#fff;
+}
+.modal-card .eyebrow{color:var(--logo-orange)!important}
+.modal-card h2{color:var(--logo-blue-dark)}
+.modal-close{
+  background:var(--logo-blue-light)!important;
+  color:var(--logo-blue-dark)!important;
+}
+.modal-close:hover{background:#dce9f8!important;color:var(--logo-orange-dark)!important}
+.modal-card label{color:var(--logo-blue-dark)}
+.modal-card input,
+.modal-card select,
+.modal-card textarea{
+  border-color:#c7d8ef;
+  background:#fff;
+}
+.modal-card input:focus,
+.modal-card select:focus,
+.modal-card textarea:focus{
+  border-color:var(--logo-blue)!important;
+  box-shadow:0 0 0 3px rgba(7,72,153,.10);
+}
+.payment-box{
+  background:var(--logo-blue-pale)!important;
+  border-color:#c7d8ef!important;
+}
+.payment-title{color:var(--logo-blue-dark)}
+.payment-option{
+  border-color:#c7d8ef!important;
+  background:#fff!important;
+}
+.payment-option:has(input:checked){
+  border-color:var(--logo-blue)!important;
+  background:var(--logo-blue-light)!important;
+  box-shadow:inset 3px 0 0 var(--logo-orange);
+}
+.payment-summary{
+  border-top-color:#c7d8ef!important;
+}
+.payment-summary strong{color:var(--logo-blue-dark)}
+.modal-card form>.btn.primary{
+  background:var(--logo-orange)!important;
+  box-shadow:0 3px 10px rgba(202,98,35,.24);
+}
+.modal-card form>.btn.primary:hover{background:var(--logo-orange-dark)!important}
