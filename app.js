@@ -169,7 +169,7 @@ function renderCartRecommendations(){
 function removeFromCart(id){cart=cart.filter(i=>i.id!==String(id));save();renderCart();render();}
 
 function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden")}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden")}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
-document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{const f=b.dataset.filter;currentFilter=f;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===f));render(f)}));
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{const f=b.dataset.filter;currentFilter=f;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===f));b.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});render(f)}));
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
 document.getElementById("shopMenuBtn")?.addEventListener("click",()=>document.getElementById("categoryTabs")?.scrollIntoView({behavior:"smooth",inline:"center"}));
 document.getElementById("productSearch")?.addEventListener("input",()=>render(currentFilter));

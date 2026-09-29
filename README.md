@@ -10,3 +10,6 @@ Corrección del cambio visual del carrito, tomando como base íntegra la v9.4 es
 ## v9.5.5
 - Ocultada la información de Efectivo/CUP y Transferencia en las tarjetas de productos de Electrodomésticos.
 - Se mantienen disponibles los métodos de pago CUP y Transferencia al finalizar un pedido de solo Electrodomésticos.
+
+
+v9.5.6: Barra de búsqueda/menú/categorías fija al llegar al encabezado durante el desplazamiento. La categoría activa se mantiene resaltada y se centra al seleccionarla.
