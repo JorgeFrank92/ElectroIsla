@@ -64,7 +64,7 @@ function updateDeliveryFields(){
  updatePaymentSummary();
 }
 
-function priceMarkup(p){const cur=p.currency||"USD",sym=currencySymbols[cur]||"";const discounted=effectivePrice(p)<Number(p.price);const original=discounted?`<span class="old-price">${sym}${Number(p.price).toFixed(2)} ${cur}</span> `:"";const base=`${original}<span class="discount-price">${sym}${effectivePrice(p).toFixed(2)} ${cur}</span>`;if(p.category!=="Electrodomésticos")return base;const cash=cashCup(p),transfer=transferCup(p);if(cash===null)return `${base}<div class="cup-note">CUP: configura una tasa para ${cur}</div>`;return `${base}<div class="cup-price">💵 Efectivo: ${money(cash,"CUP")}</div><div class="cup-price">💳 Transferencia: ${money(transfer,"CUP")}</div>`;}
+function priceMarkup(p){const cur=p.currency||"USD",sym=currencySymbols[cur]||"";const discounted=effectivePrice(p)<Number(p.price);const original=discounted?`<span class="old-price">${sym}${Number(p.price).toFixed(2)} ${cur}</span> `:"";return `${original}<span class="discount-price">${sym}${effectivePrice(p).toFixed(2)} ${cur}</span>`;}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 async function loadStoreSettings(){const {data,error}=await supabaseClient.from("store_settings").select("usd_to_cup,transfer_markup_percent").eq("id",1).maybeSingle();if(error)throw error;if(data){storeSettings={usd_to_cup:Number(data.usd_to_cup)||0,transfer_markup_percent:Number(data.transfer_markup_percent)||0}}}
 function save(){localStorage.setItem("electroisla_products",JSON.stringify(products));localStorage.setItem("electroisla_cart",JSON.stringify(cart))}
