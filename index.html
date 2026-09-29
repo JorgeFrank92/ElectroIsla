@@ -8,59 +8,32 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="topbar">
+<header class="topbar shop-topbar">
   <a class="brand" href="index.html"><span class="brand-mark">EI</span><span>Electro<span>Isla</span></span></a>
-  <nav>
-    <a href="#categorias">Tiendas</a>
-    <a href="#ofertas">Ofertas</a>
-    <a href="#contacto">Contacto</a>
-    <a class="admin-link" href="admin.html">Administrar</a>
-  </nav>
+  <nav><a href="#ofertas">Productos</a><a href="#contacto">Contacto</a><a class="admin-link" href="admin.html">Administrar</a></nav>
   <button id="cartBtn" class="cart-btn">🛒 <span>Ver mi Pedido</span> <b id="cartCount">0</b></button>
 </header>
-
 <main>
-  <section class="hero">
-    <div>
-      <p class="eyebrow">TU TIENDA EN LÍNEA</p>
-      <h1>Todo lo que necesitas,<br><span>en un solo lugar.</span></h1>
-      <p class="hero-copy">Alimentos y electrodomésticos con pedidos fáciles y atención directa por WhatsApp.</p>
-      <div class="hero-actions">
-        <a href="#categorias" class="btn primary">Explorar tienda</a>
-        <a href="https://wa.me/5352017110" target="_blank" class="btn secondary">💬 WhatsApp</a>
-      </div>
+  <section class="store-hero">
+    <div class="store-banner">
+      <div class="store-banner-copy"><span class="store-badge">ABIERTO</span><h1>ElectroIsla</h1><p>Alimentos y electrodomésticos</p></div>
     </div>
-    <div class="hero-card">
-      <div class="hero-icon">🛍️</div>
-      <strong>Compra fácil</strong>
-      <span>Agrega al carrito y envía tu pedido por WhatsApp.</span>
-    </div>
+    <div class="store-info"><strong>Compra fácil, directo a tu puerta</strong><span>Selecciona tus productos y arma tu pedido.</span></div>
   </section>
 
-  <section id="categorias" class="section">
-    <div class="section-head">
-      <div><p class="eyebrow">DOS TIENDAS</p><h2>Elige qué buscas</h2></div>
-    </div>
-    <div class="store-grid">
-      <button class="store-card food" data-filter="Alimentos">
-        <div class="store-emoji">🥩</div><div><h3>ElectroIsla Alimentos</h3><p>Carnes, aceite, pescados, enlatados, bebidas y combos.</p></div><span>→</span>
-      </button>
-      <button class="store-card appliances" data-filter="Electrodomésticos">
-        <div class="store-emoji">❄️</div><div><h3>ElectroIsla Electrodomésticos</h3><p>Splits, ventiladores, lavadoras, cocinas y más.</p></div><span>→</span>
-      </button>
-    </div>
-  </section>
-
-  <section id="ofertas" class="section products-section">
-    <div class="section-head">
-      <div><p class="eyebrow">CATÁLOGO</p><h2>Productos</h2></div>
-      <div class="filters">
-        <button class="filter active" data-filter="Todos">Todos</button>
-        <button class="filter" data-filter="Alimentos">🥩 Alimentos</button>
-        <button class="filter" data-filter="Electrodomésticos">🏠 Electrodomésticos</button>
+  <section id="ofertas" class="shop-catalog">
+    <div class="shop-toolbar">
+      <button id="shopSearchBtn" class="icon-btn" aria-label="Buscar">⌕</button>
+      <button id="shopMenuBtn" class="icon-btn" aria-label="Categorías">☰</button>
+      <div class="category-tabs" id="categoryTabs">
+        <button class="filter active" data-filter="Todos">Ofertas</button>
+        <button class="filter" data-filter="Alimentos">Alimentos</button>
+        <button class="filter" data-filter="Electrodomésticos">Electrodomésticos</button>
       </div>
     </div>
-    <div id="products" class="product-grid"></div>
+    <div id="searchWrap" class="shop-search hidden"><input id="productSearch" type="search" placeholder="Buscar productos..."></div>
+    <div class="catalog-heading"><h2>Ofertas</h2><span id="resultCount"></span></div>
+    <div id="products" class="product-list"></div>
   </section>
 
   <section id="contacto" class="contact section">
@@ -68,6 +41,10 @@
     <a class="btn primary" href="https://wa.me/5352017110" target="_blank">💬 Escribir por WhatsApp</a>
   </section>
 </main>
+<div id="stickyOrder" class="sticky-order">
+  <div class="sticky-order-info"><span data-sticky-count>0 productos</span><strong data-sticky-total>$0.00 USD</strong></div>
+  <button class="sticky-order-btn" onclick="openCart()">Ver mi Pedido</button>
+</div>
 
 <div id="cartOverlay" class="overlay hidden"></div>
 <aside id="cart" class="cart-panel">
