@@ -25,3 +25,6 @@ v9.6.5: corregida la altura de la portada para eliminar el espacio vacío y sepa
 v9.6.6: carrito simplificado estilo Eglis; eliminada la sección 'Complementa tu pedido' y ajustados los productos del carrito.
 
 v9.6.7: pantalla Tu Pedido ajustada al estilo visual de Eglis, con servicio A domicilio fijo inferior.
+
+
+v9.6.8: se restaura el botón anterior 'Continuar con el pedido' en la parte inferior del carrito.
