@@ -48,10 +48,15 @@
 
 <div id="cartOverlay" class="overlay hidden"></div>
 <aside id="cart" class="cart-panel">
-  <div class="cart-head"><h2>🛒 Tu carrito</h2><button id="closeCart">✕</button></div>
+  <div class="cart-head">
+    <div><p class="eyebrow">TU COMPRA</p><h2>🛒 Tu Pedido</h2></div>
+    <button id="closeCart" aria-label="Cerrar">✕</button>
+  </div>
   <div id="cartItems" class="cart-items"></div>
-  <div class="cart-total"><span>Total</span><strong id="cartTotal">$0.00</strong></div>
-  <button id="checkoutBtn" class="btn primary full">Continuar con el pedido</button>
+  <div class="cart-summary">
+    <div class="cart-total"><span>Total</span><strong id="cartTotal">$0.00 USD</strong></div>
+    <button id="checkoutBtn" class="btn primary full">Continuar con el pedido</button>
+  </div>
 </aside>
 
 <div id="checkoutModal" class="modal hidden">

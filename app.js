@@ -125,12 +125,32 @@ function updatePaymentSummary(){
  box.innerHTML=`<strong>Total a pagar: ${amount}</strong><span>${zoneName?`Zona: ${esc(zoneName)}`:"Selecciona una zona"}</span><span>${feeText}</span><span>Método seleccionado: ${label}</span>`;
 }
 function renderCart(){
- const box=document.getElementById("cartItems"),count=cart.reduce((s,i)=>s+i.qty,0);document.getElementById("cartCount").textContent=count;
- let cashTotal=0,transferTotal=0,usdTotal=0,hasCup=true,hasUsd=true;
- box.innerHTML=cart.length?cart.map(i=>{const p=products.find(x=>x.id===i.id);if(!p)return"";const cur=p.currency||"USD",unitPrice=effectivePrice(p),lineTotal=unitPrice*i.qty;const cash=cashCup(p),transfer=transferCup(p);if(cur==="USD")usdTotal+=lineTotal;else hasUsd=false;if(cash!==null){cashTotal+=cash*i.qty;transferTotal+=transfer*i.qty}else hasCup=false;return `<div class="cart-row"><div><strong>${esc(p.name)}</strong><br><small>${money(unitPrice,cur)} × ${i.qty}</small>${cash!==null?`<br><small>💵 ${money(cash,"CUP")} · 💳 ${money(transfer,"CUP")}</small>`:""}</div><div class="qty"><button onclick="change('${esc(p.id)}',-1)">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)">+</button></div></div>`}).join(""):"<p>Tu carrito está vacío.</p>";
- document.getElementById("cartTotal").innerHTML=cart.length?`<span>Total</span><strong>${hasUsd?money(usdTotal,"USD"):"— USD"}</strong>`:`<span>Total</span><strong>$0.00 USD</strong>`;
+ const box=document.getElementById("cartItems"),count=cart.reduce((s,i)=>s+i.qty,0);
+ document.getElementById("cartCount").textContent=count;
+ let usdTotal=0;
+ box.innerHTML=cart.length?cart.map(i=>{
+   const p=products.find(x=>x.id===i.id); if(!p)return"";
+   const cur=p.currency||"USD",unitPrice=effectivePrice(p),lineTotal=unitPrice*i.qty;
+   if(cur==="USD")usdTotal+=lineTotal;
+   const img=p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}">`:`<div class="cart-thumb placeholder">🛍️</div>`;
+   return `<div class="cart-item">
+     <div class="cart-thumb-wrap">${img}</div>
+     <div class="cart-item-main">
+       <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">✕</button></div>
+       <small>${money(unitPrice,cur)} c/u</small>
+       <div class="cart-item-bottom">
+         <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
+         <strong>${money(lineTotal,cur)}</strong>
+       </div>
+     </div>
+   </div>`;
+ }).join(""):"<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>";
+ document.getElementById("cartTotal").innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"— USD"):"$0.00 USD";
+ updateStickyOrder();
  updatePaymentSummary();
 }
+function removeFromCart(id){cart=cart.filter(i=>i.id!==String(id));save();renderCart();render();}
+
 function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden")}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden")}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
 document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{const f=b.dataset.filter;currentFilter=f;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===f));render(f)}));
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
