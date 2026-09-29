@@ -41,3 +41,6 @@ Se agregó Zona de entrega con tarifas de domicilio: gratis, 5 USD, 10 USD y opc
 
 ## v8.9 - Zelle
 Se agregó Zelle como método de pago. Zelle utiliza exactamente el mismo total en USD que USD, incluyendo el costo del domicilio, sin conversión ni recargo. El método aparece junto a USD, CUP y Transferencia y se refleja también en el pedido enviado por WhatsApp.
+
+
+Versión v9.2: botón del carrito cambiado de “Ver mi carrito” a “Ver mi Pedido”.
