@@ -1,0 +1,14 @@
+{
+  "name": "ElectroIsla 360",
+  "short_name": "ElectroIsla",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b4ea2",
+  "description": "ElectroIsla: alimentos y electrodomésticos.",
+  "icons": [
+    {"src":"electroisla-logo-real.jpg","sizes":"192x192","type":"image/jpeg","purpose":"any"},
+    {"src":"electroisla-logo-real.jpg","sizes":"512x512","type":"image/jpeg","purpose":"any"}
+  ]
+}
