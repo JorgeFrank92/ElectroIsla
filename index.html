@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 <header class="topbar shop-topbar">
@@ -72,7 +72,7 @@
     <form id="orderForm">
       <label>Nombre<input required id="customerName" placeholder="Tu nombre"></label>
       <label>Teléfono<input required id="customerPhone" placeholder="Tu teléfono"></label>
-      <label>Zona de entrega<select required id="municipality">
+      <label class="delivery-field">Zona de entrega<select required id="municipality" class="delivery-native-select">
         <option value="">Selecciona...</option>
         <option value="Nueva Gerona" data-fee="0">Nueva Gerona — Gratis</option>
         <option value="Micro 70" data-fee="0">Micro 70 — Gratis</option>
@@ -93,7 +93,15 @@
         <option value="Mella" data-fee="10">Mella — 10 USD</option>
         <option value="Ciro Redondo" data-fee="10">Ciro Redondo — 10 USD</option>
         <option value="Otro" data-fee="10">Otro — 10 USD</option>
-      </select></label>
+      </select>
+      <div class="delivery-picker" id="deliveryPicker">
+        <button type="button" class="delivery-trigger" id="deliveryTrigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="delivery-trigger-main"><span class="delivery-pin">⌖</span><span id="deliverySelectedText">Selecciona tu zona</span></span>
+          <span class="delivery-trigger-side"><span class="delivery-fee" id="deliverySelectedFee">—</span><span class="delivery-chevron">⌄</span></span>
+        </button>
+        <div class="delivery-menu" id="deliveryMenu" role="listbox" aria-label="Zona de entrega"></div>
+      </div>
+      </label>
       <label id="otherZoneWrap" class="hidden">Especifique la zona<input id="otherZone" placeholder="Escriba cuál es su zona de entrega"></label>
       <div class="payment-box">
         <div class="payment-title">💳 Método de pago</div>
@@ -113,6 +121,6 @@
 <footer><strong>ElectroIsla</strong><span>Alimentos + Electrodomésticos</span><span>WhatsApp: +53 52017110</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js?v=2"></script>
-<script src="app.js?v=13"></script>
+<script src="app.js?v=14"></script>
 </body>
 </html>

@@ -436,3 +436,26 @@ input:focus,select:focus,textarea:focus{border-color:var(--logo-blue)}
   box-shadow:0 3px 10px rgba(202,98,35,.24);
 }
 .modal-card form>.btn.primary:hover{background:var(--logo-orange-dark)!important}
+
+/* v9.7.1 — Selector de zona de entrega estilo ElectroIsla */
+.delivery-native-select{position:absolute !important;width:1px !important;height:1px !important;opacity:0 !important;pointer-events:none !important;margin:0 !important;padding:0 !important;}
+.delivery-field{position:relative;}
+.delivery-picker{position:relative;margin-top:7px;}
+.delivery-trigger{width:100%;min-height:54px;border:1px solid #c9d8eb;border-radius:14px;background:#fff;color:var(--logo-blue-dark);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;box-shadow:0 2px 8px rgba(7,43,121,.04);transition:.18s;}
+.delivery-trigger:hover,.delivery-picker.open .delivery-trigger{border-color:var(--logo-blue);box-shadow:0 0 0 3px rgba(11,78,162,.09);}
+.delivery-trigger-main{display:flex;align-items:center;gap:10px;min-width:0;font-weight:750;}
+.delivery-pin{width:30px;height:30px;border-radius:9px;background:var(--logo-blue-light);color:var(--logo-blue);display:grid;place-items:center;font-size:18px;font-weight:900;flex:none;}
+.delivery-trigger-main span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;}
+.delivery-trigger-side{display:flex;align-items:center;gap:9px;flex:none;}
+.delivery-fee{font-size:11px;font-weight:900;color:#c45b1d;background:#fff1e6;border:1px solid #ffd8bd;border-radius:999px;padding:5px 8px;white-space:nowrap;}
+.delivery-chevron{font-size:21px;line-height:1;color:var(--logo-blue);transform:translateY(-2px);transition:.18s;}
+.delivery-picker.open .delivery-chevron{transform:rotate(180deg) translateY(2px);}
+.delivery-menu{position:absolute;z-index:80;left:0;right:0;top:calc(100% + 7px);background:#fff;border:1px solid #c9d8eb;border-radius:15px;padding:7px;box-shadow:0 16px 35px rgba(7,43,121,.16);max-height:270px;overflow:auto;display:none;}
+.delivery-picker.open .delivery-menu{display:block;}
+.delivery-option{width:100%;border:0;border-radius:10px;background:#fff;color:var(--ink);padding:11px 10px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-size:14px;cursor:pointer;}
+.delivery-option:hover{background:var(--logo-blue-light);}
+.delivery-option.active{background:#edf5ff;color:var(--logo-blue-dark);font-weight:800;box-shadow:inset 3px 0 0 var(--orange);}
+.delivery-option b{font-size:11px;color:#c45b1d;background:#fff1e6;border:1px solid #ffd8bd;border-radius:999px;padding:4px 7px;white-space:nowrap;}
+.delivery-option.active b{background:#ffe8d6;border-color:#ffc99e;}
+.delivery-option.placeholder-option{color:var(--muted);font-weight:600;}
+@media(max-width:520px){.delivery-menu{max-height:240px}.delivery-trigger{min-height:52px}.delivery-option{padding:10px 9px;}}

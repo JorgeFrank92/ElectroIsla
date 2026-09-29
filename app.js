@@ -63,6 +63,46 @@ function updateDeliveryFields(){
  }
  updatePaymentSummary();
 }
+function setupDeliveryPicker(){
+ const select=document.getElementById("municipality");
+ const picker=document.getElementById("deliveryPicker");
+ const trigger=document.getElementById("deliveryTrigger");
+ const menu=document.getElementById("deliveryMenu");
+ const textBox=document.getElementById("deliverySelectedText");
+ const feeBox=document.getElementById("deliverySelectedFee");
+ if(!select||!picker||!trigger||!menu)return;
+ const options=[...select.options];
+ menu.innerHTML=options.map((o,index)=>{
+   const fee=o.dataset.fee;
+   const feeText=o.value===""?"":(Number(fee||0)>0?`${fee} USD`:"Gratis");
+   return `<button type="button" class="delivery-option${o.value===""?" placeholder-option":""}" data-value="${esc(o.value)}" role="option" aria-selected="${o.selected}"><span>${esc(o.value?o.value:o.textContent)}</span>${feeText?`<b>${feeText}</b>`:""}</button>`;
+ }).join("");
+ function sync(){
+   const o=select.options[select.selectedIndex];
+   const value=select.value;
+   textBox.textContent=value?o.textContent.split(" — ")[0]:"Selecciona tu zona";
+   feeBox.textContent=value?(Number(o.dataset.fee||0)>0?`${o.dataset.fee} USD`:"Gratis"):"—";
+   menu.querySelectorAll(".delivery-option").forEach(btn=>{
+     const active=btn.dataset.value===value;
+     btn.classList.toggle("active",active);
+     btn.setAttribute("aria-selected",String(active));
+   });
+ }
+ function close(){picker.classList.remove("open");trigger.setAttribute("aria-expanded","false");}
+ trigger.addEventListener("click",()=>{const open=!picker.classList.contains("open");picker.classList.toggle("open",open);trigger.setAttribute("aria-expanded",String(open));});
+ menu.addEventListener("click",e=>{
+   const btn=e.target.closest(".delivery-option");
+   if(!btn)return;
+   select.value=btn.dataset.value;
+   select.dispatchEvent(new Event("change",{bubbles:true}));
+   sync();
+   close();
+ });
+ select.addEventListener("change",sync);
+ document.addEventListener("click",e=>{if(!picker.contains(e.target))close();});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")close();});
+ sync();
+}
 
 function priceMarkup(p){const cur=p.currency||"USD",sym=currencySymbols[cur]||"";const discounted=effectivePrice(p)<Number(p.price);const original=discounted?`<span class="old-price">${sym}${Number(p.price).toFixed(2)} ${cur}</span> `:"";return `${original}<span class="discount-price">${sym}${effectivePrice(p).toFixed(2)} ${cur}</span>`;}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -179,6 +219,6 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach(r=>r.addEventLi
 document.getElementById("municipality")?.addEventListener("change",updateDeliveryFields);
 document.getElementById("otherZone")?.addEventListener("input",updatePaymentSummary);
 
-render();renderCart();startCloud();
+setupDeliveryPicker();render();renderCart();startCloud();
 supabaseClient.channel("settings-store").on("postgres_changes",{event:"*",schema:"public",table:"store_settings"},async()=>{try{await loadStoreSettings();render();renderCart()}catch(e){console.warn(e)}}).subscribe();
 supabaseClient.channel("products-store").on("postgres_changes",{event:"*",schema:"public",table:"products"},async()=>{try{await loadCloudProducts();render();renderCart()}catch(e){console.warn(e)}}).subscribe();

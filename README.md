@@ -1,3 +1,11 @@
+# ElectroIsla v9.7.1
+
+Cambio de esta versión:
+- Se reemplazó la lista desplegable nativa de Zona de entrega por un selector personalizado, limpio y responsive.
+- Usa la paleta azul/naranja de ElectroIsla, con zona seleccionada resaltada y costo de domicilio visible.
+- Se conserva la lógica existente de zonas, precios, "Otro", pagos, carrito, WhatsApp y Supabase.
+- Base: v9.7.0.
+
 # ElectroIsla v9.5.8
 
 Cambio de esta versión:
