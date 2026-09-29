@@ -140,7 +140,6 @@ function renderCart(){
        <small>${money(unitPrice,cur)} c/u</small>
        <div class="cart-item-bottom">
          <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
-         <strong>${money(lineTotal,cur)}</strong>
        </div>
      </div>
    </div>`;
@@ -148,7 +147,6 @@ function renderCart(){
  document.getElementById("cartTotal").innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"— USD"):"$0.00 USD";
  const topTotal=document.getElementById("cartTopTotal");
  if(topTotal)topTotal.textContent=`US$ ${usdTotal.toFixed(2)}`;
- renderCartRecommendations();
  updateStickyOrder();
  updatePaymentSummary();
 }
