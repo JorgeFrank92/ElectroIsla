@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="electroisla-version" content="9.8.1">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9.8.1">
 </head>
 <body>
 <header class="topbar shop-topbar">
@@ -118,10 +119,20 @@
   </div>
 </div>
 
+<div id="thankYouModal" class="modal hidden" aria-hidden="true">
+  <div class="modal-card thank-you-card">
+    <div class="thank-you-icon" aria-hidden="true">✓</div>
+    <p class="eyebrow">PEDIDO ENVIADO</p>
+    <h2>¡Gracias por tu compra!</h2>
+    <p class="thank-you-text">Tu pedido fue enviado a ElectroIsla 360 por WhatsApp. Gracias por confiar en nosotros.</p>
+    <button id="thankYouAccept" class="btn primary full" type="button">Aceptar</button>
+  </div>
+</div>
+
 <footer><strong>ElectroIsla</strong><span>Alimentos + Electrodomésticos</span><span>WhatsApp: +53 52017110</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js?v=3"></script>
-<script src="app.js?v=15"></script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).catch(()=>{}));}</script>
+<script src="supabase-config.js?v=4"></script>
+<script src="app.js?v=17"></script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js?v=9.8.1",{updateViaCache:"none"}).catch(()=>{}));}</script>
 </body>
 </html>

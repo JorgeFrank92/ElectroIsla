@@ -1,40 +1,15 @@
-# ElectroIsla v9.7.1
+# ElectroIsla v9.8.0 — corrección de actualización de la app
 
-Cambio de esta versión:
-- Se reemplazó la lista desplegable nativa de Zona de entrega por un selector personalizado, limpio y responsive.
-- Usa la paleta azul/naranja de ElectroIsla, con zona seleccionada resaltada y costo de domicilio visible.
-- Se conserva la lógica existente de zonas, precios, "Otro", pagos, carrito, WhatsApp y Supabase.
-- Base: v9.7.0.
+Esta versión mantiene la tienda y la lógica de v9.7.2, pero cambia la estrategia de actualización de la PWA/TWA:
 
-# ElectroIsla v9.5.8
+- `manifest.webmanifest` usa `start_url` con `?app_version=9.8.0` para que una nueva versión de la aplicación arranque en una URL nueva.
+- El registro del service worker usa `sw.js?v=9.8.0`.
+- El service worker usa una caché nueva y elimina las cachés anteriores al activarse.
+- HTML y recursos principales se solicitan primero por red.
+- Se mantienen el selector nuevo de zona, productos, Supabase, pagos y pedidos de la versión anterior.
 
-Cambio de esta versión:
-- Se hizo más discreto el bloque de ayuda/WhatsApp al final de la tienda.
-- Se conserva el enlace directo a WhatsApp.
-- No se modificaron productos, carrito, categorías, pagos, entrega ni Supabase.
-- Base: v9.5.6.
+## Importante
 
+Para que el cambio de `start_url` llegue a la aplicación Android instalada, hay que generar una nueva versión del APK/TWA. Debe reutilizarse el mismo `signing.keystore` de ElectroIsla para que Android acepte la actualización como la misma aplicación.
 
-v9.5.8: reemplazo del emoji del carrito superior por un icono SVG propio para mantener el mismo aspecto entre navegadores y dispositivos.
-
-
-v9.5.9 — Carrito superior minimalista: icono SVG oscuro sin cuadro verde; contador en círculo verde.
-
-
-v9.6.0: Interfaz con paleta de colores alineada con el logo de ElectroIsla, conservando funciones y estructura de v9.5.9.
-
-
-v9.6.3: portada hero de ElectroIsla 360 integrada en la tienda.
-
-v9.6.4: portada corregida para mostrar la imagen completa sin recorte en móvil.
-
-v9.6.5: corregida la altura de la portada para eliminar el espacio vacío y separado el texto de información.
-
-v9.6.6: carrito simplificado estilo Eglis; eliminada la sección 'Complementa tu pedido' y ajustados los productos del carrito.
-
-v9.6.7: pantalla Tu Pedido ajustada al estilo visual de Eglis, con servicio A domicilio fijo inferior.
-
-
-v9.6.8: se restaura el botón anterior 'Continuar con el pedido' en la parte inferior del carrito.
-
-v9.6.9: corregido el error que impedía actualizar la cantidad visible en el botón '+' de cada producto después de agregarlo; ahora el botón muestra la cantidad. Se corrigió también el total superior del carrito para mostrar 'USD 0.00' y se añadió el total acumulado de cada producto dentro del pedido.
+No borrar los iconos existentes del repositorio si ya están presentes.

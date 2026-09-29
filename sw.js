@@ -1,10 +1,10 @@
-const CACHE_NAME = 'electroisla-v9.7.2';
+const CACHE_NAME = 'electroisla-v9.8.0';
 const CORE = [
-  './',
+  './?app_version=9.8.0',
   './index.html',
-  './styles.css?v=8',
-  './app.js?v=15',
-  './supabase-config.js?v=3'
+  './styles.css?v=9.8.0',
+  './app.js?v=16',
+  './supabase-config.js?v=4'
 ];
 
 self.addEventListener('install', event => {
@@ -18,7 +18,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
+      .then(keys => Promise.all(keys.map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -27,7 +27,8 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-  // Always prefer the network for HTML so the installed app receives updates.
+  // HTML/navigation: always ask the network first so the installed app
+  // cannot remain pinned to an older GitHub Pages document.
   if (req.mode === 'navigate' || new URL(req.url).pathname.endsWith('/index.html')) {
     event.respondWith(
       fetch(req, { cache: 'no-store' })
@@ -41,7 +42,6 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Network first for our versioned app files; cache as fallback.
   if (new URL(req.url).origin === self.location.origin) {
     event.respondWith(
       fetch(req, { cache: 'no-store' })

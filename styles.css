@@ -459,3 +459,38 @@ input:focus,select:focus,textarea:focus{border-color:var(--logo-blue)}
 .delivery-option.active b{background:#ffe8d6;border-color:#ffc99e;}
 .delivery-option.placeholder-option{color:var(--muted);font-weight:600;}
 @media(max-width:520px){.delivery-menu{max-height:240px}.delivery-trigger{min-height:52px}.delivery-option{padding:10px 9px;}}
+
+
+/* v9.8.1 — Pantalla de agradecimiento después de enviar el pedido */
+.thank-you-card{
+  text-align:center;
+  max-width:430px;
+  padding:34px 24px 26px;
+}
+.thank-you-icon{
+  width:72px;
+  height:72px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--logo-blue-light);
+  color:var(--logo-blue);
+  border:2px solid #c7d8ef;
+  font-size:38px;
+  font-weight:900;
+  box-shadow:0 6px 18px rgba(7,72,153,.12);
+}
+.thank-you-card .eyebrow{margin-bottom:6px;}
+.thank-you-card h2{margin:0 0 12px;}
+.thank-you-text{
+  margin:0 auto 24px;
+  max-width:340px;
+  color:var(--muted);
+  line-height:1.55;
+}
+.thank-you-card .btn.primary{
+  background:var(--logo-orange)!important;
+  box-shadow:0 3px 10px rgba(202,98,35,.24);
+}
+.thank-you-card .btn.primary:hover{background:var(--logo-orange-dark)!important}
