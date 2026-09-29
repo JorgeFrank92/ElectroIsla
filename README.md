@@ -8,3 +8,6 @@ Cambio de esta versión:
 
 
 v9.5.8: reemplazo del emoji del carrito superior por un icono SVG propio para mantener el mismo aspecto entre navegadores y dispositivos.
+
+
+v9.5.9 — Carrito superior minimalista: icono SVG oscuro sin cuadro verde; contador en círculo verde.

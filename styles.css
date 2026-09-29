@@ -140,3 +140,61 @@
   .shop-topbar .cart-btn .cart-icon{width:24px;height:24px}
 }
 
+
+/* v9.5.9 — Carrito superior minimalista sin fondo */
+.shop-topbar .cart-btn{
+  background:transparent !important;
+  border:0;
+  color:var(--ink);
+  width:44px;
+  min-width:44px;
+  height:44px;
+  padding:0;
+  border-radius:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  box-shadow:none;
+}
+.shop-topbar .cart-btn:hover,
+.shop-topbar .cart-btn:focus{
+  background:transparent !important;
+  box-shadow:none;
+}
+.shop-topbar .cart-btn .cart-icon{
+  width:27px;
+  height:27px;
+  color:var(--ink);
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.9;
+}
+.shop-topbar .cart-btn b{
+  position:relative;
+  top:-8px;
+  margin-left:-7px;
+  min-width:18px;
+  height:18px;
+  padding:0 4px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  background:var(--accent);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  line-height:1;
+}
+@media(max-width:700px){
+  .shop-topbar .cart-btn{
+    width:40px;
+    min-width:40px;
+    height:40px;
+  }
+  .shop-topbar .cart-btn .cart-icon{
+    width:25px;
+    height:25px;
+  }
+}
