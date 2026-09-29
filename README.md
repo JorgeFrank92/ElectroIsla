@@ -17,3 +17,5 @@ v9.6.0: Interfaz con paleta de colores alineada con el logo de ElectroIsla, cons
 
 
 v9.6.3: portada hero de ElectroIsla 360 integrada en la tienda.
+
+v9.6.4: portada corregida para mostrar la imagen completa sin recorte en móvil.
