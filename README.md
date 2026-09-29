@@ -28,3 +28,5 @@ v9.6.7: pantalla Tu Pedido ajustada al estilo visual de Eglis, con servicio A do
 
 
 v9.6.8: se restaura el botón anterior 'Continuar con el pedido' en la parte inferior del carrito.
+
+v9.6.9: corregido el error que impedía actualizar la cantidad visible en el botón '+' de cada producto después de agregarlo; ahora el botón muestra la cantidad. Se corrigió también el total superior del carrito para mostrar 'USD 0.00' y se añadió el total acumulado de cada producto dentro del pedido.

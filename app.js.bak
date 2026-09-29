@@ -138,17 +138,15 @@ function renderCart(){
      <div class="cart-item-main">
        <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">🗑️</button></div>
        <small>${money(unitPrice,cur)} c/u</small>
-       <div class="cart-line-total">Total: ${money(lineTotal,cur)}</div>
        <div class="cart-item-bottom">
          <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
        </div>
      </div>
    </div>`;
  }).join(""):`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
- const cartTotal=document.getElementById("cartTotal");
- if(cartTotal)cartTotal.innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
+ document.getElementById("cartTotal").innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"— USD"):"$0.00 USD";
  const topTotal=document.getElementById("cartTopTotal");
- if(topTotal)topTotal.textContent=`USD ${usdTotal.toFixed(2)}`;
+ if(topTotal)topTotal.textContent=`US$ ${usdTotal.toFixed(2)}`;
  updateStickyOrder();
  updatePaymentSummary();
 }
