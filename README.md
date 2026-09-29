@@ -11,3 +11,6 @@ v9.5.8: reemplazo del emoji del carrito superior por un icono SVG propio para ma
 
 
 v9.5.9 — Carrito superior minimalista: icono SVG oscuro sin cuadro verde; contador en círculo verde.
+
+
+v9.6.0: Interfaz con paleta de colores alineada con el logo de ElectroIsla, conservando funciones y estructura de v9.5.9.

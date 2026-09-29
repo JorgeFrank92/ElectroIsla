@@ -198,3 +198,61 @@
     height:25px;
   }
 }
+
+/* v9.6.0 — Paleta de interfaz alineada con el logo de ElectroIsla */
+:root{
+  --logo-green:#0b8f5b;
+  --logo-green-dark:#075f3d;
+  --logo-green-light:#eaf7f1;
+  --logo-green-pale:#f4fbf7;
+  --logo-ink:#17202a;
+  --accent:var(--logo-green);
+  --accent2:var(--logo-green-dark);
+  --ink:var(--logo-ink);
+}
+
+/* Áreas principales */
+.store-banner{
+  background:linear-gradient(120deg,var(--logo-green-dark) 0%,var(--logo-green) 58%,#12a66d 100%);
+}
+.store-info{background:var(--logo-green-pale)}
+.category-tabs .filter.active,
+.filter.active{
+  color:var(--logo-green-dark);
+  background:var(--logo-green-light);
+  border-color:#b9dfce;
+}
+.category-tabs .filter.active:after{background:var(--logo-green)}
+
+/* Botones y acentos */
+.primary,
+.add,
+.add-circle,
+.recommendation-add,
+.contact .btn,
+.sticky-order-btn{
+  background:var(--logo-green);
+}
+.primary:hover{background:var(--logo-green-dark)}
+
+/* Fondos suaves */
+.payment-box{background:var(--logo-green-pale)}
+.payment-option:has(input:checked){
+  border-color:var(--logo-green);
+  background:var(--logo-green-light);
+}
+
+/* Estado abierto y pequeños detalles */
+.store-badge,
+.eyebrow,
+.tag{color:var(--logo-green)}
+
+/* Ayuda WhatsApp */
+.contact{border-color:#cfe9dc}
+.contact .eyebrow{color:var(--logo-green)}
+
+/* Icono de carrito */
+.shop-topbar .cart-btn b{background:var(--logo-green);color:#fff}
+
+/* Enfoques y campos */
+input:focus,select:focus,textarea:focus{border-color:var(--logo-green)}
