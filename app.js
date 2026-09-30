@@ -365,7 +365,7 @@ function removeFromCart(id){cart=cart.filter(i=>i.id!==String(id));save();render
 function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden")}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden")}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
 renderCategoryTabs();
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
-document.getElementById("shopMenuBtn")?.addEventListener("click",()=>document.getElementById("categoryTabs")?.scrollIntoView({behavior:"smooth",inline:"center"}));
+document.getElementById("shopMenuBtn")?.addEventListener("click",openCategoryMenu);
 document.getElementById("productSearch")?.addEventListener("input",()=>render(currentFilter));
 document.getElementById("cartBtn").onclick=openCart;document.getElementById("closeCart").onclick=closeCart;document.getElementById("cartOverlay").onclick=closeCart;document.getElementById("checkoutBtn").onclick=openCheckout;document.getElementById("closeModal").onclick=()=>document.getElementById("checkoutModal").classList.add("hidden");
 function showThankYou(){
@@ -417,6 +417,8 @@ document.getElementById("otherZone")?.addEventListener("input",updatePaymentSumm
 
 setupDeliveryPicker();
 renderCategoryTabs();
+ensureCategoryMenu();
+renderCategoryMenu();
 render();
 renderCart();
 startCloud();
@@ -425,4 +427,7 @@ supabaseClient.channel("settings-store").on("postgres_changes",{event:"*",schema
 
 supabaseClient.channel("products-store").on("postgres_changes",{event:"*",schema:"public",table:"products"},async()=>{try{await loadCloudProducts();render();renderCart()}catch(e){console.warn(e)}}).subscribe();
 
-supabaseClient.channel("categories-store").on("postgres_changes",{event:"*",schema:"public",table:"categories"},async()=>{try{await loadCloudCategories();if(currentFilter!=="Todos"&&!categories.some(c=>c.name===currentFilter)){currentFilter="Todos"}renderCategoryTabs();render(currentFilter);renderCart()}catch(e){console.warn("No se pudieron actualizar las categorías.",e)}}).subscribe();
+supabaseClient.channel("categories-store").on("postgres_changes",{event:"*",schema:"public",table:"categories"},async()=>{try{await loadCloudCategories();if(currentFilter!=="Todos"&&!categories.some(c=>c.name===currentFilter)){currentFilter="Todos"}renderCategoryTabs();
+renderCategoryMenu();
+render(currentFilter);
+renderCart()
