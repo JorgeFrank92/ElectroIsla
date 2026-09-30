@@ -9,27 +9,75 @@
 .photo-btn input{display:none}.photo-preview img{width:120px;height:120px;object-fit:cover;border-radius:12px;margin-top:10px}
 .photo-status{display:block;margin-top:7px;font-size:.85rem;color:#5b6670}
 
-/* Administrar categorías — mismo lenguaje visual de ElectroIsla */
-.category-manager{margin-top:18px}
-.category-help{margin-top:-6px;color:#5b6670;font-size:.92rem;line-height:1.45}
-.category-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;margin-top:14px}
-.category-form .check{margin:0;white-space:nowrap}
-.category-list{display:grid;gap:10px;margin-top:16px}
-.category-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid #e3e8ee;border-radius:16px;background:#fff}
-.category-item.is-hidden{opacity:.72}
+/* Administrar categorías + formulario: misma paleta azul/naranja de ElectroIsla */
+:root{
+  --ei-blue:#0757a6;
+  --ei-blue-dark:#064887;
+  --ei-orange:#f28a22;
+  --ei-soft-blue:#eef6ff;
+  --ei-soft-orange:#fff4e7;
+  --ei-border:#dce7f2;
+}
+.admin-card{border-color:var(--ei-border)}
+.admin-card h2{color:#17324d}
+.admin-card input:focus,.admin-card select:focus,.admin-card textarea:focus{
+  outline:none;border-color:var(--ei-blue);box-shadow:0 0 0 3px rgba(7,87,166,.12)
+}
+.btn.primary{background:var(--ei-blue);border-color:var(--ei-blue)}
+.btn.primary:hover{background:var(--ei-blue-dark)}
+.btn.secondary{border-color:#d7e2ed;background:#fff}
+.category-manager{margin-top:16px;padding:18px}
+.category-help{margin-top:-5px;color:#5b6670;font-size:.88rem;line-height:1.4}
+.category-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end;margin-top:12px}
+.category-form .check{margin:0;white-space:nowrap;font-size:.88rem}
+.category-form input{height:42px}
+.category-list{display:grid;gap:7px;margin-top:12px}
+.category-item{
+  display:flex;align-items:center;justify-content:space-between;gap:9px;
+  padding:9px 10px;border:1px solid var(--ei-border);border-radius:12px;
+  background:var(--ei-soft-blue)
+}
+.category-item.is-hidden{opacity:.68;background:#f7f8fa}
 .category-info{min-width:0}
-.category-name{font-weight:700;color:#17324d}
-.category-state{display:block;margin-top:3px;font-size:.82rem;color:#6b7280}
-.category-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-.category-actions .btn{min-width:42px}
-.category-empty{padding:12px 0;color:#6b7280}
-.category-editing{margin-top:10px;padding:10px 12px;border-radius:12px;background:#fff4e8;color:#7a4a13;font-size:.86rem}
+.category-name{font-weight:700;color:#17324d;font-size:.94rem}
+.category-state{display:block;margin-top:1px;font-size:.75rem;color:#6b7280}
+.category-actions{display:flex;gap:5px;flex-wrap:nowrap;justify-content:flex-end}
+.category-actions .btn{
+  min-width:38px;padding:7px 9px;border-radius:10px;font-size:.78rem
+}
+.category-actions .btn:first-child{border-color:#cfe0f2}
+.category-actions .btn:nth-child(2){color:var(--ei-blue)}
+.category-actions .btn:last-child{color:#9a4d16;border-color:#f1d5bd;background:#fffaf5}
+.category-empty{padding:10px 0;color:#6b7280}
+.category-editing{
+  margin-top:8px;padding:8px 10px;border-radius:10px;
+  background:var(--ei-soft-orange);color:#7a4a13;font-size:.8rem
+}
+/* Selector de categoría del producto, estilo formulario del cliente */
+#pCategory{
+  width:100%;min-height:46px;padding:11px 42px 11px 13px;
+  border:1px solid #d9e3ee;border-radius:12px;background:#fff;
+  color:#17324d;font-weight:600;font-size:.95rem;
+  box-shadow:0 1px 2px rgba(0,0,0,.03)
+}
+#pCategory:hover{border-color:#b9cde2}
+#pCategory:focus{border-color:var(--ei-blue);box-shadow:0 0 0 3px rgba(7,87,166,.12)}
+/* Los controles del formulario de producto usan la misma sensación visual */
+#productForm input:not([type="checkbox"]),#productForm select,#productForm textarea{
+  border-radius:12px;border-color:#d9e3ee;background:#fff
+}
+#productForm label{color:#17324d}
+#productForm .check input{accent-color:var(--ei-blue)}
+#productForm .photo-picker{
+  border-color:#c9d9e8;background:#f8fbff;border-radius:12px
+}
+#productForm .photo-btn{background:var(--ei-blue);border-color:var(--ei-blue)}
 @media(max-width:700px){
   .category-form{grid-template-columns:1fr}
   .category-form .check{justify-self:start}
-  .category-item{align-items:flex-start;flex-direction:column}
-  .category-actions{width:100%;justify-content:flex-start}
-  .category-actions .btn{flex:1}
+  .category-item{padding:8px 9px}
+  .category-actions{gap:4px}
+  .category-actions .btn{padding:7px 8px;font-size:.75rem}
 }
 
 </style>
@@ -62,7 +110,7 @@
 
 <section class="admin-card category-manager">
   <h2>🗂️ Administrar categorías</h2>
-  <p class="category-help">Crea y organiza las categorías que aparecerán en la tienda. Puedes ocultarlas sin borrarlas.</p>
+  <p class="category-help">Crea, edita y organiza las categorías de tu tienda. Puedes ocultarlas sin borrarlas.</p>
 
   <form id="categoryForm" class="category-form">
     <input type="hidden" id="categoryEditId">
