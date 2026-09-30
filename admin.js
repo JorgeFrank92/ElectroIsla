@@ -96,6 +96,46 @@ function initCategoryPicker(){
   syncCategoryPicker();
 }
 
+function initFancySelect(selectId,pickerId,triggerId,valueId,optionsId){
+  const select=document.getElementById(selectId), picker=document.getElementById(pickerId), trigger=document.getElementById(triggerId), valueBox=document.getElementById(valueId), box=document.getElementById(optionsId);
+  if(!select||!picker||!trigger||!valueBox||!box||picker.dataset.ready)return;
+  picker.dataset.ready="1";
+  function sync(){
+    const opt=select.options[select.selectedIndex];
+    valueBox.textContent=opt?.textContent||"Selecciona una opción";
+    box.querySelectorAll(".ei-fancy-option").forEach(b=>{const on=b.dataset.value===select.value;b.classList.toggle("selected",on);b.setAttribute("aria-selected",String(on));b.innerHTML=`<span>${esc(b.dataset.label||b.textContent)}</span>${on?'<span class="ei-fancy-check">✓</span>':""}`;});
+  }
+  function build(){
+    box.innerHTML="";
+    [...select.children].forEach(node=>{
+      if(node.tagName==="OPTGROUP"){
+        const h=document.createElement("div");h.className="ei-fancy-group";h.textContent=node.label;box.appendChild(h);
+        [...node.children].forEach(addOption);
+      }else if(node.tagName==="OPTION") addOption(node);
+    });
+    sync();
+  }
+  function addOption(opt){
+    const b=document.createElement("button");b.type="button";b.className="ei-fancy-option";b.dataset.value=opt.value;b.dataset.label=opt.textContent;b.setAttribute("role","option");
+    b.addEventListener("click",()=>{select.value=opt.value;select.dispatchEvent(new Event("change",{bubbles:true}));picker.classList.remove("open");trigger.setAttribute("aria-expanded","false");sync();});
+    box.appendChild(b);
+  }
+  trigger.addEventListener("click",()=>{const open=!picker.classList.contains("open");document.querySelectorAll(".ei-fancy-picker.open,.ei-category-picker.open").forEach(x=>x.classList.remove("open"));picker.classList.toggle("open",open);trigger.setAttribute("aria-expanded",String(open));});
+  select.addEventListener("change",sync);
+  build();
+}
+function syncFancySelects(){
+  ["pCurrency","pUnit"].forEach(id=>{
+    const select=document.getElementById(id);
+    if(select)select.dispatchEvent(new Event("change",{bubbles:true}));
+  });
+  if(typeof syncCategoryPicker==="function")syncCategoryPicker();
+}
+function initAllFancySelects(){
+  initFancySelect("pCurrency","currencyPicker","currencyPickerTrigger","currencyPickerValue","currencyPickerOptions");
+  initFancySelect("pUnit","unitPicker","unitPickerTrigger","unitPickerValue","unitPickerOptions");
+}
+
 function renderCategories(){
   const box=document.getElementById("categoryList");
   if(!box)return;
@@ -333,7 +373,7 @@ function edit(id){
  if(unitOptions.includes(p.unit||"")){document.getElementById("pUnit").value=p.unit||"";document.getElementById("pUnitCustom").value="";document.getElementById("pUnitCustom").style.display="none";}
  else{document.getElementById("pUnit").value="__otra__";document.getElementById("pUnitCustom").value=p.unit||"";document.getElementById("pUnitCustom").style.display="block";}
  document.getElementById("pImage").value=p.image||"";document.getElementById("pDescription").value=p.description||"";document.getElementById("pAvailable").checked=p.available!==false;
- document.getElementById("formTitle").textContent="✏️ Editar producto";showPreview(p.image||"");scrollTo(0,0)
+ document.getElementById("formTitle").textContent="✏️ Editar producto";syncFancySelects();showPreview(p.image||"");scrollTo(0,0)
 }
 async function toggle(id){
  const p=products.find(x=>x.id===id);if(!p)return;
@@ -362,6 +402,7 @@ const picker=document.getElementById("pImageFile");
 picker.addEventListener("change",async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const status=document.getElementById("photoStatus");status.textContent="Leyendo la foto…";try{const data=await compressImage(file);document.getElementById("pImage").value=data;showPreview(data);status.textContent="✅ Foto cargada. Ahora pulsa «Guardar producto»."}catch(err){document.getElementById("pImage").value="";document.getElementById("imagePreview").innerHTML="";status.textContent="❌ No se pudo cargar la foto.";alert(err.message||"No se pudo cargar la foto.")}finally{picker.value=""}});
 
 
+initAllFancySelects();
 document.getElementById("categoryForm").addEventListener("submit",saveCategoryRecord);
 document.getElementById("cancelCategoryEdit").onclick=resetCategoryForm;
 
@@ -379,7 +420,7 @@ document.getElementById("productForm").addEventListener("submit",async e=>{
  const id=document.getElementById("editId").value;const old=[...products];if(id)products=products.map(x=>x.id===id?p:x);else products.push(p);saveLocal();render();
  try{await cloudUpsert(p);reset();render();const status=document.getElementById("cloudStatus");if(status)status.textContent=`☁️ Sincronizado con Supabase · ${products.length} productos`;alert("✅ Producto guardado y sincronizado en la nube.")}catch(err){products=old;saveLocal();render();alert("No se pudo guardar en Supabase. El cambio local fue revertido.\n\n"+(err.message||err))}
 });
-function reset(){document.getElementById("productForm").reset();document.getElementById("editId").value="";document.getElementById("pImage").value="";document.getElementById("formTitle").textContent="➕ Agregar producto";document.getElementById("pAvailable").checked=true;document.getElementById("pCurrency").value="USD";document.getElementById("pDiscountPrice").value="";document.getElementById("pUnitCustom").value="";document.getElementById("pUnitCustom").style.display="none";showPreview("")}
+function reset(){document.getElementById("productForm").reset();document.getElementById("editId").value="";document.getElementById("pImage").value="";document.getElementById("formTitle").textContent="➕ Agregar producto";document.getElementById("pAvailable").checked=true;document.getElementById("pCurrency").value="USD";document.getElementById("pDiscountPrice").value="";document.getElementById("pUnitCustom").value="";document.getElementById("pUnitCustom").style.display="none";syncFancySelects();showPreview("")}
 document.getElementById("cancelEdit").onclick=reset;
 document.getElementById("saveSettings").onclick=saveSettings;
 document.getElementById("loginBtn").onclick=login;
