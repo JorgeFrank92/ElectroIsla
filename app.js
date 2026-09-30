@@ -116,7 +116,157 @@ function fromRow(r){return{id:String(r.id),name:r.name||"",category:r.category||
 async function loadCloudProducts(){const {data,error}=await supabaseClient.from("products").select("*").order("created_at",{ascending:true});if(error)throw error;if(data&&data.length){products=data.map(fromRow);save();return true}return false}
 async function startCloud(){try{await loadStoreSettings();await loadCloudCategories();await loadCloudProducts();renderCategoryTabs();render();renderCart()}catch(err){console.warn("Supabase no disponible; usando catálogo local.",err);renderCategoryTabs();render();renderCart()}}
 let currentFilter="Todos";
-function renderCategoryTabs(){const tabs=document.getElementById("categoryTabs");if(!tabs)return;const names=[...new Set(categories.map(c=>c.name).filter(Boolean))];tabs.innerHTML=`<button class="filter${currentFilter==="Todos"?" active":""}" data-filter="Todos">Ofertas</button>${names.map(name=>`<button class="filter${currentFilter===name?" active":""}" data-filter="${esc(name)}">${esc(name)}</button>`).join("")}`;tabs.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{const f=b.dataset.filter;currentFilter=f;tabs.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===f));b.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});render(f)}))}
+function renderCategoryTabs(){
+ const tabs=document.getElementById("categoryTabs");
+ if(!tabs)return;
+
+ const names=[...new Set(categories.map(c=>c.name).filter(Boolean))];
+
+ tabs.innerHTML=`
+ <button class="filter${currentFilter==="Todos"?" active":""}" data-filter="Todos">Ofertas</button>
+ ${names.map(name=>`
+   <button class="filter${currentFilter===name?" active":""}" data-filter="${esc(name)}">
+     ${esc(name)}
+   </button>
+ `).join("")}`;
+
+ tabs.querySelectorAll(".filter").forEach(b=>{
+   b.addEventListener("click",()=>{
+     const f=b.dataset.filter;
+     currentFilter=f;
+
+     tabs.querySelectorAll(".filter")
+       .forEach(x=>x.classList.toggle("active",x.dataset.filter===f));
+
+     b.scrollIntoView({
+       behavior:"smooth",
+       block:"nearest",
+       inline:"center"
+     });
+
+     render(f);
+   });
+ });
+}
+
+function renderCategoryMenu(){
+ const menu=document.getElementById("categoryMenu");
+ if(!menu)return;
+
+ const names=[...new Set(
+   categories.map(c=>c.name).filter(Boolean)
+ )];
+
+ menu.innerHTML=`
+   <div class="category-menu-head">
+     <div>
+       <span class="category-menu-kicker">NAVEGACIÓN</span>
+       <h2>Categorías</h2>
+     </div>
+
+     <button
+       type="button"
+       class="category-menu-close"
+       id="categoryMenuClose"
+       aria-label="Cerrar categorías">
+       ✕
+     </button>
+   </div>
+
+   <div class="category-menu-list">
+
+     <button
+       type="button"
+       class="category-menu-item${currentFilter==="Todos"?" active":""}"
+       data-menu-filter="Todos">
+       <span>Ofertas</span>
+       <span>›</span>
+     </button>
+
+     ${names.map(name=>`
+       <button
+         type="button"
+         class="category-menu-item${currentFilter===name?" active":""}"
+         data-menu-filter="${esc(name)}">
+         <span>${esc(name)}</span>
+         <span>›</span>
+       </button>
+     `).join("")}
+
+   </div>
+ `;
+
+ menu.querySelector("#categoryMenuClose")
+   ?.addEventListener("click",closeCategoryMenu);
+
+ menu.querySelectorAll("[data-menu-filter]")
+   .forEach(b=>{
+     b.addEventListener("click",()=>{
+       currentFilter=b.dataset.menuFilter;
+
+       closeCategoryMenu();
+
+       renderCategoryTabs();
+       renderCategoryMenu();
+       render(currentFilter);
+     });
+   });
+}
+
+function ensureCategoryMenu(){
+ if(document.getElementById("categoryMenu"))return;
+
+ const overlay=document.createElement("div");
+
+ overlay.id="categoryMenuOverlay";
+ overlay.className="category-menu-overlay";
+
+ overlay.addEventListener("click",closeCategoryMenu);
+
+ document.body.appendChild(overlay);
+
+ const menu=document.createElement("aside");
+
+ menu.id="categoryMenu";
+ menu.className="category-menu";
+
+ menu.setAttribute(
+   "aria-label",
+   "Menú de categorías"
+ );
+
+ document.body.appendChild(menu);
+
+ renderCategoryMenu();
+}
+
+function openCategoryMenu(){
+ ensureCategoryMenu();
+
+ renderCategoryMenu();
+
+ document
+   .getElementById("categoryMenuOverlay")
+   ?.classList.add("open");
+
+ document
+   .getElementById("categoryMenu")
+   ?.classList.add("open");
+
+ document.body.classList.add("category-menu-open");
+}
+
+function closeCategoryMenu(){
+ document
+   .getElementById("categoryMenuOverlay")
+   ?.classList.remove("open");
+
+ document
+   .getElementById("categoryMenu")
+   ?.classList.remove("open");
+
+ document.body.classList.remove("category-menu-open");
+}
 function updateStickyOrder(){const bar=document.getElementById("stickyOrder");if(!bar)return;const count=cart.reduce((s,i)=>s+i.qty,0);let total=0;cart.forEach(i=>{const p=products.find(x=>x.id===i.id);if(p)total+=effectivePrice(p)*i.qty});bar.classList.toggle("visible",count>0);const c=bar.querySelector("[data-sticky-count]");const t=bar.querySelector("[data-sticky-total]");if(c)c.textContent=`${count} producto${count===1?"":"s"}`;if(t)t.textContent=money(total,"USD")}
 function render(filter="Todos"){const box=document.getElementById("products");if(!box)return;const q=(document.getElementById("productSearch")?.value||"").trim().toLowerCase();const activeCategoryNames=new Set(categories.map(c=>c.name));const list=products.filter(p=>p.available&&activeCategoryNames.has(p.category)&&(filter==="Todos"||p.category===filter)&&(!q||`${p.name} ${p.description||""}`.toLowerCase().includes(q)));const count=document.getElementById("resultCount");if(count)count.textContent=`${list.length} producto${list.length===1?"":"s"}`;box.innerHTML=list.map(p=>{const qty=cart.find(i=>i.id===p.id)?.qty||0;return `<article class="product shop-product"><div class="product-info"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description||"")}</p><div class="price">${priceMarkup(p)} <small>${esc(p.unit||"")}</small></div></div><div class="product-media"><div class="product-img">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:(p.category==="Alimentos"?"🥩":"🏠")}</div><button class="add-circle" onclick="add('${esc(p.id)}')" aria-label="Agregar ${esc(p.name)}">${qty>0?qty:"+"}</button></div></article>`}).join("")||'<p class="empty-products">No hay productos disponibles.</p>';updateStickyOrder()}function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();renderCart();render(currentFilter)}
 function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart();render(currentFilter)}
