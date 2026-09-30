@@ -138,6 +138,39 @@
 }
 .ei-category-check{color:var(--ei-orange);font-weight:800}
 
+
+/* v8 — Administrador: naranja como color principal */
+:root{
+  --ei-blue:#0757a6; --ei-blue-dark:#064887; --ei-orange:#f28a22;
+  --ei-orange-dark:#d96f0d; --ei-soft-orange:#fff4e7; --ei-border:#f0d4b7;
+  --ei-soft-blue:#eef6ff;
+}
+.admin-page{background:#fffaf5}
+.admin-page .topbar{border-bottom-color:#f0d4b7;background:#fff}
+.admin-page .brand-mark{background:var(--ei-orange)!important}
+.admin-page .brand span:last-child{color:var(--ei-orange)!important}
+.admin-page .admin-title h1,.admin-page h1,.admin-page h2{color:#7a3f0a}
+.admin-page .eyebrow{color:var(--ei-orange-dark)}
+.admin-page .admin-card{border-color:#f0d4b7;box-shadow:0 6px 20px rgba(217,111,13,.06)}
+.admin-page input:focus,.admin-page select:focus,.admin-page textarea:focus{border-color:var(--ei-orange)!important;box-shadow:0 0 0 3px rgba(242,138,34,.16)!important}
+.admin-page .btn.primary{background:var(--ei-orange)!important;border-color:var(--ei-orange)!important}
+.admin-page .btn.primary:hover{background:var(--ei-orange-dark)!important}
+.admin-page .btn.secondary:hover{border-color:var(--ei-orange)!important;color:var(--ei-orange-dark)!important}
+.admin-page .category-item{background:var(--ei-soft-orange);border-color:#f0d4b7}
+.admin-page .category-name{color:#7a3f0a}
+.admin-page .category-actions .btn:nth-child(2){color:var(--ei-orange-dark)}
+.admin-page .category-editing{background:#fff0df;color:#7a3f0a}
+.admin-page #productForm label,.admin-page label{color:#6d421d}
+.admin-page .photo-picker{border-color:#efc99f!important;background:#fff8ef!important}
+.admin-page .photo-btn{background:var(--ei-orange)!important;border-color:var(--ei-orange)!important}
+.admin-page .ei-category-trigger:focus,.admin-page .ei-category-picker.open .ei-category-trigger,.admin-page .ei-fancy-trigger:focus,.admin-page .ei-fancy-picker.open .ei-fancy-trigger{border-color:var(--ei-orange)!important;box-shadow:0 0 0 3px rgba(242,138,34,.16)!important}
+.admin-page .ei-category-chevron,.admin-page .ei-fancy-chevron,.admin-page .ei-fancy-check,.admin-page .ei-category-check{color:var(--ei-orange)!important}
+.admin-page .ei-category-option:hover,.admin-page .ei-fancy-option:hover{background:var(--ei-soft-orange);border-color:#f0d4b7}
+.admin-page .ei-category-option.selected,.admin-page .ei-fancy-option.selected{background:var(--ei-soft-orange);border-color:var(--ei-orange);color:var(--ei-orange-dark)}
+.admin-page .settings-card{background:linear-gradient(180deg,#fff,#fffaf5)}
+.admin-page .settings-status{color:#8a5a2b!important}
+.admin-page .admin-products .btn.primary,.admin-page #adminProducts .btn.primary{background:var(--ei-orange)!important;border-color:var(--ei-orange)!important}
+
 </style>
 </head>
 <body class="admin-page">
@@ -255,5 +288,5 @@
 </div></section></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js?v=2"></script>
-<script src="admin.js?v=12"></script>
+<script src="admin.js?v=13"></script>
 </body></html>
