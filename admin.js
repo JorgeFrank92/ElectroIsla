@@ -10,6 +10,7 @@ const defaultProducts=[
 ];
 let products=JSON.parse(localStorage.getItem("electroisla_products")||"null")||defaultProducts;
 let storeSettings={usd_to_cup:700,transfer_markup_percent:0};
+let categories=[];
 const saveLocal=()=>localStorage.setItem("electroisla_products",JSON.stringify(products));
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const currencySymbols={USD:"$",CUP:"$",EUR:"€"};
@@ -26,6 +27,163 @@ function toRow(p){
 function fromRow(r){
  return {id:String(r.id),name:r.name||"",category:r.category||"Alimentos",price:Number(r.price)||0,currency:r.currency||"USD",discountPrice:r.discount_price===null||r.discount_price===undefined?null:Number(r.discount_price),unit:r.unit||"",image:r.image||"",description:r.description||"",available:r.available!==false};
 }
+
+async function loadCategories(){
+  const {data,error}=await supabaseClient.from("categories").select("*").order("sort_order",{ascending:true}).order("name",{ascending:true});
+  if(error) throw error;
+  categories=data||[];
+  populateCategorySelect();
+  renderCategories();
+}
+
+function populateCategorySelect(){
+  const select=document.getElementById("pCategory");
+  if(!select)return;
+  const current=select.value;
+  const list=categories.filter(c=>c.available!==false);
+  select.innerHTML=list.map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");
+  if(current && [...select.options].some(o=>o.value===current)) select.value=current;
+  else if(select.options.length) select.selectedIndex=0;
+}
+
+function renderCategories(){
+  const box=document.getElementById("categoryList");
+  if(!box)return;
+  if(!categories.length){
+    box.innerHTML='<div class="category-empty">No hay categorías creadas todavía.</div>';
+    return;
+  }
+  box.innerHTML=categories.map(c=>`
+    <div class="category-item ${c.available?"":"is-hidden"}">
+      <div class="category-info">
+        <div class="category-name">${esc(c.name)}</div>
+        <span class="category-state">${c.available?"● Visible en la tienda":"○ Oculta en la tienda"}</span>
+      </div>
+      <div class="category-actions">
+        <button type="button" class="btn secondary" onclick="editCategory(${Number(c.id)})">✏️ Editar</button>
+        <button type="button" class="btn secondary" onclick="toggleCategory(${Number(c.id)})">${c.available?"👁️ Ocultar":"👁️ Mostrar"}</button>
+        <button type="button" class="btn secondary" onclick="removeCategory(${Number(c.id)})">🗑️</button>
+      </div>
+    </div>`).join("");
+}
+
+function resetCategoryForm(){
+  const form=document.getElementById("categoryForm");
+  if(form)form.reset();
+  const id=document.getElementById("categoryEditId");
+  if(id)id.value="";
+  const available=document.getElementById("categoryAvailable");
+  if(available)available.checked=true;
+  const btn=document.getElementById("saveCategory");
+  if(btn)btn.textContent="➕ Agregar categoría";
+  const cancel=document.getElementById("cancelCategoryEdit");
+  if(cancel)cancel.style.display="none";
+  const status=document.getElementById("categoryEditingStatus");
+  if(status){status.style.display="none";status.textContent="";}
+}
+
+function editCategory(id){
+  const c=categories.find(x=>Number(x.id)===Number(id));
+  if(!c)return;
+  document.getElementById("categoryEditId").value=c.id;
+  document.getElementById("categoryName").value=c.name||"";
+  document.getElementById("categoryAvailable").checked=c.available!==false;
+  document.getElementById("saveCategory").textContent="💾 Guardar categoría";
+  document.getElementById("cancelCategoryEdit").style.display="inline-flex";
+  const status=document.getElementById("categoryEditingStatus");
+  if(status){status.style.display="block";status.textContent=`Editando «${c.name}»`;}
+  document.getElementById("categoryName").focus();
+  document.getElementById("categoryForm").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+async function saveCategoryRecord(e){
+  e.preventDefault();
+  const name=document.getElementById("categoryName").value.trim();
+  const available=document.getElementById("categoryAvailable").checked;
+  const editId=document.getElementById("categoryEditId").value;
+  if(!name){alert("Escribe el nombre de la categoría.");return}
+
+  const duplicate=categories.find(c=>c.name.trim().toLowerCase()===name.toLowerCase() && String(c.id)!==String(editId));
+  if(duplicate){alert("Ya existe una categoría con ese nombre.");return}
+
+  const btn=document.getElementById("saveCategory");
+  if(btn)btn.disabled=true;
+
+  try{
+    if(editId){
+      const old=categories.find(c=>String(c.id)===String(editId));
+      if(!old)throw new Error("No se encontró la categoría que estás editando.");
+
+      if(old.name!==name){
+        // Primero actualizamos los productos para que no queden apuntando al nombre anterior.
+        const {error:prodErr}=await supabaseClient.from("products").update({category:name}).eq("category",old.name);
+        if(prodErr)throw prodErr;
+      }
+
+      const {error}=await supabaseClient.from("categories").update({
+        name,available,updated_at:new Date().toISOString()
+      }).eq("id",editId);
+      if(error){
+        if(old.name!==name) await supabaseClient.from("products").update({category:old.name}).eq("category",name);
+        throw error;
+      }
+      alert("✅ Categoría actualizada.");
+    }else{
+      const maxOrder=categories.reduce((m,c)=>Math.max(m,Number(c.sort_order)||0),0);
+      const {error}=await supabaseClient.from("categories").insert({
+        name,available,sort_order:maxOrder+1
+      });
+      if(error)throw error;
+      alert("✅ Categoría creada.");
+    }
+
+    resetCategoryForm();
+    await loadCategories();
+    await loadCloud();
+    render();
+    const status=document.getElementById("cloudStatus");
+    if(status)status.textContent=`☁️ Sincronizado con Supabase · ${products.length} productos`;
+  }catch(err){
+    alert("No se pudo guardar la categoría en Supabase.\n\n"+(err.message||err));
+  }finally{
+    if(btn)btn.disabled=false;
+  }
+}
+
+async function toggleCategory(id){
+  const c=categories.find(x=>Number(x.id)===Number(id));
+  if(!c)return;
+  const next=!c.available;
+  try{
+    const {error}=await supabaseClient.from("categories").update({available:next,updated_at:new Date().toISOString()}).eq("id",id);
+    if(error)throw error;
+    await loadCategories();
+  }catch(err){
+    alert("No se pudo cambiar la visibilidad de la categoría.\n\n"+(err.message||err));
+  }
+}
+
+async function removeCategory(id){
+  const c=categories.find(x=>Number(x.id)===Number(id));
+  if(!c)return;
+  const {count,error:countErr}=await supabaseClient.from("products").select("id",{count:"exact",head:true}).eq("category",c.name);
+  if(countErr){alert("No se pudo comprobar si la categoría tiene productos.\n\n"+(countErr.message||countErr));return}
+  if(Number(count)>0){
+    alert(`No se puede eliminar «${c.name}» porque tiene ${count} producto(s) asociado(s).\n\nPuedes ocultarla o mover esos productos a otra categoría.`);
+    return;
+  }
+  if(!confirm(`¿Eliminar la categoría «${c.name}»?`))return;
+  try{
+    const {error}=await supabaseClient.from("categories").delete().eq("id",id);
+    if(error)throw error;
+    resetCategoryForm();
+    await loadCategories();
+    alert("✅ Categoría eliminada.");
+  }catch(err){
+    alert("No se pudo eliminar la categoría.\n\n"+(err.message||err));
+  }
+}
+
 async function loadSettings(){
  const {data,error}=await supabaseClient.from("store_settings").select("usd_to_cup,transfer_markup_percent").eq("id",1).maybeSingle();
  if(error) throw error;
@@ -152,6 +310,10 @@ function compressImage(file){
 const picker=document.getElementById("pImageFile");
 picker.addEventListener("change",async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const status=document.getElementById("photoStatus");status.textContent="Leyendo la foto…";try{const data=await compressImage(file);document.getElementById("pImage").value=data;showPreview(data);status.textContent="✅ Foto cargada. Ahora pulsa «Guardar producto»."}catch(err){document.getElementById("pImage").value="";document.getElementById("imagePreview").innerHTML="";status.textContent="❌ No se pudo cargar la foto.";alert(err.message||"No se pudo cargar la foto.")}finally{picker.value=""}});
 
+
+document.getElementById("categoryForm").addEventListener("submit",saveCategoryRecord);
+document.getElementById("cancelCategoryEdit").onclick=resetCategoryForm;
+
 document.getElementById("pUnit").addEventListener("change",()=>{const other=document.getElementById("pUnit").value==="__otra__";document.getElementById("pUnitCustom").style.display=other?"block":"none";if(!other)document.getElementById("pUnitCustom").value=""});
 
 document.getElementById("productForm").addEventListener("submit",async e=>{
@@ -180,3 +342,8 @@ document.getElementById("logoutBtn").onclick=async()=>{await supabaseClient.auth
 (async()=>{const {data:{session}}=await supabaseClient.auth.getSession();if(session)await show()})();
 supabaseClient.channel("products-admin").on("postgres_changes",{event:"*",schema:"public",table:"products"},async()=>{try{const {data,error}=await supabaseClient.from("products").select("*").order("created_at",{ascending:true});if(!error&&data){products=data.map(fromRow);saveLocal();render()}}catch(e){console.warn(e)}}).subscribe();
 supabaseClient.channel("settings-admin").on("postgres_changes",{event:"*",schema:"public",table:"store_settings"},async()=>{try{await loadSettings()}catch(e){console.warn(e)}}).subscribe();
+
+supabaseClient.channel("categories-admin").on("postgres_changes",{event:"*",schema:"public",table:"categories"},async()=>{
+  try{await loadCategories()}catch(e){console.warn(e)}
+}).subscribe();
+

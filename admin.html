@@ -8,6 +8,30 @@
 .photo-btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
 .photo-btn input{display:none}.photo-preview img{width:120px;height:120px;object-fit:cover;border-radius:12px;margin-top:10px}
 .photo-status{display:block;margin-top:7px;font-size:.85rem;color:#5b6670}
+
+/* Administrar categorías — mismo lenguaje visual de ElectroIsla */
+.category-manager{margin-top:18px}
+.category-help{margin-top:-6px;color:#5b6670;font-size:.92rem;line-height:1.45}
+.category-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;margin-top:14px}
+.category-form .check{margin:0;white-space:nowrap}
+.category-list{display:grid;gap:10px;margin-top:16px}
+.category-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid #e3e8ee;border-radius:16px;background:#fff}
+.category-item.is-hidden{opacity:.72}
+.category-info{min-width:0}
+.category-name{font-weight:700;color:#17324d}
+.category-state{display:block;margin-top:3px;font-size:.82rem;color:#6b7280}
+.category-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.category-actions .btn{min-width:42px}
+.category-empty{padding:12px 0;color:#6b7280}
+.category-editing{margin-top:10px;padding:10px 12px;border-radius:12px;background:#fff4e8;color:#7a4a13;font-size:.86rem}
+@media(max-width:700px){
+  .category-form{grid-template-columns:1fr}
+  .category-form .check{justify-self:start}
+  .category-item{align-items:flex-start;flex-direction:column}
+  .category-actions{width:100%;justify-content:flex-start}
+  .category-actions .btn{flex:1}
+}
+
 </style>
 </head>
 <body class="admin-page">
@@ -33,6 +57,27 @@
 <label>Recargo por transferencia (%)<input id="transferMarkup" type="number" min="0" step="0.01" placeholder="30"></label>
 </div>
 <div class="row settings-actions"><button type="button" class="btn primary" id="saveSettings">💾 Guardar configuración</button><span id="settingsStatus" class="settings-status">☁️ Cargando configuración…</span></div>
+</section>
+
+
+<section class="admin-card category-manager">
+  <h2>🗂️ Administrar categorías</h2>
+  <p class="category-help">Crea y organiza las categorías que aparecerán en la tienda. Puedes ocultarlas sin borrarlas.</p>
+
+  <form id="categoryForm" class="category-form">
+    <input type="hidden" id="categoryEditId">
+    <label style="margin:0">Nombre de la categoría
+      <input required id="categoryName" maxlength="80" placeholder="Ej. COMBOS">
+    </label>
+    <label class="check"><input type="checkbox" id="categoryAvailable" checked> Visible en la tienda</label>
+    <div class="row" style="grid-column:1/-1;margin:0">
+      <button class="btn primary" type="submit" id="saveCategory">➕ Agregar categoría</button>
+      <button class="btn secondary" type="button" id="cancelCategoryEdit" style="display:none">Cancelar edición</button>
+    </div>
+  </form>
+
+  <div id="categoryEditingStatus" class="category-editing" style="display:none"></div>
+  <div id="categoryList" class="category-list"></div>
 </section>
 
 <div class="admin-grid">
