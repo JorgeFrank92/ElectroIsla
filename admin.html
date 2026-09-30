@@ -178,6 +178,66 @@
 .login-logo-wrap{display:flex;justify-content:center;margin:0 0 18px}
 .ei-login-logo{display:block;width:min(260px,82%);height:auto;max-height:78px;object-fit:contain}
 @media(max-width:700px){.ei-admin-logo{width:165px;max-height:50px}.ei-login-logo{width:min(230px,84%)}}
+
+/* ===== Paleta oficial del Administrador ElectroIsla ===== */
+:root{
+  --admin-orange:#F28C28;
+  --admin-orange-dark:#D96F0B;
+  --admin-orange-soft:#FFF4E7;
+  --admin-blue:#1261A0;
+  --admin-blue-soft:#EAF3FA;
+  --admin-bg:#F8FAFC;
+  --admin-text:#1F2937;
+  --admin-border:#E5E7EB;
+  --admin-green:#16A34A;
+  --admin-red:#DC2626;
+}
+.admin-page{background:var(--admin-bg);color:var(--admin-text)}
+.admin-page .topbar{border-bottom-color:var(--admin-border);background:#fff}
+.admin-page .brand-mark{background:var(--admin-orange)!important}
+.admin-page .brand span:last-child{color:var(--admin-orange)!important}
+.admin-page .admin-wrap h1,.admin-page .admin-wrap h2{color:var(--admin-text)}
+.admin-page .eyebrow{color:var(--admin-orange)!important}
+.admin-page .admin-card{border-color:var(--admin-border);box-shadow:0 5px 18px rgba(31,41,55,.05)}
+.admin-page input:not([type="checkbox"]),.admin-page select,.admin-page textarea{
+  border-color:var(--admin-border);background:#fff;color:var(--admin-text)
+}
+.admin-page input:not([type="checkbox"]):focus,.admin-page select:focus,.admin-page textarea:focus{
+  border-color:var(--admin-orange)!important;box-shadow:0 0 0 3px rgba(242,140,40,.16)!important;outline:none
+}
+.admin-page .btn.primary,.admin-page button.btn.primary{
+  background:var(--admin-orange)!important;border-color:var(--admin-orange)!important;color:#fff!important
+}
+.admin-page .btn.primary:hover{background:var(--admin-orange-dark)!important;border-color:var(--admin-orange-dark)!important}
+.admin-page .btn.secondary{background:#fff;border-color:var(--admin-border);color:var(--admin-blue)}
+.admin-page .btn.secondary:hover{border-color:var(--admin-blue);background:var(--admin-blue-soft)}
+.admin-page .settings-card,.admin-page .category-manager{border-top:3px solid var(--admin-orange)}
+.admin-page .category-item{background:#fff;border-color:var(--admin-border)}
+.admin-page .category-item:hover{border-color:#F4C48F;background:var(--admin-orange-soft)}
+.admin-page .category-item.is-hidden{background:#F7F7F7}
+.admin-page .category-name{color:var(--admin-text)}
+.admin-page .category-actions .btn:nth-child(2){color:var(--admin-blue)}
+.admin-page .category-actions .btn:last-child{color:var(--admin-red);border-color:#F2C7C7;background:#FFF7F7}
+.admin-page .category-editing{background:var(--admin-orange-soft);color:#8A4A0A}
+.admin-page .ei-category-trigger,.admin-page .ei-fancy-trigger{border-color:var(--admin-border)}
+.admin-page .ei-category-trigger:hover,.admin-page .ei-fancy-trigger:hover{border-color:#F4C48F}
+.admin-page .ei-category-trigger:focus,.admin-page .ei-category-picker.open .ei-category-trigger,
+.admin-page .ei-fancy-trigger:focus,.admin-page .ei-fancy-picker.open .ei-fancy-trigger{
+  border-color:var(--admin-orange)!important;box-shadow:0 0 0 3px rgba(242,140,40,.16)!important
+}
+.admin-page .ei-category-chevron,.admin-page .ei-fancy-chevron{color:var(--admin-orange)!important}
+.admin-page .ei-category-options,.admin-page .ei-fancy-options{border-color:var(--admin-border);box-shadow:0 12px 28px rgba(31,41,55,.12)}
+.admin-page .ei-category-option:hover,.admin-page .ei-fancy-option:hover{background:var(--admin-orange-soft);border-color:#F4C48F}
+.admin-page .ei-category-option.selected,.admin-page .ei-fancy-option.selected{background:var(--admin-orange-soft);border-color:var(--admin-orange);color:var(--admin-orange-dark)}
+.admin-page .ei-category-check,.admin-page .ei-fancy-check{color:var(--admin-orange)!important}
+.admin-page .photo-picker{border-color:#F4C48F!important;background:var(--admin-orange-soft)!important}
+.admin-page .photo-btn{background:var(--admin-orange)!important;border-color:var(--admin-orange)!important}
+.admin-page .check input{accent-color:var(--admin-orange)}
+.admin-page .settings-status,.admin-page .login-status,.admin-page .photo-status{color:#6B7280}
+.admin-page #cloudStatus{color:var(--admin-blue)!important}
+.admin-page #saveSettings,.admin-page #saveCategory,.admin-page #loginBtn{box-shadow:0 5px 12px rgba(242,140,40,.18)}
+.admin-page .admin-products .btn.primary{background:var(--admin-orange)!important}
+
 </style>
 </head>
 <body class="admin-page">
