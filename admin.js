@@ -44,6 +44,56 @@ function populateCategorySelect(){
   select.innerHTML=list.map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");
   if(current && [...select.options].some(o=>o.value===current)) select.value=current;
   else if(select.options.length) select.selectedIndex=0;
+  initCategoryPicker();
+  syncCategoryPicker();
+}
+
+
+function syncCategoryPicker(){
+  const select=document.getElementById("pCategory");
+  const picker=document.getElementById("categoryPicker");
+  const trigger=document.getElementById("categoryPickerTrigger");
+  const valueBox=document.getElementById("categoryPickerValue");
+  const optionsBox=document.getElementById("categoryPickerOptions");
+  if(!select||!picker||!trigger||!valueBox||!optionsBox)return;
+
+  const selected=select.value||"";
+  const selectedText=select.options[select.selectedIndex]?.textContent||"Selecciona una categoría";
+  valueBox.textContent=selectedText;
+
+  optionsBox.innerHTML=[...select.options].map(o=>`
+    <button type="button" class="ei-category-option ${o.value===selected?"selected":""}" role="option" aria-selected="${o.value===selected}" data-value="${esc(o.value)}">
+      <span>${esc(o.textContent)}</span>${o.value===selected?'<span class="ei-category-check">✓</span>':""}
+    </button>`).join("");
+
+  optionsBox.querySelectorAll(".ei-category-option").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      select.value=btn.dataset.value;
+      valueBox.textContent=select.options[select.selectedIndex]?.textContent||btn.dataset.value;
+      picker.classList.remove("open");
+      trigger.setAttribute("aria-expanded","false");
+      syncCategoryPicker();
+      select.dispatchEvent(new Event("change",{bubbles:true}));
+    });
+  });
+}
+function initCategoryPicker(){
+  const picker=document.getElementById("categoryPicker");
+  const trigger=document.getElementById("categoryPickerTrigger");
+  if(!picker||!trigger||trigger.dataset.ready)return;
+  trigger.dataset.ready="1";
+  trigger.addEventListener("click",()=>{
+    const open=!picker.classList.contains("open");
+    picker.classList.toggle("open",open);
+    trigger.setAttribute("aria-expanded",String(open));
+  });
+  document.addEventListener("click",(e)=>{
+    if(!picker.contains(e.target)){
+      picker.classList.remove("open");
+      trigger.setAttribute("aria-expanded","false");
+    }
+  });
+  syncCategoryPicker();
 }
 
 function renderCategories(){

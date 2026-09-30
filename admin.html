@@ -80,6 +80,49 @@
   .category-actions .btn{padding:7px 8px;font-size:.75rem}
 }
 
+
+/* Selector de categoría: misma interfaz visual de la ventana de datos del cliente */
+.ei-category-picker{position:relative;margin-top:6px}
+.ei-category-native{
+  position:absolute!important;width:1px!important;height:1px!important;
+  opacity:0!important;pointer-events:none!important
+}
+.ei-category-trigger{
+  width:100%;min-height:48px;padding:12px 14px;
+  border:1px solid #d9e3ee;border-radius:14px;background:#fff;
+  color:#17324d;font:inherit;font-weight:600;text-align:left;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.03);
+  transition:border-color .15s,box-shadow .15s,background .15s
+}
+.ei-category-trigger:hover{border-color:#b9cde2}
+.ei-category-trigger:focus,.ei-category-picker.open .ei-category-trigger{
+  outline:none;border-color:var(--ei-blue);
+  box-shadow:0 0 0 3px rgba(7,87,166,.12)
+}
+.ei-category-chevron{
+  color:var(--ei-orange);font-size:1.2rem;line-height:1;
+  transform:translateY(-2px);transition:transform .15s
+}
+.ei-category-picker.open .ei-category-chevron{transform:rotate(180deg) translateY(2px)}
+.ei-category-options{
+  display:none;position:absolute;z-index:50;left:0;right:0;top:calc(100% + 7px);
+  padding:7px;background:#fff;border:1px solid #d9e3ee;border-radius:14px;
+  box-shadow:0 12px 28px rgba(7,87,166,.14);max-height:240px;overflow:auto
+}
+.ei-category-picker.open .ei-category-options{display:grid;gap:5px}
+.ei-category-option{
+  width:100%;border:1px solid transparent;border-radius:11px;
+  background:#fff;color:#17324d;padding:11px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  text-align:left;font:inherit;font-weight:600;cursor:pointer
+}
+.ei-category-option:hover{background:var(--ei-soft-blue);border-color:#cfe0f2}
+.ei-category-option.selected{
+  background:var(--ei-soft-blue);border-color:var(--ei-blue);color:var(--ei-blue)
+}
+.ei-category-check{color:var(--ei-orange);font-weight:800}
+
 </style>
 </head>
 <body class="admin-page">
@@ -132,7 +175,15 @@
 <form id="productForm" class="admin-card">
 <input type="hidden" id="editId"><h2 id="formTitle">➕ Agregar producto</h2>
 <label>Nombre<input required id="pName" placeholder="Ej. Carne de cerdo"></label>
-<label>Categoría<select id="pCategory"><option>Alimentos</option><option>Electrodomésticos</option></select></label>
+<label>Categoría
+  <div class="ei-category-picker" id="categoryPicker">
+    <button type="button" class="ei-category-trigger" id="categoryPickerTrigger" aria-haspopup="listbox" aria-expanded="false">
+      <span id="categoryPickerValue">Selecciona una categoría</span><span class="ei-category-chevron">⌄</span>
+    </button>
+    <div class="ei-category-options" id="categoryPickerOptions" role="listbox"></div>
+  </div>
+  <select id="pCategory" class="ei-category-native" aria-hidden="true" tabindex="-1"></select>
+</label>
 <div class="price-fields">
 <label>Moneda<select id="pCurrency"><option value="USD">USD — Dólar estadounidense</option><option value="CUP">CUP — Peso cubano</option><option value="EUR">EUR — Euro</option></select></label>
 <label>Precio<input required type="number" min="0" step="0.01" id="pPrice" placeholder="0.00"></label>
@@ -205,5 +256,5 @@
 </div></section></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js?v=2"></script>
-<script src="admin.js?v=10"></script>
+<script src="admin.js?v=11"></script>
 </body></html>
