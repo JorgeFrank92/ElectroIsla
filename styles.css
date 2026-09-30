@@ -494,3 +494,110 @@ input:focus,select:focus,textarea:focus{border-color:var(--logo-blue)}
   box-shadow:0 3px 10px rgba(202,98,35,.24);
 }
 .thank-you-card .btn.primary:hover{background:var(--logo-orange-dark)!important}
+/* =========================================================
+   ELECTROISLA — MENÚ DE CATEGORÍAS
+   Navegación inspirada en la experiencia de Eglis
+   ========================================================= */
+
+.category-menu-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(7,43,121,.38);
+  backdrop-filter:blur(2px);
+  opacity:0;
+  visibility:hidden;
+  transition:
+    opacity .22s ease,
+    visibility .22s ease;
+  z-index:90;
+}
+
+.category-menu-overlay.open{
+  opacity:1;
+  visibility:visible;
+}
+
+.category-menu{
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:min(390px,92vw);
+  height:100dvh;
+
+  background:#fff;
+
+  z-index:91;
+
+  transform:translateX(-105%);
+
+  transition:transform .25s ease;
+
+  box-shadow:
+    16px 0 45px rgba(7,43,121,.18);
+
+  display:flex;
+  flex-direction:column;
+
+  overflow:hidden;
+}
+
+.category-menu.open{
+  transform:translateX(0);
+}
+
+.category-menu-head{
+  min-height:101px;
+
+  padding:24px 24px 18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  border-bottom:2px solid var(--logo-blue);
+
+  background:#fff;
+}
+
+.category-menu-kicker{
+  display:block;
+
+  color:var(--logo-orange);
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:1.8px;
+
+  margin-bottom:4px;
+}
+
+.category-menu-head h2{
+  margin:0;
+
+  color:var(--logo-blue-dark);
+
+  font-size:28px;
+
+  letter-spacing:-.4px;
+}
+
+.category-menu-close{
+  width:42px;
+  height:42px;
+
+  border:1px solid #c7d8ef;
+
+  border-radius:12px;
+
+  background:var(--logo-blue-light);
+
+  color:var(--logo-blue-dark);
+
+  font-size:20px;
+
+  cursor:pointer;
+
+  transition:
+    background .
