@@ -892,3 +892,81 @@ body.category-menu-open{
     font-size:25px !important;
   }
 }
+
+
+/* =========================================================
+   ElectroIsla 9.8.6 — animación de confirmación de añadido
+   Botón +, acumulado inferior, contador superior y pedido
+   ========================================================= */
+:root{
+  --electroisla-blue:#074899;
+  --electroisla-blue-dark:#072b79;
+}
+
+/* Animación corta: pequeño sobresalto, sin exagerar */
+@keyframes electroisla-bounce{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.13)}
+  60%{transform:scale(.94)}
+  82%{transform:scale(1.05)}
+  100%{transform:scale(1)}
+}
+
+@keyframes electroisla-pop{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.18)}
+  70%{transform:scale(.95)}
+  100%{transform:scale(1)}
+}
+
+/* Todos los botones de añadir usan el azul real de ElectroIsla */
+.add-circle,
+.recommendation-add,
+.add,
+.sticky-order-btn{
+  background:var(--electroisla-blue)!important;
+  color:#fff!important;
+}
+
+.add-circle:hover,
+.recommendation-add:hover,
+.add:hover,
+.sticky-order-btn:hover{
+  background:var(--electroisla-blue-dark)!important;
+}
+
+/* Clases disparadas desde app.js */
+.add-circle.electroisla-bounce{
+  animation:electroisla-bounce .42s ease-out;
+}
+
+.sticky-order.electroisla-bounce .sticky-order-btn,
+.sticky-order-btn.electroisla-bounce{
+  animation:electroisla-bounce .42s ease-out;
+}
+
+.shop-topbar .cart-btn b.electroisla-pop,
+#cartCount.electroisla-pop{
+  animation:electroisla-pop .42s ease-out;
+}
+
+.cart-total.electroisla-pop,
+.cart-head-total strong.electroisla-pop,
+#cartTotal.electroisla-pop,
+#cartTopTotal.electroisla-pop{
+  animation:electroisla-pop .42s ease-out;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .add-circle.electroisla-bounce,
+  .sticky-order.electroisla-bounce .sticky-order-btn,
+  .sticky-order-btn.electroisla-bounce,
+  .shop-topbar .cart-btn b.electroisla-pop,
+  #cartCount.electroisla-pop,
+  .cart-total.electroisla-pop,
+  .cart-head-total strong.electroisla-pop,
+  #cartTotal.electroisla-pop,
+  #cartTopTotal.electroisla-pop{
+    animation:none!important;
+  }
+}
