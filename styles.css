@@ -1127,3 +1127,8 @@ body.category-menu-open{
 @media(max-width:700px){
   .shop-catalog{padding-bottom:190px!important;}
 }
+
+/* Evita duplicar el carrito que ya viene integrado en electroisla-top-v2.png */
+.reference-cart .cart-icon{display:none!important;}
+.reference-cart{background:transparent!important;color:transparent!important;}
+.reference-cart b{color:#fff!important;}
