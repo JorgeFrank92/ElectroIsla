@@ -1053,3 +1053,20 @@ body.category-menu-open{
   background:linear-gradient(145deg,#ffffff 0%,#f3f6fa 48%,#dce3eb 100%) !important;
   color:var(--accent) !important;
 }
+
+/* v9.8.9 — Logo circular optimizado para navegadores móviles */
+.brand-logo{
+  width:78px!important;
+  height:78px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  border-radius:50%!important;
+  display:block!important;
+}
+@media(max-width:700px){
+  .topbar{height:82px!important;align-items:center!important;}
+  .brand-logo{
+    width:70px!important;
+    height:70px!important;
+  }
+}
