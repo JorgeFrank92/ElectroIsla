@@ -854,11 +854,11 @@ body.category-menu-open{
    Inspirado en la proporción visual de Eglis
    ========================================================= */
 .add-circle{
-  width:38px !important;
-  height:38px !important;
+  width:34px !important;
+  height:34px !important;
   right:4px !important;
   bottom:4px !important;
-  border-radius:10px !important;
+  border-radius:9px !important;
   border:0 !important;
   background:#59c500 !important;
   color:#fff !important;
@@ -884,12 +884,12 @@ body.category-menu-open{
 }
 @media(max-width:700px){
   .add-circle{
-    width:38px !important;
-    height:38px !important;
+    width:34px !important;
+    height:34px !important;
     right:4px !important;
     bottom:4px !important;
-    border-radius:10px !important;
-    font-size:25px !important;
+    border-radius:9px !important;
+    font-size:23px !important;
   }
 }
 
