@@ -1054,7 +1054,7 @@ body.category-menu-open{
   color:var(--accent) !important;
 }
 
-/* v9.8.9 — Logo circular ampliado con aro naranja ElectroIsla */
+/* v9.8.9 — Logo circular tamaño anterior con aro naranja ElectroIsla */
 .brand-logo{
   width:92px!important;
   height:92px!important;
@@ -1076,40 +1076,5 @@ body.category-menu-open{
     width:96px!important;
     height:96px!important;
     border-width:4px!important;
-  }
-}
-
-/* v9.8.9 — Logo circular ampliado con borde naranja ElectroIsla */
-.shop-topbar .brand{
-  flex:0 0 auto;
-  align-self:center;
-  overflow:visible;
-}
-.shop-topbar .brand-logo{
-  width:96px!important;
-  height:96px!important;
-  padding:0!important;
-  border:4px solid #f58220!important;
-  border-radius:50%!important;
-  background:#fff!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  box-sizing:border-box!important;
-}
-@media(max-width:700px){
-  .shop-topbar{
-    height:128px!important;
-    min-height:128px!important;
-    padding:0 4%!important;
-    gap:8px!important;
-    align-items:center!important;
-  }
-  .shop-topbar .brand-logo{
-    width:120px!important;
-    height:120px!important;
-    border-width:5px!important;
-  }
-  .shop-topbar .cart-btn{
-    margin-left:auto!important;
   }
 }
