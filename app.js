@@ -427,7 +427,20 @@ supabaseClient.channel("settings-store").on("postgres_changes",{event:"*",schema
 
 supabaseClient.channel("products-store").on("postgres_changes",{event:"*",schema:"public",table:"products"},async()=>{try{await loadCloudProducts();render();renderCart()}catch(e){console.warn(e)}}).subscribe();
 
-supabaseClient.channel("categories-store").on("postgres_changes",{event:"*",schema:"public",table:"categories"},async()=>{try{await loadCloudCategories();if(currentFilter!=="Todos"&&!categories.some(c=>c.name===currentFilter)){currentFilter="Todos"}renderCategoryTabs();
-renderCategoryMenu();
-render(currentFilter);
-renderCart()
+supabaseClient.channel("categories-store").on("postgres_changes",{event:"*",schema:"public",table:"categories"},async()=>{
+ try{
+  await loadCloudCategories();
+
+  if(currentFilter!=="Todos"&&!categories.some(c=>c.name===currentFilter)){
+   currentFilter="Todos";
+  }
+
+  renderCategoryTabs();
+  renderCategoryMenu();
+  render(currentFilter);
+  renderCart();
+
+ }catch(e){
+  console.warn("No se pudieron actualizar las categorías.",e);
+ }
+}).subscribe();
