@@ -351,6 +351,8 @@ function renderCart(){
  const topTotal=document.getElementById("cartTopTotal");
  if(topTotal)topTotal.textContent=`USD ${usdTotal.toFixed(2)}`;
  updateStickyOrder();
+ const countBadge=document.getElementById("cartCount");
+ if(countBadge && !document.getElementById("cart")?.classList.contains("open")) countBadge.style.display=cart.reduce((s,i)=>s+i.qty,0)>0?"inline-block":"none";
  updatePaymentSummary();
 }
 function renderCartRecommendations(){
@@ -369,7 +371,7 @@ function renderCartRecommendations(){
 }
 function removeFromCart(id){cart=cart.filter(i=>i.id!==String(id));save();renderCart();render();}
 
-function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden")}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden")}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
+function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden");const countBadge=document.getElementById("cartCount");if(countBadge)countBadge.style.display="none"}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden");const countBadge=document.getElementById("cartCount");if(countBadge)countBadge.style.display=cart.reduce((s,i)=>s+i.qty,0)>0?"inline-block":"none"}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
 renderCategoryTabs();
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
 document.getElementById("shopMenuBtn")?.addEventListener("click",openCategoryMenu);
