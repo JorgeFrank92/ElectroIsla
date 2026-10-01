@@ -269,7 +269,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--logo-blue)}
 /* v9.6.2 — Logo real de ElectroIsla 360 y paleta extraída del logo */
 .brand-logo{width:170px;height:78px;object-fit:contain;object-position:left center}
 .topbar{height:88px}
-@media(max-width:700px){.topbar{height:82px}.brand-logo{width:145px;height:72px}}
+@media(max-width:700px){.topbar{height:82px}.brand-logo{width:145px;height:72px;transform:translateY(6px)}}
 
 /* v9.6.5 — portada responsive sin espacio vacío */
 .store-banner{height:auto !important;min-height:0 !important;padding:0 !important;}
