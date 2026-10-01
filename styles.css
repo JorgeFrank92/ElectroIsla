@@ -1132,3 +1132,48 @@ body.category-menu-open{
 .reference-cart .cart-icon{display:none!important;}
 .reference-cart{background:transparent!important;color:transparent!important;}
 .reference-cart b{color:#fff!important;}
+
+/* 9.8.16 — CABECERA LIMPIA: una sola imagen compuesta; sin logo/portada/carrito duplicados. */
+.reference-topbar{
+  position:absolute!important;
+  left:0!important;top:0!important;
+  width:100%!important;height:0!important;min-height:0!important;
+  margin:0!important;padding:0!important;border:0!important;
+  background:transparent!important;
+  z-index:100!important;
+  pointer-events:none!important;
+}
+.reference-brand{display:none!important}
+.reference-composite{width:100%;line-height:0;overflow:hidden;position:relative;background:#074899}
+.reference-composite img{display:block;width:100%;height:auto;max-width:none}
+.reference-cart{
+  pointer-events:auto!important;
+  position:absolute!important;
+  right:3.5%!important;
+  top:12px!important;
+  width:58px!important;height:58px!important;min-width:58px!important;
+  margin:0!important;padding:0!important;
+  border:0!important;background:transparent!important;color:transparent!important;
+  box-shadow:none!important;display:block!important;z-index:101!important;
+}
+.reference-cart .cart-icon{display:none!important}
+.reference-cart .reference-cart-hit{display:block!important;width:100%;height:100%;}
+.reference-cart b{
+  position:absolute!important;
+  right:-7px!important;
+  top:-7px!important;
+  min-width:27px!important;height:27px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:3px 6px!important;
+  border-radius:999px!important;
+  background:#fff!important;
+  color:var(--logo-blue)!important;
+  border:2px solid var(--logo-blue)!important;
+  font-size:12px!important;font-weight:900!important;line-height:1!important;
+  z-index:102!important;
+  box-shadow:0 2px 7px rgba(0,0,0,.18)!important;
+}
+@media(max-width:700px){
+  .reference-cart{right:3.2%!important;top:9px!important;width:50px!important;height:50px!important;min-width:50px!important}
+  .reference-cart b{right:-6px!important;top:-6px!important;min-width:25px!important;height:25px!important;font-size:11px!important}
+}
