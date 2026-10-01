@@ -735,8 +735,166 @@ body.category-menu-open{
 }
 
 
-/* v9.8.12 — Restauración de rebotes: botón añadir + total USD.
-   El texto "Producto/Productos" permanece estático. */
+/* =========================================================
+   ElectroIsla 9.8.4 — ajuste tipográfico móvil
+   Referencia: captura Eglis enviada por el usuario.
+   Objetivo: reducir tamaños y peso para aproximar proporciones.
+   ========================================================= */
+
+@media(max-width:700px){
+
+  /* Encabezado/hero: más contenido y menos dominante */
+  .store-banner-copy h1{
+    font-size:26px !important;
+    line-height:1.12 !important;
+    letter-spacing:-.7px !important;
+  }
+  .store-banner-copy p{
+    font-size:16px !important;
+    line-height:1.35 !important;
+  }
+
+  /* Barra de navegación */
+  .icon-btn{
+    flex-basis:46px !important;
+    width:46px !important;
+    height:46px !important;
+    border-radius:12px !important;
+    font-size:24px !important;
+  }
+  .category-tabs{
+    gap:18px !important;
+  }
+  .category-tabs .filter{
+    font-size:15px !important;
+    font-weight:800 !important;
+    padding:10px 2px !important;
+  }
+
+  /* Título de sección */
+  .catalog-heading{
+    margin:6px 0 14px !important;
+  }
+  .catalog-heading h2{
+    font-size:24px !important;
+    line-height:1.15 !important;
+    letter-spacing:-.3px !important;
+  }
+  .catalog-heading span{
+    font-size:12px !important;
+  }
+
+  /* Productos: proporciones más cercanas a Eglis */
+  .shop-product{
+    grid-template-columns:minmax(0,1fr) 126px !important;
+    gap:14px !important;
+    padding:17px 0 !important;
+  }
+
+  .shop-product h3{
+    font-size:16px !important;
+    line-height:1.22 !important;
+    font-weight:600 !important;
+    letter-spacing:-.1px !important;
+    margin:0 0 5px !important;
+  }
+
+  .shop-product p{
+    font-size:12px !important;
+    line-height:1.32 !important;
+    margin:0 0 8px !important;
+    color:#8d9298 !important;
+  }
+
+  .shop-product .price{
+    font-size:16px !important;
+    line-height:1.15 !important;
+    font-weight:800 !important;
+    margin:0 !important;
+  }
+
+  .shop-product .price small{
+    font-size:10px !important;
+  }
+
+  .shop-product .product-img{
+    width:126px !important;
+    height:116px !important;
+    border-radius:12px !important;
+  }
+
+  /* Botón +: más pequeño como en Eglis */
+  .add-circle{
+    width:31px !important;
+    height:31px !important;
+    right:0 !important;
+    bottom:0 !important;
+    border-radius:9px !important;
+    font-size:22px !important;
+    line-height:1 !important;
+    box-shadow:0 3px 8px rgba(0,0,0,.10) !important;
+  }
+
+  /* Menú lateral */
+  .category-menu-item{
+    font-size:16px !important;
+    min-height:58px !important;
+  }
+}
+
+/* En pantallas grandes también mantener una escala contenida */
+@media(min-width:701px){
+  .shop-product h3{font-size:18px !important}
+  .shop-product p{font-size:13px !important}
+  .shop-product .price{font-size:18px !important}
+}
+
+/* =========================================================
+   ElectroIsla 9.8.5 — botón Añadir producto
+   Inspirado en la proporción visual de Eglis
+   ========================================================= */
+.add-circle{
+  width:38px !important;
+  height:38px !important;
+  right:4px !important;
+  bottom:4px !important;
+  border-radius:10px !important;
+  border:0 !important;
+  background:#59c500 !important;
+  color:#fff !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  font-size:25px !important;
+  font-weight:400 !important;
+  line-height:1 !important;
+  font-family:Arial,sans-serif !important;
+  box-shadow:0 3px 9px rgba(0,0,0,.14) !important;
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease !important;
+  z-index:2 !important;
+}
+.add-circle:hover{
+  background:#4fb300 !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 5px 12px rgba(0,0,0,.17) !important;
+}
+.add-circle:active{
+  transform:scale(.94) !important;
+  box-shadow:0 2px 6px rgba(0,0,0,.12) !important;
+}
+@media(max-width:700px){
+  .add-circle{
+    width:38px !important;
+    height:38px !important;
+    right:4px !important;
+    bottom:4px !important;
+    border-radius:10px !important;
+    font-size:25px !important;
+  }
+}
+
+/* ElectroIsla 9.8.7 — animación inspirada en la referencia Eglis.
+   No se modifican colores. */
 @keyframes electroisla-add-bounce{
   0%{transform:scale(1)}
   35%{transform:scale(1.12)}
@@ -744,10 +902,84 @@ body.category-menu-open{
   82%{transform:scale(1.04)}
   100%{transform:scale(1)}
 }
-.add-circle.electroisla-bounce{
-  animation:electroisla-add-bounce .36s cubic-bezier(.22,.61,.36,1)!important;
+@keyframes electroisla-total-pop{
+  0%{opacity:.55;transform:translateY(5px) scale(.98)}
+  55%{opacity:1;transform:translateY(-1px) scale(1.015)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
 }
 
+/* En Eglis, al añadir un producto, "Ver mi pedido" entra
+   inmediatamente desde abajo, con un movimiento corto y fluido. */
+.sticky-order{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(105%);
+  transition:
+    transform .26s cubic-bezier(.22,.61,.36,1),
+    opacity .16s ease,
+    visibility 0s linear .26s;
+  will-change:transform,opacity;
+}
+.sticky-order.visible{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  transition:
+    transform .26s cubic-bezier(.22,.61,.36,1),
+    opacity .14s ease,
+    visibility 0s;
+}
+.sticky-order.electroisla-order-update .sticky-order-info strong{
+  animation:electroisla-total-pop .28s cubic-bezier(.22,.61,.36,1);
+}
+.add-circle.electroisla-bounce{
+  animation:electroisla-add-bounce .36s cubic-bezier(.22,.61,.36,1);
+}
+.shop-topbar .cart-btn b.electroisla-pop,
+#cartCount.electroisla-pop,
+#cartTopTotal.electroisla-pop,
+#cartTotal.electroisla-pop,
+.cart-head-total strong.electroisla-pop{
+  animation:electroisla-total-pop .28s cubic-bezier(.22,.61,.36,1);
+}
+@media(prefers-reduced-motion:reduce){
+  .sticky-order{transition:none!important}
+  .sticky-order.electroisla-order-update .sticky-order-info strong,
+  .add-circle.electroisla-bounce,
+  .shop-topbar .cart-btn b.electroisla-pop,
+  #cartCount.electroisla-pop,
+  #cartTopTotal.electroisla-pop,
+  #cartTotal.electroisla-pop,
+  .cart-head-total strong.electroisla-pop{animation:none!important}
+}
+
+/* ElectroIsla 9.8.8 — conservar colores de la versión anterior.
+   Solo se restablece el azul; no se modifica la animación. */
+.add-circle,
+.sticky-order-btn{
+  background:#074899 !important;
+  color:#fff !important;
+}
+.add-circle:hover,
+.sticky-order-btn:hover{
+  background:#072b79 !important;
+}
+
+/* ElectroIsla 9.8.9 — ajuste fino de animación y color de botones */
+.sticky-order{
+  transition:
+    transform .05s cubic-bezier(.22,.61,.36,1),
+    opacity .05s ease,
+    visibility 0s linear .05s !important;
+}
+.sticky-order.visible{
+  transition:
+    transform .05s cubic-bezier(.22,.61,.36,1),
+    opacity .05s ease,
+    visibility 0s !important;
+}
+
+/* Rebote del total un poco más marcado */
 @keyframes electroisla-total-pop-strong{
   0%{opacity:.55;transform:translateY(7px) scale(.96)}
   35%{opacity:1;transform:translateY(-3px) scale(1.07)}
@@ -755,12 +987,27 @@ body.category-menu-open{
   82%{transform:translateY(-1px) scale(1.035)}
   100%{opacity:1;transform:translateY(0) scale(1)}
 }
-.sticky-order.electroisla-order-update .sticky-order-info [data-sticky-total],
-.sticky-order.electroisla-order-update .sticky-order-info strong{
-  animation:electroisla-total-pop-strong .42s cubic-bezier(.22,.61,.36,1)!important;
+.sticky-order.electroisla-order-update .sticky-order-info strong,
+#cartCount.electroisla-pop,
+#cartTopTotal.electroisla-pop,
+#cartTotal.electroisla-pop,
+.cart-head-total strong.electroisla-pop{
+  animation:electroisla-total-pop-strong .42s cubic-bezier(.22,.61,.36,1) !important;
 }
 
-/* Solo el número rebota; Producto/Productos queda estático. */
+/* Azul oficial definido por ElectroIsla */
+.add-circle,
+.sticky-order-btn{
+  background:var(--accent)!important;
+  color:#fff!important;
+}
+.add-circle:hover,
+.sticky-order-btn:hover{
+  background:var(--accent2)!important;
+}
+
+/* ElectroIsla 9.8.10 — mismo efecto para el contador de productos
+   situado encima del total USD en "Ver mi pedido". */
 @keyframes electroisla-product-count-pop{
   0%{opacity:.55;transform:translateY(7px) scale(.96)}
   35%{opacity:1;transform:translateY(-3px) scale(1.07)}
@@ -768,19 +1015,6 @@ body.category-menu-open{
   82%{transform:translateY(-1px) scale(1.035)}
   100%{opacity:1;transform:translateY(0) scale(1)}
 }
-.sticky-order.electroisla-order-update .sticky-order-info [data-sticky-count]{
-  display:inline-block;
-  animation:electroisla-product-count-pop .42s cubic-bezier(.22,.61,.36,1)!important;
-}
-
-/* v9.8.13 — Rebote del contador del carrito */
-@keyframes electroisla-cart-count-pop{
-  0%{opacity:.55;transform:translateY(4px) scale(.90)}
-  35%{opacity:1;transform:translateY(-2px) scale(1.16)}
-  60%{transform:translateY(1px) scale(.96)}
-  82%{transform:translateY(-1px) scale(1.05)}
-  100%{opacity:1;transform:translateY(0) scale(1)}
-}
-#cartCount.electroisla-cart-count-pop{
-  animation:electroisla-cart-count-pop .42s cubic-bezier(.22,.61,.36,1)!important;
+.sticky-order.electroisla-order-update .sticky-order-info{
+  animation:electroisla-product-count-pop .42s cubic-bezier(.22,.61,.36,1);
 }
