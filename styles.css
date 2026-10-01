@@ -952,3 +952,15 @@ body.category-menu-open{
   #cartTotal.electroisla-pop,
   .cart-head-total strong.electroisla-pop{animation:none!important}
 }
+
+/* ElectroIsla 9.8.8 — conservar colores de la versión anterior.
+   Solo se restablece el azul; no se modifica la animación. */
+.add-circle,
+.sticky-order-btn{
+  background:#074899 !important;
+  color:#fff !important;
+}
+.add-circle:hover,
+.sticky-order-btn:hover{
+  background:#072b79 !important;
+}
