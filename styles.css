@@ -1015,6 +1015,7 @@ body.category-menu-open{
   82%{transform:translateY(-1px) scale(1.035)}
   100%{opacity:1;transform:translateY(0) scale(1)}
 }
-.sticky-order.electroisla-order-update .sticky-order-info{
+.sticky-order.electroisla-order-update .sticky-order-info [data-sticky-count]{
+  display:inline-block;
   animation:electroisla-product-count-pop .42s cubic-bezier(.22,.61,.36,1);
 }
