@@ -964,3 +964,44 @@ body.category-menu-open{
 .sticky-order-btn:hover{
   background:#072b79 !important;
 }
+
+/* ElectroIsla 9.8.9 — ajuste fino de animación y color de botones */
+.sticky-order{
+  transition:
+    transform .05s cubic-bezier(.22,.61,.36,1),
+    opacity .05s ease,
+    visibility 0s linear .05s !important;
+}
+.sticky-order.visible{
+  transition:
+    transform .05s cubic-bezier(.22,.61,.36,1),
+    opacity .05s ease,
+    visibility 0s !important;
+}
+
+/* Rebote del total un poco más marcado */
+@keyframes electroisla-total-pop-strong{
+  0%{opacity:.55;transform:translateY(7px) scale(.96)}
+  35%{opacity:1;transform:translateY(-3px) scale(1.07)}
+  62%{transform:translateY(1px) scale(.98)}
+  82%{transform:translateY(-1px) scale(1.035)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.sticky-order.electroisla-order-update .sticky-order-info strong,
+#cartCount.electroisla-pop,
+#cartTopTotal.electroisla-pop,
+#cartTotal.electroisla-pop,
+.cart-head-total strong.electroisla-pop{
+  animation:electroisla-total-pop-strong .42s cubic-bezier(.22,.61,.36,1) !important;
+}
+
+/* Azul oficial definido por ElectroIsla */
+.add-circle,
+.sticky-order-btn{
+  background:var(--accent)!important;
+  color:#fff!important;
+}
+.add-circle:hover,
+.sticky-order-btn:hover{
+  background:var(--accent2)!important;
+}
