@@ -1128,3 +1128,76 @@ body.category-menu-open{
     margin-left:auto!important;
   }
 }
+
+/* =========================================================
+   9.8.9 — Cabecera superior igual a la referencia aprobada
+   ========================================================= */
+@media(max-width:700px){
+  .shop-topbar{
+    height:145px !important;
+    min-height:145px !important;
+    padding:0 28px !important;
+    background:linear-gradient(135deg,#072b79 0%,#074899 62%,#0b5eb7 100%) !important;
+    border-bottom:0 !important;
+    position:relative !important;
+    overflow:visible !important;
+    box-shadow:none !important;
+    z-index:30 !important;
+    align-items:center !important;
+  }
+  .shop-topbar::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-2px;
+    height:7px;
+    background:#ca6223;
+    border-radius:50% 50% 0 0 / 55% 55% 0 0;
+    z-index:1;
+  }
+  .shop-topbar .brand{
+    position:absolute !important;
+    left:28px !important;
+    top:5px !important;
+    width:190px !important;
+    height:190px !important;
+    z-index:4 !important;
+  }
+  .shop-topbar .brand-logo{
+    width:190px !important;
+    height:190px !important;
+    object-fit:contain !important;
+    object-position:center !important;
+    transform:none !important;
+    filter:drop-shadow(0 3px 5px rgba(0,0,0,.14));
+  }
+  .shop-topbar .cart-btn{
+    position:absolute !important;
+    right:30px !important;
+    top:55px !important;
+    margin:0 !important;
+    padding:8px !important;
+    background:transparent !important;
+    color:#fff !important;
+    z-index:4 !important;
+  }
+  .shop-topbar .cart-icon{
+    width:34px !important;
+    height:34px !important;
+    stroke:#fff !important;
+    stroke-width:1.9 !important;
+  }
+  .shop-topbar .cart-btn b{
+    background:#074899 !important;
+    color:#fff !important;
+    border:2px solid #fff !important;
+    min-width:30px;
+    text-align:center;
+  }
+  .shop-topbar nav{display:none !important}
+
+  .store-hero{position:relative !important;z-index:1 !important}
+  .store-banner{position:relative !important;z-index:1 !important}
+  .store-banner-image{position:relative !important;z-index:1 !important}
+}
