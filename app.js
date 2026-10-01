@@ -346,7 +346,7 @@ function renderCart(){
        </div>
      </div>
    </article>`;
- }).join(""):`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
+ }).join("")+`<div class="cart-delivery-note"><span class="delivery-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M5 10h25v24H5zM30 20h8l6 7v7H30z"/><circle cx="13" cy="37" r="3"/><circle cx="37" cy="37" r="3"/></svg></span><span><strong>Los precios pueden variar según la zona de entrega.</strong><br><span class="delivery-subtext">Puedes ver el costo final en el siguiente paso.</span></span></div>`:`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
  const cartTotal=document.getElementById("cartTotal");
  if(cartTotal)cartTotal.textContent=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
  const topTotal=document.getElementById("cartTopTotal");
