@@ -848,3 +848,47 @@ body.category-menu-open{
   .shop-product p{font-size:13px !important}
   .shop-product .price{font-size:18px !important}
 }
+
+/* =========================================================
+   ElectroIsla 9.8.5 — botón Añadir producto
+   Inspirado en la proporción visual de Eglis
+   ========================================================= */
+.add-circle{
+  width:38px !important;
+  height:38px !important;
+  right:4px !important;
+  bottom:4px !important;
+  border-radius:10px !important;
+  border:0 !important;
+  background:#59c500 !important;
+  color:#fff !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  font-size:25px !important;
+  font-weight:400 !important;
+  line-height:1 !important;
+  font-family:Arial,sans-serif !important;
+  box-shadow:0 3px 9px rgba(0,0,0,.14) !important;
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease !important;
+  z-index:2 !important;
+}
+.add-circle:hover{
+  background:#4fb300 !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 5px 12px rgba(0,0,0,.17) !important;
+}
+.add-circle:active{
+  transform:scale(.94) !important;
+  box-shadow:0 2px 6px rgba(0,0,0,.12) !important;
+}
+@media(max-width:700px){
+  .add-circle{
+    width:38px !important;
+    height:38px !important;
+    right:4px !important;
+    bottom:4px !important;
+    border-radius:10px !important;
+    font-size:25px !important;
+  }
+}
