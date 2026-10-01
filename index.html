@@ -47,7 +47,7 @@
 <div id="cartOverlay" class="overlay hidden"></div>
 <aside id="cart" class="cart-panel" aria-label="Tu pedido">
   <div class="cart-brand-strip" aria-hidden="true">
-    <img src="electroisla-logo-cart.png" alt="" class="cart-brand-logo">
+    <img src="electroisla-logo-circular.png" alt="" class="cart-brand-logo">
     <div class="cart-brand-copy">
       <strong>Tu hogar, nuestra prioridad</strong>
       <span>ElectroIsla 360</span>
@@ -58,21 +58,19 @@
       <span class="cart-back-icon" aria-hidden="true">←</span><span>Regresar</span>
     </button>
     <div class="cart-head-main">
-      <p class="cart-eyebrow">RESUMEN DE COMPRA</p>
       <h2>Tu pedido</h2>
-      <p>Revisa tus productos antes de continuar.</p>
+      <p>Revisa los productos de tu carrito antes de continuar.</p>
     </div>
     <div class="cart-head-total">
-      <span>Total de productos</span>
-      <strong id="cartTopCount">0 artículos</strong>
-      <small>Total</small>
+      <div class="cart-summary-top"><span class="cart-summary-icon" aria-hidden="true">🛒</span><div><span>Total de productos</span>
+      <strong id="cartTopCount">0 artículos</strong></div></div><div class="cart-summary-divider" aria-hidden="true"></div><small>Total</small>
       <b id="cartTopTotal">USD 0.00</b>
     </div>
   </div>
   <div id="cartItems" class="cart-items"></div>
   <div class="cart-service-bar">
     <div class="cart-final-row"><span>Total</span><strong id="cartTotal">USD 0.00</strong></div>
-    <div class="cart-delivery-note"><span aria-hidden="true">🚚</span><span>El costo de entrega se calcula según la zona seleccionada en el siguiente paso.</span></div>
+    <div class="cart-delivery-note"><span class="delivery-icon" aria-hidden="true">🚚</span><span>Los precios pueden variar según la zona de entrega.<br><span class="delivery-subtext">Puedes ver el costo final en el siguiente paso.</span></span></div>
     <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido <span aria-hidden="true">→</span></button>
   </div>
 </aside>
