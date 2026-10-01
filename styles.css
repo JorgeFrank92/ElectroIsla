@@ -893,80 +893,62 @@ body.category-menu-open{
   }
 }
 
-
-/* =========================================================
-   ElectroIsla 9.8.6 — animación de confirmación de añadido
-   Botón +, acumulado inferior, contador superior y pedido
-   ========================================================= */
-:root{
-  --electroisla-blue:#074899;
-  --electroisla-blue-dark:#072b79;
-}
-
-/* Animación corta: pequeño sobresalto, sin exagerar */
-@keyframes electroisla-bounce{
+/* ElectroIsla 9.8.7 — animación inspirada en la referencia Eglis.
+   No se modifican colores. */
+@keyframes electroisla-add-bounce{
   0%{transform:scale(1)}
-  35%{transform:scale(1.13)}
-  60%{transform:scale(.94)}
-  82%{transform:scale(1.05)}
+  35%{transform:scale(1.12)}
+  60%{transform:scale(.95)}
+  82%{transform:scale(1.04)}
   100%{transform:scale(1)}
 }
-
-@keyframes electroisla-pop{
-  0%{transform:scale(1)}
-  40%{transform:scale(1.18)}
-  70%{transform:scale(.95)}
-  100%{transform:scale(1)}
+@keyframes electroisla-total-pop{
+  0%{opacity:.55;transform:translateY(5px) scale(.98)}
+  55%{opacity:1;transform:translateY(-1px) scale(1.015)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
 }
 
-/* Todos los botones de añadir usan el azul real de ElectroIsla */
-.add-circle,
-.recommendation-add,
-.add,
-.sticky-order-btn{
-  background:var(--electroisla-blue)!important;
-  color:#fff!important;
+/* En Eglis, al añadir un producto, "Ver mi pedido" entra
+   inmediatamente desde abajo, con un movimiento corto y fluido. */
+.sticky-order{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(105%);
+  transition:
+    transform .26s cubic-bezier(.22,.61,.36,1),
+    opacity .16s ease,
+    visibility 0s linear .26s;
+  will-change:transform,opacity;
 }
-
-.add-circle:hover,
-.recommendation-add:hover,
-.add:hover,
-.sticky-order-btn:hover{
-  background:var(--electroisla-blue-dark)!important;
+.sticky-order.visible{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  transition:
+    transform .26s cubic-bezier(.22,.61,.36,1),
+    opacity .14s ease,
+    visibility 0s;
 }
-
-/* Clases disparadas desde app.js */
+.sticky-order.electroisla-order-update .sticky-order-info strong{
+  animation:electroisla-total-pop .28s cubic-bezier(.22,.61,.36,1);
+}
 .add-circle.electroisla-bounce{
-  animation:electroisla-bounce .42s ease-out;
+  animation:electroisla-add-bounce .36s cubic-bezier(.22,.61,.36,1);
 }
-
-.sticky-order.electroisla-bounce .sticky-order-btn,
-.sticky-order-btn.electroisla-bounce{
-  animation:electroisla-bounce .42s ease-out;
-}
-
 .shop-topbar .cart-btn b.electroisla-pop,
-#cartCount.electroisla-pop{
-  animation:electroisla-pop .42s ease-out;
-}
-
-.cart-total.electroisla-pop,
-.cart-head-total strong.electroisla-pop,
+#cartCount.electroisla-pop,
+#cartTopTotal.electroisla-pop,
 #cartTotal.electroisla-pop,
-#cartTopTotal.electroisla-pop{
-  animation:electroisla-pop .42s ease-out;
+.cart-head-total strong.electroisla-pop{
+  animation:electroisla-total-pop .28s cubic-bezier(.22,.61,.36,1);
 }
-
 @media(prefers-reduced-motion:reduce){
+  .sticky-order{transition:none!important}
+  .sticky-order.electroisla-order-update .sticky-order-info strong,
   .add-circle.electroisla-bounce,
-  .sticky-order.electroisla-bounce .sticky-order-btn,
-  .sticky-order-btn.electroisla-bounce,
   .shop-topbar .cart-btn b.electroisla-pop,
   #cartCount.electroisla-pop,
-  .cart-total.electroisla-pop,
-  .cart-head-total strong.electroisla-pop,
+  #cartTopTotal.electroisla-pop,
   #cartTotal.electroisla-pop,
-  #cartTopTotal.electroisla-pop{
-    animation:none!important;
-  }
+  .cart-head-total strong.electroisla-pop{animation:none!important}
 }

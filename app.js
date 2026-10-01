@@ -267,31 +267,10 @@ function closeCategoryMenu(){
 
  document.body.classList.remove("category-menu-open");
 }
-function updateStickyOrder(){const bar=document.getElementById("stickyOrder");if(!bar)return;const count=cart.reduce((s,i)=>s+i.qty,0);let total=0;cart.forEach(i=>{const p=products.find(x=>x.id===i.id);if(p)total+=effectivePrice(p)*i.qty});bar.classList.toggle("visible",count>0);const c=bar.querySelector("[data-sticky-count]");const t=bar.querySelector("[data-sticky-total]");if(c)c.textContent=`${count} producto${count===1?"":"s"}`;if(t)t.textContent=money(total,"USD")}
+function updateStickyOrder(animate=false){const bar=document.getElementById("stickyOrder");if(!bar)return;const count=cart.reduce((s,i)=>s+i.qty,0);let total=0;cart.forEach(i=>{const p=products.find(x=>x.id===i.id);if(p)total+=effectivePrice(p)*i.qty});bar.classList.toggle("visible",count>0);const c=bar.querySelector("[data-sticky-count]");const t=bar.querySelector("[data-sticky-total]");if(c)c.textContent=`${count} producto${count===1?"":"s"}`;if(t)t.textContent=money(total,"USD");if(animate){bar.classList.remove("electroisla-order-update");void bar.offsetWidth;bar.classList.add("electroisla-order-update");setTimeout(()=>bar.classList.remove("electroisla-order-update"),350)}}
 function render(filter="Todos"){const box=document.getElementById("products");if(!box)return;const heading=document.querySelector(".catalog-heading h2");if(heading)heading.textContent=filter==="Todos"?"Ofertas":filter;const q=(document.getElementById("productSearch")?.value||"").trim().toLowerCase();const activeCategoryNames=new Set(categories.map(c=>c.name));const list=products.filter(p=>p.available&&activeCategoryNames.has(p.category)&&(filter==="Todos"||p.category===filter)&&(!q||`${p.name} ${p.description||""}`.toLowerCase().includes(q)));const count=document.getElementById("resultCount");if(count)count.textContent=`${list.length} producto${list.length===1?"":"s"}`;box.innerHTML=list.map(p=>{const qty=cart.find(i=>i.id===p.id)?.qty||0;return `<article class="product shop-product"><div class="product-info"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description||"")}</p><div class="price">${priceMarkup(p)} <small>${esc(p.unit||"")}</small></div></div><div class="product-media"><div class="product-img">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:(p.category==="Alimentos"?"🥩":"🏠")}</div><button class="add-circle" onclick="add('${esc(p.id)}')" aria-label="Agregar ${esc(p.name)}">${qty>0?qty:"+"}</button></div></article>`}).join("")||'<p class="empty-products">No hay productos disponibles.</p>';updateStickyOrder()}
-function electroislaAnimate(selector, className="electroisla-pop"){
- const el=document.querySelector(selector);
- if(!el)return;
- el.classList.remove(className);
- void el.offsetWidth;
- el.classList.add(className);
- setTimeout(()=>el.classList.remove(className),500);
-}
-function electroislaAnimateAdd(id){
- const btn=[...document.querySelectorAll(".add-circle")].find(b=>b.getAttribute("aria-label")===`Agregar ${products.find(p=>String(p.id)===String(id))?.name}`);
- if(btn){
-  btn.classList.remove("electroisla-bounce");
-  void btn.offsetWidth;
-  btn.classList.add("electroisla-bounce");
-  setTimeout(()=>btn.classList.remove("electroisla-bounce"),500);
- }
- electroislaAnimate("#cartCount");
- electroislaAnimate("#cartTopTotal");
- electroislaAnimate("#cartTotal");
- electroislaAnimate(".cart-head-total strong");
- electroislaAnimate(".sticky-order-btn");
-}
-
+function electroislaAnimate(selector,className="electroisla-pop"){const el=document.querySelector(selector);if(!el)return;el.classList.remove(className);void el.offsetWidth;el.classList.add(className);setTimeout(()=>el.classList.remove(className),350)}
+function electroislaAnimateAdd(id){const product=products.find(p=>String(p.id)===String(id));const btn=product?[...document.querySelectorAll(".add-circle")].find(b=>b.getAttribute("aria-label")===`Agregar ${product.name}`):null;if(btn){btn.classList.remove("electroisla-bounce");void btn.offsetWidth;btn.classList.add("electroisla-bounce");setTimeout(()=>btn.classList.remove("electroisla-bounce"),400)}electroislaAnimate("#cartCount");electroislaAnimate("#cartTopTotal");electroislaAnimate("#cartTotal");electroislaAnimate(".cart-head-total strong");updateStickyOrder(true)}
 function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();renderCart();render(currentFilter);requestAnimationFrame(()=>electroislaAnimateAdd(id))}
 function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart();render(currentFilter)}
 function getOrderTotals(){
