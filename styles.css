@@ -735,8 +735,32 @@ body.category-menu-open{
 }
 
 
-/* v9.8.11 — Rebote SOLO del número de productos del pedido */
-[data-sticky-count-number]{display:inline-block;}
+/* v9.8.12 — Restauración de rebotes: botón añadir + total USD.
+   El texto "Producto/Productos" permanece estático. */
+@keyframes electroisla-add-bounce{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.12)}
+  60%{transform:scale(.95)}
+  82%{transform:scale(1.04)}
+  100%{transform:scale(1)}
+}
+.add-circle.electroisla-bounce{
+  animation:electroisla-add-bounce .36s cubic-bezier(.22,.61,.36,1)!important;
+}
+
+@keyframes electroisla-total-pop-strong{
+  0%{opacity:.55;transform:translateY(7px) scale(.96)}
+  35%{opacity:1;transform:translateY(-3px) scale(1.07)}
+  62%{transform:translateY(1px) scale(.98)}
+  82%{transform:translateY(-1px) scale(1.035)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.sticky-order.electroisla-order-update .sticky-order-info [data-sticky-total],
+.sticky-order.electroisla-order-update .sticky-order-info strong{
+  animation:electroisla-total-pop-strong .42s cubic-bezier(.22,.61,.36,1)!important;
+}
+
+/* Solo el número rebota; Producto/Productos queda estático. */
 @keyframes electroisla-product-count-pop{
   0%{opacity:.55;transform:translateY(7px) scale(.96)}
   35%{opacity:1;transform:translateY(-3px) scale(1.07)}
@@ -744,4 +768,19 @@ body.category-menu-open{
   82%{transform:translateY(-1px) scale(1.035)}
   100%{opacity:1;transform:translateY(0) scale(1)}
 }
-.sticky-order.electroisla-order-update [data-sticky-count-number]{animation:electroisla-product-count-pop .42s cubic-bezier(.22,.61,.36,1);}
+.sticky-order.electroisla-order-update .sticky-order-info [data-sticky-count]{
+  display:inline-block;
+  animation:electroisla-product-count-pop .42s cubic-bezier(.22,.61,.36,1)!important;
+}
+
+/* v9.8.13 — Rebote del contador del carrito */
+@keyframes electroisla-cart-count-pop{
+  0%{opacity:.55;transform:translateY(4px) scale(.90)}
+  35%{opacity:1;transform:translateY(-2px) scale(1.16)}
+  60%{transform:translateY(1px) scale(.96)}
+  82%{transform:translateY(-1px) scale(1.05)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+#cartCount.electroisla-cart-count-pop{
+  animation:electroisla-cart-count-pop .42s cubic-bezier(.22,.61,.36,1)!important;
+}
