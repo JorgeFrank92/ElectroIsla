@@ -1034,3 +1034,22 @@ body.category-menu-open{
 @media(prefers-reduced-motion:reduce){
   .electroisla-cart-bounce,[data-sticky-count-number].electroisla-product-count-bounce{animation:none!important}
 }
+
+/* Botón añadir: cuadrado inicialmente; al tener cantidad pasa a circular */
+.add-circle.has-qty{
+  border-radius:50% !important;
+}
+
+/* ElectroIsla — botón seleccionado con cantidad
+   Al pasar a redondo, el fondo cambia a blanco degradado y
+   el número adopta el azul oficial de ElectroIsla. */
+.add-circle.has-qty{
+  background:linear-gradient(145deg,#ffffff 0%,#f7f9fc 48%,#e2e7ee 100%) !important;
+  color:var(--accent) !important;
+  border-radius:50% !important;
+  box-shadow:0 3px 10px rgba(0,0,0,.16),inset 0 1px 1px rgba(255,255,255,.95) !important;
+}
+.add-circle.has-qty:hover{
+  background:linear-gradient(145deg,#ffffff 0%,#f3f6fa 48%,#dce3eb 100%) !important;
+  color:var(--accent) !important;
+}
