@@ -272,7 +272,7 @@ function render(filter="Todos"){const box=document.getElementById("products");if
 function electroislaAnimate(selector,className="electroisla-pop"){const el=document.querySelector(selector);if(!el)return;el.classList.remove(className);void el.offsetWidth;el.classList.add(className);setTimeout(()=>el.classList.remove(className),350)}
 function electroislaAnimateAdd(id){const product=products.find(p=>String(p.id)===String(id));const btn=product?[...document.querySelectorAll(".add-circle")].find(b=>b.getAttribute("aria-label")===`Agregar ${product.name}`):null;if(btn){btn.classList.remove("electroisla-bounce");void btn.offsetWidth;btn.classList.add("electroisla-bounce");setTimeout(()=>btn.classList.remove("electroisla-bounce"),400)}electroislaAnimate("#cartCount","electroisla-cart-bounce");electroislaAnimate("#cartTopTotal");electroislaAnimate("#cartTotal");electroislaAnimate(".cart-head-total strong");updateStickyOrder(true)}
 function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();renderCart();render(currentFilter);requestAnimationFrame(()=>electroislaAnimateAdd(id))}
-function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart();render(currentFilter);requestAnimationFrame(()=>{electroislaAnimate("#cartCount","electroisla-cart-bounce");updateStickyOrder(true)})}
+function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;const oldCount=cart.reduce((s,i)=>s+i.qty,0);x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart();render(currentFilter);const newCount=cart.reduce((s,i)=>s+i.qty,0);requestAnimationFrame(()=>{if(newCount>0&&newCount!==oldCount)electroislaAnimate("#cartCount","electroisla-cart-bounce");updateStickyOrder(true)})}
 function getOrderTotals(){
  const canPayCupTransfer=cart.length>0&&cart.every(i=>{const p=products.find(x=>x.id===i.id);return p&&p.category==="Electrodomésticos";});
  let usdTotal=0,cashTotal=0,transferTotal=0,usdAvailable=true,cupAvailable=canPayCupTransfer;
@@ -323,7 +323,11 @@ function updatePaymentSummary(){
 }
 function renderCart(){
  const box=document.getElementById("cartItems"),count=cart.reduce((s,i)=>s+i.qty,0);
- document.getElementById("cartCount").textContent=count;
+ const cartBadge=document.getElementById("cartCount");
+ if(cartBadge){
+   cartBadge.textContent=count;
+   cartBadge.classList.toggle("cart-count-hidden",count===0);
+ }
  let usdTotal=0;
  box.innerHTML=cart.length?cart.map(i=>{
    const p=products.find(x=>x.id===i.id); if(!p)return"";

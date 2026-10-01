@@ -1020,6 +1020,10 @@ body.category-menu-open{
   display:inline-block;
   animation:electroisla-cart-count-bounce .42s cubic-bezier(.22,.61,.36,1)!important;
 }
+/* Carrito vacío: no mostrar el número hasta que haya productos. */
+.shop-topbar .cart-btn b.cart-count-hidden{
+  display:none!important;
+}
 @keyframes electroisla-product-count-bounce{
   0%{opacity:.55;transform:translateY(7px) scale(.96)}
   35%{opacity:1;transform:translateY(-3px) scale(1.07)}
