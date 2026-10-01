@@ -1005,3 +1005,16 @@ body.category-menu-open{
 .sticky-order-btn:hover{
   background:var(--accent2)!important;
 }
+
+/* ElectroIsla 9.8.10 — mismo efecto para el contador de productos
+   situado encima del total USD en "Ver mi pedido". */
+@keyframes electroisla-product-count-pop{
+  0%{opacity:.55;transform:translateY(7px) scale(.96)}
+  35%{opacity:1;transform:translateY(-3px) scale(1.07)}
+  62%{transform:translateY(1px) scale(.98)}
+  82%{transform:translateY(-1px) scale(1.035)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.sticky-order.electroisla-order-update .sticky-order-info{
+  animation:electroisla-product-count-pop .42s cubic-bezier(.22,.61,.36,1);
+}
