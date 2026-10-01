@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="electroisla-version" content="9.8.16-cabecera-limpia">
+  <meta name="electroisla-version" content="9.8.20-sin-carrito">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=9.8.28-tu-pedido">
+  <link rel="stylesheet" href="styles.css?v=9.8.21-tu-pedido">
 </head>
 <body>
-<header class="reference-topbar shop-topbar" aria-label="ElectroIsla 360"></header>
+<header class="reference-topbar shop-topbar" aria-label="ElectroIsla 360">
+</header>
 <main>
   <section class="store-hero reference-store-hero">
     <div class="reference-visual">
@@ -44,34 +45,33 @@
 </div>
 
 <div id="cartOverlay" class="overlay hidden"></div>
-<aside id="cart" class="cart-panel">
-  <div class="order-brand-header">
-    <div class="order-brand-wave"></div>
-    <img class="order-brand-logo" src="electroisla-logo-circular.png" alt="ElectroIsla 360">
-    <div class="order-brand-slogan">Tu hogar, nuestra prioridad</div>
+<aside id="cart" class="cart-panel" aria-label="Tu pedido">
+  <div class="cart-brand-strip" aria-hidden="true">
+    <img src="electroisla-logo-circular.png" alt="" class="cart-brand-logo">
+    <div class="cart-brand-copy">
+      <strong>Tu hogar, nuestra prioridad</strong>
+      <span>ElectroIsla 360</span>
+    </div>
   </div>
-
-  <div class="order-main-head">
-    <div class="order-intro">
-      <button id="closeCart" class="order-back" aria-label="Regresar"><span aria-hidden="true">←</span><b>Regresar</b></button>
-      <h1>Tu pedido</h1>
+  <div class="cart-head">
+    <button id="closeCart" class="cart-back" aria-label="Regresar">
+      <span class="cart-back-icon" aria-hidden="true">←</span><span>Regresar</span>
+    </button>
+    <div class="cart-head-main">
+      <h2>Tu pedido</h2>
       <p>Revisa los productos de tu carrito antes de continuar.</p>
     </div>
-    <div class="order-summary-card">
-      <div class="order-summary-top"><span class="order-cart-symbol" aria-hidden="true">🛒</span><div><span>Total de productos</span><strong id="cartTopCount">0 artículos</strong></div></div>
-      <div class="order-summary-divider"></div>
-      <div class="order-summary-total"><b>Total</b><strong id="cartTopTotal">$0.00 USD</strong></div>
+    <div class="cart-head-total">
+      <div class="cart-summary-top"><span class="cart-summary-icon" aria-hidden="true">🛒</span><div><span>Total de productos</span>
+      <strong id="cartTopCount">0 artículos</strong></div></div><div class="cart-summary-divider" aria-hidden="true"></div><small>Total</small>
+      <b id="cartTopTotal">USD 0.00</b>
     </div>
   </div>
-
   <div id="cartItems" class="cart-items"></div>
-
   <div class="cart-service-bar">
-    <div class="order-delivery-note"><span class="delivery-icon" aria-hidden="true">🚚</span><div><strong>Los precios pueden variar según la zona de entrega.</strong><span>Puedes ver el costo final en el siguiente paso.</span></div></div>
-    <div class="order-bottom-bar">
-      <div class="order-bottom-total"><span>Total</span><strong id="cartBottomTotal">$0.00 USD</strong></div>
-      <button id="checkoutBtn" class="order-checkout-btn" aria-label="Continuar con el pedido">Continuar con el pedido <span aria-hidden="true">→</span></button>
-    </div>
+    <div class="cart-final-row"><span>Total</span><strong id="cartTotal">USD 0.00</strong></div>
+    <div class="cart-delivery-note"><span class="delivery-icon" aria-hidden="true">🚚</span><span>Los precios pueden variar según la zona de entrega.<br><span class="delivery-subtext">Puedes ver el costo final en el siguiente paso.</span></span></div>
+    <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido <span aria-hidden="true">→</span></button>
   </div>
 </aside>
 
@@ -141,7 +141,7 @@
 <footer><strong>ElectroIsla</strong><span>Alimentos + Electrodomésticos</span><span>WhatsApp: +53 52017110</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js?v=4"></script>
-<script src="app.js?v=28"></script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js?v=9.8.15-visual",{updateViaCache:"none"}).catch(()=>{}));}</script>
+<script src="app.js?v=25"></script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js?v=9.8.19-sin-contador",{updateViaCache:"none"}).catch(()=>{}));}</script>
 </body>
 </html>
