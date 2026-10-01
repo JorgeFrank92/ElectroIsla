@@ -736,18 +736,243 @@ body.category-menu-open{
 
 
 /* =========================================================
-   ElectroIsla 9.8.2 — refinamiento del menú de categorías
+   ElectroIsla 9.8.3 — tipografía inspirada en la referencia Eglis
+   Basado en la captura proporcionada por el usuario.
    ========================================================= */
-.category-menu-head{border-bottom:2px solid var(--accent)!important}
-.category-menu-kicker{color:var(--orange)!important}
-.category-menu-head h2{color:var(--accent2)!important}
-.category-menu-close{background:#eef5ff!important;color:var(--accent2)!important}
-.category-menu-close:hover{background:#dfeeff!important;color:var(--orange)!important}
-.category-menu-item{color:var(--ink)!important}
-.category-menu-item span:last-child{color:var(--accent)!important}
-.category-menu-item:hover{background:#f1f6fc!important;color:var(--accent2)!important}
-.category-menu-item.active{color:var(--accent)!important;box-shadow:inset 4px 0 0 var(--orange)!important;background:#eef5ff!important}
+
+/* La referencia usa una sans-serif redonda, limpia y de alto peso.
+   Se conserva Inter/system-ui para no depender de una fuente externa. */
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:#111;
+}
+
+/* Encabezado de la tienda */
+.store-info strong{
+  font-size:clamp(27px,6vw,34px);
+  line-height:1.08;
+  font-weight:900;
+  letter-spacing:-.7px;
+  color:#111;
+}
+.store-info span{
+  font-size:16px;
+  line-height:1.35;
+  color:#666;
+}
+
+/* Navegación: tamaño y peso similares a la captura */
+.shop-toolbar{
+  gap:12px;
+}
+.category-tabs{
+  gap:30px;
+}
+.category-tabs .filter{
+  font-size:20px;
+  line-height:1.1;
+  font-weight:900;
+  letter-spacing:-.35px;
+  padding:13px 2px 12px;
+  color:#111;
+}
+.category-tabs .filter.active{
+  color:#57aF08 !important;
+}
+.category-tabs .filter.active:after{
+  height:3px;
+  background:#57aF08 !important;
+}
+
+/* Botones de búsqueda/menú */
+.icon-btn{
+  width:60px;
+  height:60px;
+  flex-basis:60px;
+  border-radius:14px;
+  font-size:30px;
+  color:#222;
+}
+
+/* Título de sección */
+.catalog-heading{
+  margin:8px 0 22px;
+}
+.catalog-heading h2{
+  font-size:32px;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-.8px;
+  color:#111;
+}
+
+/* Productos: nombre, descripción y precio como en la referencia */
+.shop-product{
+  grid-template-columns:minmax(0,1fr) 150px;
+  gap:24px;
+  padding:22px 0 24px;
+}
+.shop-product h3{
+  font-size:23px;
+  line-height:1.16;
+  font-weight:500;
+  letter-spacing:-.35px;
+  color:#111;
+  margin:0 0 7px;
+}
+.shop-product p{
+  font-size:17px;
+  line-height:1.18;
+  color:#8a8a8a;
+  margin:0 0 12px;
+  font-weight:400;
+}
+.shop-product .price{
+  font-size:23px;
+  line-height:1.1;
+  font-weight:900;
+  color:#111;
+  letter-spacing:-.25px;
+}
+
+/* Botón + verde como Eglis */
+.add-circle{
+  width:52px;
+  height:52px;
+  right:-1px;
+  bottom:-5px;
+  border-radius:13px;
+  background:#57c900 !important;
+  font-size:32px;
+  font-weight:400;
+}
+
+/* Imagen de producto */
+.shop-product .product-img{
+  width:150px;
+  height:150px;
+  border-radius:14px;
+  background:#f5f5f5;
+}
+
+/* Menú lateral */
+.category-menu-item{
+  font-size:18px;
+  font-weight:650;
+}
+.category-menu-item.active{
+  font-weight:900;
+}
+
+/* Ajuste móvil: proporciones muy cercanas a la captura */
 @media(max-width:700px){
-  .category-menu-head{padding-top:20px!important}
-  .category-menu-item{min-height:62px;font-size:17px}
+  .store-info{
+    padding:20px 5% 18px;
+  }
+  .store-info strong{
+    font-size:30px;
+    text-align:center;
+  }
+  .store-info span{
+    font-size:16px;
+    text-align:center;
+  }
+
+  .shop-catalog{
+    padding:18px 5% 100px;
+  }
+
+  .shop-toolbar{
+    gap:10px;
+    margin-bottom:18px;
+  }
+
+  .icon-btn{
+    width:60px;
+    height:60px;
+    flex-basis:60px;
+    border-radius:14px;
+    font-size:30px;
+  }
+
+  .category-tabs{
+    gap:31px;
+  }
+  .category-tabs .filter{
+    font-size:20px;
+    font-weight:900;
+    padding:14px 2px 12px;
+  }
+
+  .catalog-heading{
+    margin:6px 0 20px;
+  }
+  .catalog-heading h2{
+    font-size:31px;
+  }
+
+  .shop-product{
+    grid-template-columns:minmax(0,1fr) 150px;
+    gap:18px;
+    padding:20px 0 28px;
+  }
+
+  .shop-product h3{
+    font-size:22px;
+    line-height:1.14;
+  }
+
+  .shop-product p{
+    font-size:16px;
+    line-height:1.2;
+    -webkit-line-clamp:2;
+  }
+
+  .shop-product .price{
+    font-size:22px;
+  }
+
+  .shop-product .product-img{
+    width:150px;
+    height:150px;
+  }
+
+  .add-circle{
+    width:52px;
+    height:52px;
+    border-radius:13px;
+    font-size:32px;
+  }
+}
+
+/* Pantallas muy estrechas: conservar legibilidad sin desbordar */
+@media(max-width:390px){
+  .category-tabs{
+    gap:24px;
+  }
+  .category-tabs .filter{
+    font-size:18px;
+  }
+  .shop-product{
+    grid-template-columns:minmax(0,1fr) 128px;
+    gap:14px;
+  }
+  .shop-product .product-img{
+    width:128px;
+    height:128px;
+  }
+  .shop-product h3{
+    font-size:19px;
+  }
+  .shop-product p{
+    font-size:14px;
+  }
+  .shop-product .price{
+    font-size:20px;
+  }
+  .add-circle{
+    width:44px;
+    height:44px;
+    font-size:28px;
+  }
 }
