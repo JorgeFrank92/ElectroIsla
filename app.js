@@ -334,25 +334,28 @@ function renderCart(){
    const cur=p.currency||"USD",unitPrice=effectivePrice(p),lineTotal=unitPrice*i.qty;
    if(cur==="USD")usdTotal+=lineTotal;
    const img=p.image?`<img class="cart-thumb" src="${esc(p.image)}" alt="${esc(p.name)}">`:`<div class="cart-thumb placeholder">🛍️</div>`;
-   return `<div class="cart-item">
+   const category=p.category?`<span class="cart-category">${esc(p.category)}</span>`:"";
+   return `<article class="cart-item">
      <div class="cart-thumb-wrap">${img}</div>
      <div class="cart-item-main">
-       <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">🗑️</button></div>
-       <small>${money(unitPrice,cur)} c/u</small>
-       <div class="cart-line-total">Total: ${money(lineTotal,cur)}</div>
+       <div class="cart-item-top"><div class="cart-product-heading"><strong>${esc(p.name)}</strong>${category}</div><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}" title="Eliminar">🗑️</button></div>
+       <small class="cart-unit-price">${money(unitPrice,cur)} c/u</small>
        <div class="cart-item-bottom">
+         <strong class="cart-line-total">Subtotal: ${money(lineTotal,cur)}</strong>
          <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
        </div>
      </div>
-   </div>`;
+   </article>`;
  }).join(""):`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
  const cartTotal=document.getElementById("cartTotal");
- if(cartTotal)cartTotal.innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
+ if(cartTotal)cartTotal.textContent=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
  const topTotal=document.getElementById("cartTopTotal");
- if(topTotal)topTotal.textContent=`USD ${usdTotal.toFixed(2)}`;
+ if(topTotal)topTotal.textContent=money(usdTotal,"USD");
+ const topCount=document.getElementById("cartTopCount");
+ if(topCount)topCount.textContent=`${count} ${count===1?"artículo":"artículos"}`;
  updateStickyOrder();
  const countBadge=document.getElementById("cartCount");
- if(countBadge && !document.getElementById("cart")?.classList.contains("open")) countBadge.style.display=cart.reduce((s,i)=>s+i.qty,0)>0?"inline-block":"none";
+ if(countBadge && !document.getElementById("cart")?.classList.contains("open")) countBadge.style.display=count>0?"inline-block":"none";
  updatePaymentSummary();
 }
 function renderCartRecommendations(){

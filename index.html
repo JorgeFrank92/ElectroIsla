@@ -6,7 +6,7 @@
   <meta name="electroisla-version" content="9.8.20-sin-carrito">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=9.8.20-sin-carrito">
+  <link rel="stylesheet" href="styles.css?v=9.8.21-tu-pedido">
 </head>
 <body>
 <header class="reference-topbar shop-topbar" aria-label="ElectroIsla 360">
@@ -45,14 +45,28 @@
 </div>
 
 <div id="cartOverlay" class="overlay hidden"></div>
-<aside id="cart" class="cart-panel">
+<aside id="cart" class="cart-panel" aria-label="Tu pedido">
   <div class="cart-head">
-    <button id="closeCart" class="cart-back" aria-label="Volver">← <span>Atrás</span></button>
-    <div class="cart-head-total"><span>Su carrito</span><strong id="cartTopTotal">US$ 0.00</strong></div>
+    <button id="closeCart" class="cart-back" aria-label="Regresar">
+      <span class="cart-back-icon" aria-hidden="true">←</span><span>Regresar</span>
+    </button>
+    <div class="cart-head-main">
+      <p class="cart-eyebrow">RESUMEN DE COMPRA</p>
+      <h2>Tu pedido</h2>
+      <p>Revisa tus productos antes de continuar.</p>
+    </div>
+    <div class="cart-head-total">
+      <span>Total de productos</span>
+      <strong id="cartTopCount">0 artículos</strong>
+      <small>Total</small>
+      <b id="cartTopTotal">USD 0.00</b>
+    </div>
   </div>
   <div id="cartItems" class="cart-items"></div>
   <div class="cart-service-bar">
-    <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido</button>
+    <div class="cart-final-row"><span>Total</span><strong id="cartTotal">USD 0.00</strong></div>
+    <div class="cart-delivery-note"><span aria-hidden="true">🚚</span><span>El costo de entrega se calcula según la zona seleccionada en el siguiente paso.</span></div>
+    <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido <span aria-hidden="true">→</span></button>
   </div>
 </aside>
 
