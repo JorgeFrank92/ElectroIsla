@@ -2720,3 +2720,9 @@ body.cart-open-lock{
   margin:0!important;
   text-align:center!important;
 }
+
+/* v9.8.81 — controles del óvalo a 18px */
+.cart-item .qty button,
+.cart-item .qty b{
+  font-size:18px!important;
+}
