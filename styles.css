@@ -2286,3 +2286,34 @@ body.category-menu-open{
     line-height:1!important;
   }
 }
+
+/* 9.8.41 — recuperar espacio vertical; eliminar separación horizontal; reducir importe */
+@media(max-width:700px){
+  .cart-head .cart-summary-products{
+    gap:3px!important;
+  }
+  .cart-head .cart-summary-products .cart-summary-label{
+    margin:0 0 2px 0!important;
+    line-height:1.15!important;
+  }
+  .cart-head .cart-summary-products strong{
+    margin:2px 0 0 0!important;
+    line-height:1.15!important;
+  }
+  .cart-head .cart-summary-divider{
+    margin:5px 0!important;
+  }
+  .cart-head .cart-summary-total{
+    column-gap:0!important;
+    row-gap:4px!important;
+  }
+  .cart-head .cart-summary-total > span{
+    margin:0!important;
+    line-height:1.15!important;
+  }
+  .cart-head .cart-summary-total > strong{
+    margin:3px 0 0 0!important;
+    font-size:10px!important;
+    line-height:1.15!important;
+  }
+}
