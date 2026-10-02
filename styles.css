@@ -2631,3 +2631,9 @@ body.cart-open-lock{
 @media(max-width:700px){
   .cart-item .cart-item-bottom{right:20px!important;}
 }
+
+/* v9.8.77 — eliminar el fondo/cuadrado blanco de los controles +/- */
+.cart-item .qty,
+.cart-item .qty button{
+  background:transparent!important;
+}
