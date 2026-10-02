@@ -2211,3 +2211,30 @@ body.category-menu-open{
     font-size:11px!important;
   }
 }
+
+/* 9.8.37 — igualar "Regresar" con "Total" y mantener la frase en una sola línea */
+.cart-head .cart-back > span:last-child{
+  font-size:11px!important;
+  line-height:1!important;
+}
+.cart-head .cart-summary-total > span{
+  font-size:11px!important;
+  line-height:1!important;
+}
+.cart-head .cart-title-block p{
+  font-size:10px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+}
+@media(max-width:700px){
+  .cart-head .cart-back > span:last-child{
+    font-size:11px!important;
+  }
+  .cart-head .cart-summary-total > span{
+    font-size:11px!important;
+  }
+  .cart-head .cart-title-block p{
+    font-size:10px!important;
+    white-space:nowrap!important;
+  }
+}
