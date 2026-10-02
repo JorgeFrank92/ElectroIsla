@@ -1616,3 +1616,117 @@ body.category-menu-open{
   .cart-service-bar{padding:12px 16px max(12px,env(safe-area-inset-bottom))!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)!important;grid-template-areas:"total button"!important;gap:12px!important}
   .cart-final-row span{font-size:15px!important}.cart-final-row strong{font-size:31px!important;white-space:nowrap!important}.cart-previous-btn{min-height:58px!important;border-radius:14px!important;font-size:17px!important;padding:0 10px!important}.cart-previous-btn span{font-size:27px!important}
 }
+
+
+/* =========================================================
+   ElectroIsla 9.8.30 — ENCABEZADO DE "TU PEDIDO"
+   Base: 9.8.24
+   Objetivo: reproducir la referencia:
+   - azul solo por encima de la línea naranja
+   - línea naranja en forma de sonrisa, de lateral a lateral
+   - logo circular con borde exterior naranja
+   - eslogan blanco a la derecha
+   ========================================================= */
+
+.cart-brand-strip{
+  position:relative!important;
+  flex:0 0 205px!important;
+  height:205px!important;
+  min-height:205px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  display:block!important;
+  background:#fff!important;
+  border:0!important;
+}
+
+/* La forma azul termina exactamente en la curva naranja. */
+.cart-brand-wave{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+.cart-brand-wave-fill{
+  fill:#0b4ea2!important;
+}
+.cart-brand-wave-line{
+  fill:none!important;
+  stroke:#ff7a00!important;
+  stroke-width:8!important;
+  vector-effect:non-scaling-stroke!important;
+}
+
+/* Logo circular: blanco limpio + borde exterior naranja. */
+.cart-brand-logo{
+  position:absolute!important;
+  left:28px!important;
+  top:15px!important;
+  width:175px!important;
+  height:175px!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  border-radius:50%!important;
+  border:8px solid #ff7a00!important;
+  background:#fff!important;
+  padding:0!important;
+  z-index:3!important;
+  filter:drop-shadow(0 5px 10px rgba(0,0,0,.16))!important;
+}
+
+/* Eslogan: blanco, grande y a la derecha, como la referencia. */
+.cart-brand-copy{
+  position:absolute!important;
+  right:6%!important;
+  top:58px!important;
+  margin:0!important;
+  padding:0!important;
+  max-width:52%!important;
+  text-align:right!important;
+  z-index:3!important;
+}
+.cart-brand-copy strong{
+  display:block!important;
+  color:#fff!important;
+  font-size:clamp(24px,3.2vw,39px)!important;
+  line-height:1.12!important;
+  font-weight:900!important;
+  font-style:italic!important;
+  letter-spacing:-.4px!important;
+  text-shadow:0 2px 4px rgba(0,0,0,.10)!important;
+}
+.cart-brand-copy span{display:none!important}
+
+@media(max-width:700px){
+  .cart-brand-strip{
+    flex-basis:218px!important;
+    height:218px!important;
+    min-height:218px!important;
+  }
+
+  .cart-brand-wave-line{
+    stroke-width:7!important;
+  }
+
+  .cart-brand-logo{
+    left:20px!important;
+    top:8px!important;
+    width:142px!important;
+    height:142px!important;
+    border-width:7px!important;
+  }
+
+  .cart-brand-copy{
+    right:22px!important;
+    top:58px!important;
+    max-width:46%!important;
+  }
+
+  .cart-brand-copy strong{
+    font-size:21px!important;
+    line-height:1.08!important;
+  }
+}
