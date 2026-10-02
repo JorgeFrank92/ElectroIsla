@@ -2574,3 +2574,7 @@ body.cart-open-lock{
 /* v9.8.59 — Nombre del producto exactamente del mismo tamaño que "Regresar" */
 .cart-item .cart-item-top > strong{font-size:18px!important;}
 .cart-back span{font-size:18px!important;}
+
+/* v9.8.60 — corregido: "Regresar" realmente se renderiza a 11px en móvil; igualar SOLO nombre de producto */
+.cart-item .cart-item-top > strong{font-size:11px!important;line-height:1!important;font-weight:500!important;}
+@media(max-width:700px){.cart-item .cart-item-top > strong{font-size:11px!important;}}
