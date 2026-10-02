@@ -2386,3 +2386,23 @@ body.category-menu-open{
     font-weight:500!important;
   }
 }
+
+/* v9.8.46 — Signo + del botón de seleccionar producto: grande, fino y centrado. */
+.add-circle:not(.has-qty){
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  font-size:28px!important;
+  font-weight:300!important;
+  line-height:.8!important;
+  font-family:"Helvetica Neue",Arial,sans-serif!important;
+  text-align:center!important;
+  transform-origin:center!important;
+}
+@media(max-width:700px){
+  .add-circle:not(.has-qty){
+    font-size:28px!important;
+    font-weight:300!important;
+    line-height:.8!important;
+  }
+}
