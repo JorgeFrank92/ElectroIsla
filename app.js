@@ -268,9 +268,46 @@ function closeCategoryMenu(){
  document.body.classList.remove("category-menu-open");
 }
 function updateStickyOrder(animate=false){const bar=document.getElementById("stickyOrder");if(!bar)return;const count=cart.reduce((s,i)=>s+i.qty,0);let total=0;cart.forEach(i=>{const p=products.find(x=>x.id===i.id);if(p)total+=effectivePrice(p)*i.qty});bar.classList.toggle("visible",count>0);const c=bar.querySelector("[data-sticky-count]");const n=bar.querySelector("[data-sticky-count-number]");const w=bar.querySelector("[data-sticky-count-word]");const t=bar.querySelector("[data-sticky-total]");if(n)n.textContent=count;if(w)w.textContent=count===1?"producto":"productos";if(c&&!n&&!w)c.textContent=`${count} producto${count===1?"":"s"}`;if(t)t.textContent=money(total,"USD");if(animate){bar.classList.remove("electroisla-order-update");if(n)n.classList.remove("electroisla-product-count-bounce");void bar.offsetWidth;if(n)n.classList.add("electroisla-product-count-bounce");bar.classList.add("electroisla-order-update");setTimeout(()=>{bar.classList.remove("electroisla-order-update");if(n)n.classList.remove("electroisla-product-count-bounce")},450)}}
-function render(filter="Todos"){const box=document.getElementById("products");if(!box)return;const heading=document.querySelector(".catalog-heading h2");if(heading)heading.textContent=filter==="Todos"?"Ofertas":filter;const q=(document.getElementById("productSearch")?.value||"").trim().toLowerCase();const activeCategoryNames=new Set(categories.map(c=>c.name));const list=products.filter(p=>p.available&&activeCategoryNames.has(p.category)&&(filter==="Todos"||p.category===filter)&&(!q||`${p.name} ${p.description||""}`.toLowerCase().includes(q)));const count=document.getElementById("resultCount");if(count)count.textContent=`${list.length} producto${list.length===1?"":"s"}`;box.innerHTML=list.map(p=>{const qty=cart.find(i=>i.id===p.id)?.qty||0;return `<article class="product shop-product"><div class="product-info"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description||"")}</p><div class="price">${priceMarkup(p)} <small>${esc(p.unit||"")}</small></div></div><div class="product-media"><div class="product-img">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:(p.category==="Alimentos"?"🥩":"🏠")}</div><button class="add-circle${qty>0?" has-qty":""}" onclick="add('${esc(p.id)}')" aria-label="Agregar ${esc(p.name)}">${qty>0?qty:"+"}</button></div></article>`}).join("")||'<p class="empty-products">No hay productos disponibles.</p>';updateStickyOrder()}
+function render(filter="Todos"){const box=document.getElementById("products");if(!box)return;const heading=document.querySelector(".catalog-heading h2");if(heading)heading.textContent=filter==="Todos"?"Ofertas":filter;const q=(document.getElementById("productSearch")?.value||"").trim().toLowerCase();const activeCategoryNames=new Set(categories.map(c=>c.name));const list=products.filter(p=>p.available&&activeCategoryNames.has(p.category)&&(filter==="Todos"||p.category===filter)&&(!q||`${p.name} ${p.description||""}`.toLowerCase().includes(q)));const count=document.getElementById("resultCount");if(count)count.textContent=`${list.length} producto${list.length===1?"":"s"}`;box.innerHTML=list.map(p=>{const qty=cart.find(i=>i.id===p.id)?.qty||0;return `<article class="product shop-product" data-category="${esc(p.category||"")}"><div class="product-info"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description||"")}</p><div class="price">${priceMarkup(p)} <small>${esc(p.unit||"")}</small></div></div><div class="product-media"><div class="product-img">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:(p.category==="Alimentos"?"🥩":"🏠")}</div><button class="add-circle${qty>0?" has-qty":""}" onclick="add('${esc(p.id)}')" aria-label="Agregar ${esc(p.name)}">${qty>0?qty:"+"}</button></div></article>`}).join("")||'<p class="empty-products">No hay productos disponibles.</p>';updateStickyOrder()}
 function electroislaAnimate(selector,className="electroisla-pop"){const el=document.querySelector(selector);if(!el)return;el.classList.remove(className);void el.offsetWidth;el.classList.add(className);setTimeout(()=>el.classList.remove(className),350)}
 function electroislaAnimateAdd(id){const product=products.find(p=>String(p.id)===String(id));const btn=product?[...document.querySelectorAll(".add-circle")].find(b=>b.getAttribute("aria-label")===`Agregar ${product.name}`):null;if(btn){btn.classList.remove("electroisla-bounce");void btn.offsetWidth;btn.classList.add("electroisla-bounce");setTimeout(()=>btn.classList.remove("electroisla-bounce"),400)}electroislaAnimate("#cartCount","electroisla-cart-bounce");electroislaAnimate("#cartTopTotal");electroislaAnimate("#cartTotal");electroislaAnimate(".cart-head-total strong");updateStickyOrder(true)}
+function updateCategoryHighlight(name){
+ const tabs=document.getElementById("categoryTabs");
+ if(!tabs)return;
+ tabs.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===name));
+ const active=tabs.querySelector(`.filter[data-filter="${CSS.escape(name)}"]`);
+ if(active){
+  const r=active.getBoundingClientRect(),tr=tabs.getBoundingClientRect();
+  if(r.left<tr.left+8 || r.right>tr.right-8) active.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
+ }
+}
+let categoryScrollFrame=0;
+function syncCategoryWithScroll(){
+ const box=document.getElementById("products");
+ if(!box || currentFilter!=="Todos")return;
+ const items=[...box.querySelectorAll(".shop-product[data-category]")];
+ if(!items.length)return;
+ const toolbar=document.querySelector(".shop-toolbar");
+ const toolbarBottom=toolbar?.getBoundingClientRect().bottom||0;
+ const targetY=Math.max(toolbarBottom+30,window.innerHeight*0.34);
+ let best=null,bestDistance=Infinity;
+ for(const item of items){
+  const r=item.getBoundingClientRect();
+  const visibleTop=Math.max(r.top,toolbarBottom);
+  const visibleBottom=Math.min(r.bottom,window.innerHeight);
+  if(visibleBottom<=visibleTop)continue;
+  const distance=Math.abs((r.top+r.height/2)-targetY);
+  if(distance<bestDistance){bestDistance=distance;best=item;}
+ }
+ if(!best)best=items.find(item=>item.getBoundingClientRect().bottom>toolbarBottom)||items[items.length-1];
+ const category=best?.dataset.category;
+ if(category)updateCategoryHighlight(category);
+}
+function scheduleCategoryScrollSync(){
+ if(categoryScrollFrame)return;
+ categoryScrollFrame=requestAnimationFrame(()=>{categoryScrollFrame=0;syncCategoryWithScroll();});
+}
+
 function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();renderCart();render(currentFilter);requestAnimationFrame(()=>electroislaAnimateAdd(id))}
 function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;const oldCount=cart.reduce((s,i)=>s+i.qty,0);x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart();render(currentFilter);const newCount=cart.reduce((s,i)=>s+i.qty,0);requestAnimationFrame(()=>{if(newCount>0&&newCount!==oldCount)electroislaAnimate("#cartCount","electroisla-cart-bounce");updateStickyOrder(true)})}
 function getOrderTotals(){
@@ -379,6 +416,9 @@ renderCategoryTabs();
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
 document.getElementById("shopMenuBtn")?.addEventListener("click",openCategoryMenu);
 document.getElementById("productSearch")?.addEventListener("input",()=>render(currentFilter));
+window.addEventListener("scroll",scheduleCategoryScrollSync,{passive:true});
+window.addEventListener("resize",scheduleCategoryScrollSync);
+window.addEventListener("load",scheduleCategoryScrollSync);
 document.getElementById("cartBtn")?.addEventListener("click",openCart);document.getElementById("closeCart").onclick=closeCart;document.getElementById("cartOverlay").onclick=closeCart;document.getElementById("checkoutBtn").onclick=openCheckout;document.getElementById("closeModal").onclick=()=>document.getElementById("checkoutModal").classList.add("hidden");
 function showThankYou(){
  const modal=document.getElementById("thankYouModal");
