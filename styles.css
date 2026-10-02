@@ -2437,3 +2437,25 @@ body.cart-open-lock{
   overscroll-behavior:contain!important;
   -webkit-overflow-scrolling:touch;
 }
+
+/* 9.8.50 — Imagen de cada producto en "Tu pedido" ligeramente más pequeña. */
+.cart-item{
+  grid-template-columns:90px minmax(0,1fr)!important;
+  gap:18px!important;
+}
+.cart-thumb-wrap,
+.cart-thumb{
+  width:90px!important;
+  height:90px!important;
+}
+@media(max-width:700px){
+  .cart-item{
+    grid-template-columns:90px minmax(0,1fr)!important;
+    gap:18px!important;
+  }
+  .cart-thumb-wrap,
+  .cart-thumb{
+    width:90px!important;
+    height:90px!important;
+  }
+}
