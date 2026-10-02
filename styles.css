@@ -2201,3 +2201,13 @@ body.category-menu-open{
   .cart-head .cart-summary-products .cart-summary-label{font-size:10px!important;}
   .cart-head .cart-summary-products strong{font-size:9px!important;}
 }
+
+/* 9.8.36 — "Regresar" al mismo tamaño que "Total" en móvil */
+.cart-head .cart-back{
+  font-size:11px!important;
+}
+@media(max-width:700px){
+  .cart-head .cart-back{
+    font-size:11px!important;
+  }
+}
