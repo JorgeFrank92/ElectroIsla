@@ -2570,3 +2570,7 @@ body.cart-open-lock{
 
 /* v9.8.58 — SOLO nombre del producto: 18px, grosor 500 */
 .cart-item .cart-item-top > strong{font-size:18px!important;font-weight:500!important;line-height:1!important;display:block!important;}
+
+/* v9.8.59 — Nombre del producto exactamente del mismo tamaño que "Regresar" */
+.cart-item .cart-item-top > strong{font-size:18px!important;}
+.cart-back span{font-size:18px!important;}
