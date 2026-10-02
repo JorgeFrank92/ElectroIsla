@@ -2157,3 +2157,39 @@ body.category-menu-open{
     justify-self:end!important;
   }
 }
+
+/* 9.8.34 — ajustar verticalmente el bloque final: "Total" arriba y el importe debajo a la derecha */
+.cart-head .cart-summary-total{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-template-rows:auto auto!important;
+  row-gap:3px!important;
+  align-items:center!important;
+  width:100%!important;
+}
+.cart-head .cart-summary-total > span{
+  grid-column:1!important;
+  grid-row:1!important;
+  justify-self:start!important;
+  margin:0 0 2px 0!important;
+  transform:translateY(-2px)!important;
+}
+.cart-head .cart-summary-total > strong{
+  grid-column:1!important;
+  grid-row:2!important;
+  justify-self:end!important;
+  margin:2px 0 0 0!important;
+  text-align:right!important;
+}
+
+@media(max-width:700px){
+  .cart-head .cart-summary-total{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto auto!important;
+    row-gap:3px!important;
+  }
+  .cart-head .cart-summary-total > strong{
+    justify-self:end!important;
+    margin-top:2px!important;
+  }
+}
