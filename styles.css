@@ -2258,3 +2258,31 @@ body.category-menu-open{
     margin-left:-10px!important;
   }
 }
+
+/* 9.8.40 — eliminar espacios verticales entre las líneas dentro del cuadro de totales */
+@media(max-width:700px){
+  .cart-head .cart-summary-products{
+    gap:0!important;
+    line-height:1!important;
+  }
+  .cart-head .cart-summary-products .cart-summary-label,
+  .cart-head .cart-summary-products strong{
+    display:block!important;
+    margin:0!important;
+    padding:0!important;
+    line-height:1!important;
+  }
+  .cart-head .cart-summary-divider{
+    margin:3px 0!important;
+  }
+  .cart-head .cart-summary-total{
+    row-gap:0!important;
+    line-height:1!important;
+  }
+  .cart-head .cart-summary-total > span,
+  .cart-head .cart-summary-total > strong{
+    margin:0!important;
+    padding:0!important;
+    line-height:1!important;
+  }
+}
