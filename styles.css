@@ -2529,3 +2529,34 @@ body.cart-open-lock{
   .cart-item-category{font-size:15px!important}
   .cart-item-price{font-size:20px!important;margin-top:14px!important}
 }
+
+/* v9.8.56 — tamaños EXACTOS solicitados para las letras de los productos en Tu pedido */
+.cart-item .cart-item-main .cart-item-top strong{
+  font-size:18px!important;
+  line-height:1!important;
+  font-weight:500!important;
+}
+.cart-item .cart-item-main .cart-item-description{
+  font-size:15px!important;
+  line-height:1!important;
+  font-weight:400!important;
+  margin:0!important;
+  padding:0!important;
+}
+.cart-item .cart-item-main .cart-item-category{
+  font-size:15px!important;
+  line-height:1!important;
+  font-weight:400!important;
+  margin:0!important;
+  padding:3px 9px!important;
+}
+.cart-item .cart-item-main .cart-item-price{
+  font-size:20px!important;
+  line-height:1!important;
+  font-weight:500!important;
+  margin-top:14px!important;
+  padding:0!important;
+}
+.cart-back span{
+  font-size:18px!important;
+}
