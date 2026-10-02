@@ -1835,3 +1835,56 @@ body.category-menu-open{
     font-size:22px!important;
   }
 }
+
+/* 9.8.29 — Cabecera Tu pedido aún más compacta, solo este bloque */
+.cart-head{
+  padding:18px 24px 16px!important;
+  gap:12px!important;
+}
+.cart-head .cart-back{
+  font-size:16px!important;
+  line-height:1.1!important;
+  margin-bottom:2px!important;
+}
+.cart-head h1{
+  font-size:30px!important;
+  line-height:1.05!important;
+  margin:2px 0 3px!important;
+}
+.cart-head .cart-warning{
+  font-size:14px!important;
+  line-height:1.25!important;
+  margin:0!important;
+}
+.cart-head .cart-summary{
+  padding:14px 18px!important;
+  border-radius:18px!important;
+}
+.cart-head .cart-summary-title{
+  font-size:16px!important;
+  line-height:1.15!important;
+}
+.cart-head .cart-summary-count{
+  font-size:18px!important;
+  line-height:1.1!important;
+}
+.cart-head .cart-summary-total-label{
+  font-size:15px!important;
+}
+.cart-head .cart-summary-total{
+  font-size:27px!important;
+  line-height:1!important;
+}
+@media(max-width:700px){
+  .cart-head{
+    padding:14px 18px 13px!important;
+    gap:9px!important;
+  }
+  .cart-head h1{font-size:26px!important;}
+  .cart-head .cart-warning{font-size:13px!important;}
+  .cart-head .cart-summary{padding:11px 14px!important;}
+  .cart-head .cart-summary-title{font-size:14px!important;}
+  .cart-head .cart-summary-count{font-size:16px!important;}
+  .cart-head .cart-summary-total-label{font-size:14px!important;}
+  .cart-head .cart-summary-total{font-size:23px!important;}
+}
