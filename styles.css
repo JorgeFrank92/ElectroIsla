@@ -2580,12 +2580,12 @@ body.cart-open-lock{
 @media(max-width:700px){.cart-item .cart-item-top > strong{font-size:11px!important;}}
 
 /* v9.8.61 — descripción del producto a 6.5px */
-.cart-item .cart-item-description{font-size:6.5px!important;line-height:1!important;font-weight:400!important;}
+.cart-item .cart-item-description{font-size:8.5px!important;line-height:1!important;font-weight:400!important;}
 
 
 /* v9.8.62 — corrección definitiva: descripción sin estilo inline */
-.cart-item .cart-item-description{font-size:6.5px!important;line-height:1!important;font-weight:400!important;margin:0!important;padding:0!important;}
-@media(max-width:700px){.cart-item .cart-item-description{font-size:6.5px!important;}}
+.cart-item .cart-item-description{font-size:8.5px!important;line-height:1!important;font-weight:400!important;margin:0!important;padding:0!important;}
+@media(max-width:700px){.cart-item .cart-item-description{font-size:8.5px!important;}}
 
 /* v9.8.63 — descripción fijada directamente en el elemento para evitar cualquier sobrescritura */
-.cart-item .cart-item-description{font-size:6.5px!important;line-height:1!important;font-weight:400!important;margin:0!important;padding:0!important;}
+.cart-item .cart-item-description{font-size:8.5px!important;line-height:1!important;font-weight:400!important;margin:0!important;padding:0!important;}
