@@ -2596,3 +2596,6 @@ body.cart-open-lock{
 
 /* v9.8.68 — nombre del producto en azul oscuro */
 .cart-item .cart-item-top > strong{color:var(--logo-blue-dark)!important;}
+/* v9.8.69 — aumentar grosor del nombre y del precio */
+.cart-item .cart-item-top > strong{font-weight:700!important;}
+.cart-item .cart-item-price{font-weight:700!important;}
