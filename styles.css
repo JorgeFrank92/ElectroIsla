@@ -2238,3 +2238,13 @@ body.category-menu-open{
     white-space:nowrap!important;
   }
 }
+
+/* 9.8.38 — desplazar el cuadro de totales hasta el borde derecho en móvil.
+   Se libera espacio a la izquierda para que no tape la frase descriptiva. */
+@media(max-width:700px){
+  .cart-head .cart-head-summary{
+    position:relative!important;
+    left:14px!important;
+    margin-right:14px!important;
+  }
+}
