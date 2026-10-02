@@ -2857,3 +2857,17 @@ body.cart-open-lock{
     box-shadow:none!important;
   }
 }
+
+/* v9.8.93 — fondo azul en los círculos de − y + */
+@media(max-width:700px){
+  .cart-item .qty > button,
+  .cart-item .qty > button:hover,
+  .cart-item .qty > button:active,
+  .cart-item .qty > button:focus{
+    border:2px solid #074899!important;
+    border-radius:50%!important;
+    color:#fff!important;
+    background:#074899!important;
+    box-shadow:none!important;
+  }
+}
