@@ -2617,5 +2617,7 @@ body.cart-open-lock{
   }
 }
 
-/* v9.8.73 — categoría a 4px de la foto */
-.cart-item .cart-item-category{margin-left:4px!important;}
+/* v9.8.74 — corregido: categoría a 4px reales de la foto en móvil */
+@media(max-width:700px){
+  .cart-item .cart-item-category{margin-left:-7px!important;}
+}
