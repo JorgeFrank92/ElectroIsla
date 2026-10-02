@@ -2560,3 +2560,10 @@ body.cart-open-lock{
 .cart-back span{
   font-size:18px!important;
 }
+
+
+/* v9.8.57 — fuerza final de tamaños solicitados en el HTML del pedido */
+.cart-item .cart-item-top strong{font-size:18px!important;line-height:1!important;font-weight:500!important}
+.cart-item .cart-item-description{font-size:15px!important;line-height:1!important;font-weight:400!important}
+.cart-item .cart-item-category{font-size:15px!important;line-height:1!important;font-weight:400!important}
+.cart-item .cart-item-price{font-size:20px!important;line-height:1!important;font-weight:500!important}
