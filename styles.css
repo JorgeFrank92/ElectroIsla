@@ -2122,3 +2122,38 @@ body.category-menu-open{
     margin-left:auto!important;
   }
 }
+
+/* 9.8.33 — mover SOLO el importe numérico; "Total" permanece bajo el carrito */
+.cart-head .cart-summary-total{
+  display:grid!important;
+  grid-template-columns:auto 1fr!important;
+  align-items:center!important;
+  column-gap:12px!important;
+  width:100%!important;
+}
+.cart-head .cart-summary-total > span{
+  justify-self:start!important;
+  margin:0!important;
+}
+.cart-head .cart-summary-total > strong{
+  justify-self:end!important;
+  margin:0!important;
+  text-align:right!important;
+}
+
+/* La línea divisoria usa exactamente los mismos márgenes laterales del contenido. */
+.cart-head .cart-summary-divider{
+  width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+@media(max-width:700px){
+  .cart-head .cart-summary-total{
+    grid-template-columns:auto 1fr!important;
+    column-gap:10px!important;
+  }
+  .cart-head .cart-summary-total > strong{
+    justify-self:end!important;
+  }
+}
