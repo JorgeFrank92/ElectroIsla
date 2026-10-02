@@ -2578,3 +2578,6 @@ body.cart-open-lock{
 /* v9.8.60 — corregido: "Regresar" realmente se renderiza a 11px en móvil; igualar SOLO nombre de producto */
 .cart-item .cart-item-top > strong{font-size:11px!important;line-height:1!important;font-weight:500!important;}
 @media(max-width:700px){.cart-item .cart-item-top > strong{font-size:11px!important;}}
+
+/* v9.8.61 — descripción del producto a 6.5px */
+.cart-item .cart-item-description{font-size:6.5px!important;line-height:1!important;font-weight:400!important;}
