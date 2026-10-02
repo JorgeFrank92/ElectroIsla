@@ -2807,3 +2807,17 @@ body.cart-open-lock{
   .cart-item .qty button,
   .cart-item .qty b{position:relative!important;z-index:1!important;}
 }
+
+/* v9.8.89 — líneas superior e inferior pegadas exactamente a los círculos */
+@media(max-width:700px){
+  .cart-item .qty::before,
+  .cart-item .qty::after{
+    left:32px!important;
+    right:33px!important;
+    height:1px!important;
+    background:#777!important;
+    z-index:0!important;
+  }
+  .cart-item .qty::before{top:2px!important;}
+  .cart-item .qty::after{bottom:2px!important;}
+}
