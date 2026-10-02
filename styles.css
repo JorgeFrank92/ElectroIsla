@@ -1523,3 +1523,129 @@ body.category-menu-open{
     height:auto!important;
   }
 }
+
+
+/* =========================================================
+   v9.8.26 — SOLO BLOQUE SUPERIOR DE "TU PEDIDO"
+   Referencia: regreso debajo de la cabecera, contenido a la
+   izquierda y resumen del pedido a la derecha.
+   No modifica portada, productos ni funcionamiento.
+   ========================================================= */
+
+/* Escritorio/tablet: dos columnas como en la referencia */
+.cart-head{
+  display:grid!important;
+  grid-template-columns:minmax(0, 1fr) minmax(360px, 35%)!important;
+  align-items:start!important;
+  column-gap:46px!important;
+}
+
+/* El lado izquierdo queda en este orden:
+   Regresar → Tu pedido → advertencia */
+.cart-head-main{
+  display:block!important;
+  min-width:0!important;
+}
+
+/* El resumen permanece completo en la columna derecha */
+.cart-head-summary{
+  align-self:start!important;
+  width:100%!important;
+}
+
+/* Móvil: conserva la misma composición izquierda/derecha,
+   reduciendo tamaños para que ambas zonas permanezcan visibles. */
+@media(max-width:700px){
+  .cart-head{
+    grid-template-columns:minmax(0, 1fr) minmax(142px, 39%)!important;
+    column-gap:12px!important;
+    row-gap:0!important;
+    align-items:start!important;
+    padding:18px 14px 22px!important;
+    min-height:0!important;
+  }
+
+  .cart-head-main{
+    min-width:0!important;
+  }
+
+  .cart-back{
+    margin:0 0 18px!important;
+    gap:9px!important;
+    font-size:17px!important;
+  }
+
+  .cart-back-icon{
+    width:44px!important;
+    height:44px!important;
+    flex:0 0 44px!important;
+  }
+
+  .cart-back-icon svg{
+    width:31px!important;
+    height:31px!important;
+  }
+
+  .cart-title-block h1{
+    font-size:38px!important;
+    line-height:1!important;
+    letter-spacing:-1.5px!important;
+    margin:0 0 10px!important;
+  }
+
+  .cart-title-block p{
+    font-size:16px!important;
+    line-height:1.28!important;
+    margin:0!important;
+  }
+
+  .cart-head-summary{
+    min-width:0!important;
+    padding:18px 14px 17px!important;
+    border-radius:20px!important;
+  }
+
+  .cart-summary-products{
+    gap:10px!important;
+  }
+
+  .cart-summary-icon{
+    width:36px!important;
+    flex-basis:36px!important;
+  }
+
+  .cart-summary-icon svg{
+    width:36px!important;
+    height:36px!important;
+  }
+
+  .cart-summary-label{
+    font-size:14px!important;
+    line-height:1.15!important;
+  }
+
+  .cart-summary-products strong{
+    font-size:17px!important;
+    line-height:1.15!important;
+  }
+
+  .cart-summary-divider{
+    margin:15px 0 14px!important;
+  }
+
+  .cart-summary-total{
+    gap:8px!important;
+    align-items:flex-start!important;
+    flex-direction:column!important;
+  }
+
+  .cart-summary-total > span{
+    font-size:16px!important;
+  }
+
+  .cart-summary-total strong{
+    font-size:25px!important;
+    white-space:normal!important;
+    line-height:1.05!important;
+  }
+}
