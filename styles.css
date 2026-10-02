@@ -2603,3 +2603,9 @@ body.cart-open-lock{
 /* v9.8.70 — aumentar un poco más el grosor del nombre y precio */
 .cart-item .cart-item-top > strong{font-weight:700!important;}
 .cart-item .cart-item-price{font-weight:700!important;}
+
+/* v9.8.71 — contenido del producto a 4px de separación de la foto */
+.cart-item{
+  grid-template-columns:100px minmax(0,1fr)!important;
+  column-gap:4px!important;
+}
