@@ -1008,3 +1008,30 @@ body.category-menu-open{
     padding:10px 27px 0!important;
   }
 }
+
+/* 9.8.24 — Cabecera del pedido: imagen de referencia EXACTA proporcionada por el usuario */
+.cart-brand-header{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1536 / 312!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+.cart-brand-header img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:fill!important;
+  object-position:center center!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
+@media(max-width:700px){
+  .cart-brand-header{
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:1536 / 312!important;
+  }
+}
