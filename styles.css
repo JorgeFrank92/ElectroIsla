@@ -2416,3 +2416,24 @@ body.category-menu-open{
     top:0!important;
   }
 }
+
+/* 9.8.49 — Al abrir "Tu pedido" se bloquea por completo el desplazamiento de la pantalla principal. */
+html.cart-open-lock,
+body.cart-open-lock{
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+body.cart-open-lock{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+}
+.cart-panel.open{
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+}
+.cart-items{
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch;
+}

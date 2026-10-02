@@ -411,7 +411,30 @@ function renderCartRecommendations(){
 }
 function removeFromCart(id){cart=cart.filter(i=>i.id!==String(id));save();renderCart();render();}
 
-function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden")}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden")}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
+let cartScrollY=0;
+function lockPageScroll(){
+  cartScrollY=window.scrollY||window.pageYOffset||0;
+  document.documentElement.classList.add("cart-open-lock");
+  document.body.classList.add("cart-open-lock");
+  document.body.style.top=`-${cartScrollY}px`;
+}
+function unlockPageScroll(){
+  document.documentElement.classList.remove("cart-open-lock");
+  document.body.classList.remove("cart-open-lock");
+  document.body.style.top="";
+  window.scrollTo(0,cartScrollY);
+}
+function openCart(){
+  document.getElementById("cart").classList.add("open");
+  document.getElementById("cartOverlay").classList.remove("hidden");
+  lockPageScroll();
+}
+function closeCart(){
+  document.getElementById("cart").classList.remove("open");
+  document.getElementById("cartOverlay").classList.add("hidden");
+  unlockPageScroll();
+}
+function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
 renderCategoryTabs();
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
 document.getElementById("shopMenuBtn")?.addEventListener("click",openCategoryMenu);
