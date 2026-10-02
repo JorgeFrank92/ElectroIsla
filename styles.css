@@ -2460,10 +2460,10 @@ body.cart-open-lock{
   }
 }
 
-/* 9.8.51 — acercar ligeramente la imagen del producto al borde izquierdo */
+/* 9.8.52 — imagen del producto casi al borde izquierdo, manteniendo el tamaño reducido */
 @media(max-width:700px){
  .cart-items{padding-left:27px!important;padding-right:27px!important}
- .cart-item{grid-template-columns:100px minmax(0,1fr);gap:20px}
- .cart-thumb-wrap,.cart-thumb{width:100px;height:100px}
+ .cart-item{grid-template-columns:90px minmax(0,1fr)!important;gap:18px!important}
+ .cart-thumb-wrap,.cart-thumb{width:90px!important;height:90px!important}
+ .cart-item .cart-thumb-wrap{transform:translateX(-26px)!important}
 }
-.cart-item .cart-thumb-wrap{transform:translateX(-3px)}
