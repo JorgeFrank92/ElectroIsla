@@ -2248,3 +2248,13 @@ body.category-menu-open{
     margin-right:14px!important;
   }
 }
+
+/* 9.8.39 — subir y compactar verticalmente el cuadro de totales; ampliar ligeramente hacia la izquierda */
+@media(max-width:700px){
+  .cart-head .cart-head-summary{
+    transform:translateY(-7px)!important;
+    padding-top:12px!important;
+    padding-bottom:9px!important;
+    margin-left:-10px!important;
+  }
+}
