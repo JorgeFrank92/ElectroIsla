@@ -1711,3 +1711,127 @@ body.category-menu-open{
     line-height:1.05!important;
   }
 }
+
+/* v9.8.28 — Reducir AÚN MÁS la tipografía del bloque superior de "Tu pedido".
+   Solo afecta .cart-head. No toca la portada, productos ni funcionamiento. */
+.cart-head .cart-back{
+  font-size:16px!important;
+  gap:12px!important;
+  margin-bottom:24px!important;
+}
+.cart-head .cart-back-icon{
+  width:44px!important;
+  height:44px!important;
+  flex-basis:44px!important;
+}
+.cart-head .cart-back-icon svg{
+  width:27px!important;
+  height:27px!important;
+}
+.cart-head .cart-title-block h1{
+  font-size:38px!important;
+  line-height:1.02!important;
+  letter-spacing:-1.2px!important;
+  margin-bottom:8px!important;
+}
+.cart-head .cart-title-block p{
+  font-size:16px!important;
+  line-height:1.25!important;
+}
+.cart-head .cart-head-summary{
+  min-height:0!important;
+  padding:22px 22px 20px!important;
+  border-radius:20px!important;
+}
+.cart-head .cart-summary-products{
+  gap:12px!important;
+}
+.cart-head .cart-summary-icon,
+.cart-head .cart-summary-icon svg{
+  width:38px!important;
+  height:38px!important;
+}
+.cart-head .cart-summary-icon{
+  flex-basis:38px!important;
+}
+.cart-head .cart-summary-label{
+  font-size:16px!important;
+  line-height:1.12!important;
+}
+.cart-head .cart-summary-products strong{
+  font-size:18px!important;
+  line-height:1.1!important;
+}
+.cart-head .cart-summary-divider{
+  margin:16px 0 14px!important;
+}
+.cart-head .cart-summary-total{
+  gap:18px!important;
+}
+.cart-head .cart-summary-total > span{
+  font-size:16px!important;
+}
+.cart-head .cart-summary-total strong{
+  font-size:30px!important;
+  line-height:1!important;
+}
+
+@media(max-width:700px){
+  .cart-head .cart-back{
+    font-size:14px!important;
+    gap:10px!important;
+    margin-bottom:16px!important;
+  }
+  .cart-head .cart-back-icon{
+    width:38px!important;
+    height:38px!important;
+    flex-basis:38px!important;
+  }
+  .cart-head .cart-back-icon svg{
+    width:24px!important;
+    height:24px!important;
+  }
+  .cart-head .cart-title-block h1{
+    font-size:26px!important;
+    line-height:1.05!important;
+    letter-spacing:-.7px!important;
+    margin-bottom:6px!important;
+  }
+  .cart-head .cart-title-block p{
+    font-size:13px!important;
+    line-height:1.25!important;
+  }
+  .cart-head .cart-head-summary{
+    padding:12px 12px 12px!important;
+    border-radius:16px!important;
+  }
+  .cart-head .cart-summary-products{
+    gap:8px!important;
+  }
+  .cart-head .cart-summary-icon,
+  .cart-head .cart-summary-icon svg{
+    width:28px!important;
+    height:28px!important;
+  }
+  .cart-head .cart-summary-icon{
+    flex-basis:28px!important;
+  }
+  .cart-head .cart-summary-label{
+    font-size:12px!important;
+  }
+  .cart-head .cart-summary-products strong{
+    font-size:14px!important;
+  }
+  .cart-head .cart-summary-divider{
+    margin:9px 0 9px!important;
+  }
+  .cart-head .cart-summary-total{
+    gap:8px!important;
+  }
+  .cart-head .cart-summary-total > span{
+    font-size:12px!important;
+  }
+  .cart-head .cart-summary-total strong{
+    font-size:22px!important;
+  }
+}
