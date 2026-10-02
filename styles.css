@@ -2736,3 +2736,6 @@ body.cart-open-lock{
 
 /* v9.8.83 — contador forzado directamente en el HTML a 18px */
 .cart-item .qty b{font-size:18px!important;line-height:1!important;font-weight:800!important;}
+
+/* v9.8.84 — contador exactamente a 11px */
+.cart-item .qty b{font-size:11px!important;line-height:1!important;font-weight:800!important;}
