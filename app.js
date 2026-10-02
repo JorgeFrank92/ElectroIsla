@@ -270,9 +270,9 @@ function closeCategoryMenu(){
 function updateStickyOrder(animate=false){const bar=document.getElementById("stickyOrder");if(!bar)return;const count=cart.reduce((s,i)=>s+i.qty,0);let total=0;cart.forEach(i=>{const p=products.find(x=>x.id===i.id);if(p)total+=effectivePrice(p)*i.qty});bar.classList.toggle("visible",count>0);const c=bar.querySelector("[data-sticky-count]");const n=bar.querySelector("[data-sticky-count-number]");const w=bar.querySelector("[data-sticky-count-word]");const t=bar.querySelector("[data-sticky-total]");if(n)n.textContent=count;if(w)w.textContent=count===1?"producto":"productos";if(c&&!n&&!w)c.textContent=`${count} producto${count===1?"":"s"}`;if(t)t.textContent=money(total,"USD");if(animate){bar.classList.remove("electroisla-order-update");if(n)n.classList.remove("electroisla-product-count-bounce");void bar.offsetWidth;if(n)n.classList.add("electroisla-product-count-bounce");bar.classList.add("electroisla-order-update");setTimeout(()=>{bar.classList.remove("electroisla-order-update");if(n)n.classList.remove("electroisla-product-count-bounce")},450)}}
 function render(filter="Todos"){const box=document.getElementById("products");if(!box)return;const heading=document.querySelector(".catalog-heading h2");if(heading)heading.textContent=filter==="Todos"?"Ofertas":filter;const q=(document.getElementById("productSearch")?.value||"").trim().toLowerCase();const activeCategoryNames=new Set(categories.map(c=>c.name));const list=products.filter(p=>p.available&&activeCategoryNames.has(p.category)&&(filter==="Todos"||p.category===filter)&&(!q||`${p.name} ${p.description||""}`.toLowerCase().includes(q)));const count=document.getElementById("resultCount");if(count)count.textContent=`${list.length} producto${list.length===1?"":"s"}`;box.innerHTML=list.map(p=>{const qty=cart.find(i=>i.id===p.id)?.qty||0;return `<article class="product shop-product"><div class="product-info"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description||"")}</p><div class="price">${priceMarkup(p)} <small>${esc(p.unit||"")}</small></div></div><div class="product-media"><div class="product-img">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:(p.category==="Alimentos"?"🥩":"🏠")}</div><button class="add-circle${qty>0?" has-qty":""}" onclick="add('${esc(p.id)}')" aria-label="Agregar ${esc(p.name)}">${qty>0?qty:"+"}</button></div></article>`}).join("")||'<p class="empty-products">No hay productos disponibles.</p>';updateStickyOrder()}
 function electroislaAnimate(selector,className="electroisla-pop"){const el=document.querySelector(selector);if(!el)return;el.classList.remove(className);void el.offsetWidth;el.classList.add(className);setTimeout(()=>el.classList.remove(className),350)}
-function electroislaAnimateAdd(id){const product=products.find(p=>String(p.id)===String(id));const btn=product?[...document.querySelectorAll(".add-circle")].find(b=>b.getAttribute("aria-label")===`Agregar ${product.name}`):null;if(btn){btn.classList.remove("electroisla-bounce");void btn.offsetWidth;btn.classList.add("electroisla-bounce");setTimeout(()=>btn.classList.remove("electroisla-bounce"),400)}electroislaAnimate("#cartTopTotal");electroislaAnimate("#cartTotal");electroislaAnimate(".cart-head-total strong");updateStickyOrder(true)}
+function electroislaAnimateAdd(id){const product=products.find(p=>String(p.id)===String(id));const btn=product?[...document.querySelectorAll(".add-circle")].find(b=>b.getAttribute("aria-label")===`Agregar ${product.name}`):null;if(btn){btn.classList.remove("electroisla-bounce");void btn.offsetWidth;btn.classList.add("electroisla-bounce");setTimeout(()=>btn.classList.remove("electroisla-bounce"),400)}electroislaAnimate("#cartCount","electroisla-cart-bounce");electroislaAnimate("#cartTopTotal");electroislaAnimate("#cartTotal");electroislaAnimate(".cart-head-total strong");updateStickyOrder(true)}
 function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();renderCart();render(currentFilter);requestAnimationFrame(()=>electroislaAnimateAdd(id))}
-function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;const oldCount=cart.reduce((s,i)=>s+i.qty,0);x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart();render(currentFilter);const newCount=cart.reduce((s,i)=>s+i.qty,0);requestAnimationFrame(()=>{if(newCount>0&&newCount!==oldCount)updateStickyOrder(true)})}
+function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;const oldCount=cart.reduce((s,i)=>s+i.qty,0);x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart();render(currentFilter);const newCount=cart.reduce((s,i)=>s+i.qty,0);requestAnimationFrame(()=>{if(newCount>0&&newCount!==oldCount)electroislaAnimate("#cartCount","electroisla-cart-bounce");updateStickyOrder(true)})}
 function getOrderTotals(){
  const canPayCupTransfer=cart.length>0&&cart.every(i=>{const p=products.find(x=>x.id===i.id);return p&&p.category==="Electrodomésticos";});
  let usdTotal=0,cashTotal=0,transferTotal=0,usdAvailable=true,cupAvailable=canPayCupTransfer;
@@ -334,34 +334,28 @@ function renderCart(){
    const cur=p.currency||"USD",unitPrice=effectivePrice(p),lineTotal=unitPrice*i.qty;
    if(cur==="USD")usdTotal+=lineTotal;
    const img=p.image?`<img class="cart-thumb" src="${esc(p.image)}" alt="${esc(p.name)}">`:`<div class="cart-thumb placeholder">🛍️</div>`;
-   const category=p.category?`<span class="cart-category">${esc(p.category)}</span>`:"";
-   return `<article class="cart-item">
+   return `<div class="cart-item">
      <div class="cart-thumb-wrap">${img}</div>
      <div class="cart-item-main">
-       <div class="cart-product-heading"><strong>${esc(p.name)}</strong>${category}</div>
-       <small class="cart-unit-price">${money(unitPrice,cur)} c/u</small>
+       <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">🗑️</button></div>
+       <small>${money(unitPrice,cur)} c/u</small>
+       <div class="cart-line-total">Total: ${money(lineTotal,cur)}</div>
+       <div class="cart-item-bottom">
+         <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
+       </div>
      </div>
-     <div class="cart-item-actions">
-       <button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}" title="Eliminar">
-         <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-       </button>
-       <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
-       <strong class="cart-line-total">Subtotal: ${money(lineTotal,cur)}</strong>
-     </div>
-   </article>`;
- }).join("")+`<div class="cart-delivery-note cart-delivery-inline">
-   <span class="delivery-icon" aria-hidden="true"><svg viewBox="0 0 48 32" width="38" height="28" aria-hidden="true"><path d="M2 4h27v19H2zM29 12h9l7 7v4H29z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="12" cy="25" r="4" fill="#fff" stroke="currentColor" stroke-width="2.4"/><circle cx="37" cy="25" r="4" fill="#fff" stroke="currentColor" stroke-width="2.4"/><path d="M34 12v7h9" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></span>
-   <span><strong>Los precios pueden variar según la zona de entrega.</strong><br><span class="delivery-subtext">Puedes ver el costo final en el siguiente paso.</span></span>
- </div>`:`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
+   </div>`;
+ }).join(""):`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
  const cartTotal=document.getElementById("cartTotal");
- if(cartTotal)cartTotal.textContent=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
+ if(cartTotal)cartTotal.innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
  const topTotal=document.getElementById("cartTopTotal");
- if(topTotal)topTotal.textContent=money(usdTotal,"USD");
+ if(topTotal)topTotal.textContent=`$${usdTotal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})} USD`;
  const topCount=document.getElementById("cartTopCount");
- if(topCount)topCount.textContent=`${count} ${count===1?"artículo":"artículos"}`;
+ if(topCount){
+   const totalItems=cart.reduce((s,i)=>s+i.qty,0);
+   topCount.textContent=`${totalItems} artículo${totalItems===1?"":"s"}`;
+ }
  updateStickyOrder();
- const countBadge=document.getElementById("cartCount");
- if(countBadge && !document.getElementById("cart")?.classList.contains("open")) countBadge.style.display=count>0?"inline-block":"none";
  updatePaymentSummary();
 }
 function renderCartRecommendations(){
@@ -380,12 +374,12 @@ function renderCartRecommendations(){
 }
 function removeFromCart(id){cart=cart.filter(i=>i.id!==String(id));save();renderCart();render();}
 
-function setCartBadgeVisible(visible){const countBadge=document.getElementById("cartCount");if(!countBadge)return;countBadge.style.display=visible&&cart.reduce((s,i)=>s+i.qty,0)>0?"inline-block":"none"}function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden");setCartBadgeVisible(false)}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden");if(document.getElementById("checkoutModal")?.classList.contains("hidden"))setCartBadgeVisible(true)}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();setCartBadgeVisible(false);document.getElementById("checkoutModal").classList.remove("hidden")}
+function openCart(){document.getElementById("cart").classList.add("open");document.getElementById("cartOverlay").classList.remove("hidden")}function closeCart(){document.getElementById("cart").classList.remove("open");document.getElementById("cartOverlay").classList.add("hidden")}function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}updatePaymentSummary();document.getElementById("checkoutModal").classList.remove("hidden")}
 renderCategoryTabs();
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
 document.getElementById("shopMenuBtn")?.addEventListener("click",openCategoryMenu);
 document.getElementById("productSearch")?.addEventListener("input",()=>render(currentFilter));
-document.getElementById("cartBtn")?.addEventListener("click",openCart);document.getElementById("closeCart").onclick=closeCart;document.getElementById("cartOverlay").onclick=closeCart;document.getElementById("checkoutBtn").onclick=openCheckout;document.getElementById("closeModal").onclick=()=>document.getElementById("checkoutModal").classList.add("hidden");
+document.getElementById("cartBtn").onclick=openCart;document.getElementById("closeCart").onclick=closeCart;document.getElementById("cartOverlay").onclick=closeCart;document.getElementById("checkoutBtn").onclick=openCheckout;document.getElementById("closeModal").onclick=()=>document.getElementById("checkoutModal").classList.add("hidden");
 function showThankYou(){
  const modal=document.getElementById("thankYouModal");
  if(!modal)return;

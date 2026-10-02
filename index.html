@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="electroisla-version" content="9.8.17-cabecera-pedido">
+  <meta name="electroisla-version" content="9.8.20-pedido">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=9.8.17-cabecera-pedido">
+  <link rel="stylesheet" href="styles.css?v=9.8.20-pedido">
 </head>
 <body>
 <header class="reference-topbar shop-topbar" aria-label="ElectroIsla 360">
@@ -50,12 +50,36 @@
 
 <div id="cartOverlay" class="overlay hidden"></div>
 <aside id="cart" class="cart-panel">
-  <div class="cart-brand-header" aria-label="ElectroIsla 360">
-    <img src="cart-header-reference.png?v=1" alt="ElectroIsla 360 - Tu hogar, nuestra prioridad">
-  </div>
   <div class="cart-head">
-    <button id="closeCart" class="cart-back" aria-label="Volver">← <span>Atrás</span></button>
-    <div class="cart-head-total"><span>Su carrito</span><strong id="cartTopTotal">US$ 0.00</strong></div>
+    <div class="cart-head-main">
+      <button id="closeCart" class="cart-back" aria-label="Regresar">
+        <span class="cart-back-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" focusable="false"><path d="M30 9 15 24l15 15M16 24h25"/></svg>
+        </span>
+        <span>Regresar</span>
+      </button>
+      <div class="cart-title-block">
+        <h1>Tu pedido</h1>
+        <p>Revisa los productos de tu carrito antes de continuar.</p>
+      </div>
+    </div>
+
+    <div class="cart-head-summary" aria-label="Resumen del pedido">
+      <div class="cart-summary-products">
+        <span class="cart-summary-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" focusable="false"><path d="M8 12h8l5 30h31l6-22H19"/><path d="M25 51a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm27 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path d="M24 29h27"/></svg>
+        </span>
+        <div>
+          <span class="cart-summary-label">Total de productos</span>
+          <strong id="cartTopCount">0 artículos</strong>
+        </div>
+      </div>
+      <div class="cart-summary-divider"></div>
+      <div class="cart-summary-total">
+        <span>Total</span>
+        <strong id="cartTopTotal">USD 0.00</strong>
+      </div>
+    </div>
   </div>
   <div id="cartItems" class="cart-items"></div>
   <div class="cart-service-bar">
