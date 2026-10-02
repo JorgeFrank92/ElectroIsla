@@ -2593,3 +2593,6 @@ body.cart-open-lock{
 .cart-item .cart-item-category{
   transform:translateY(3px)!important;
 }
+
+/* v9.8.68 — nombre del producto en azul oscuro */
+.cart-item .cart-item-top > strong{color:var(--logo-blue-dark)!important;}
