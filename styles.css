@@ -2193,3 +2193,11 @@ body.category-menu-open{
     margin-top:2px!important;
   }
 }
+
+/* 9.8.35 — reducir más la tipografía del lado izquierdo del resumen */
+.cart-head .cart-summary-products .cart-summary-label{font-size:11px!important;}
+.cart-head .cart-summary-products strong{font-size:10px!important;}
+@media(max-width:700px){
+  .cart-head .cart-summary-products .cart-summary-label{font-size:10px!important;}
+  .cart-head .cart-summary-products strong{font-size:9px!important;}
+}
