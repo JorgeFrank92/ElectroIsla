@@ -2626,3 +2626,8 @@ body.cart-open-lock{
 @media(max-width:700px){
   .cart-item .cart-item-bottom{right:8px!important;}
 }
+
+/* v9.8.76 — mover un poco más a la izquierda los controles para dejar libre el lado derecho */
+@media(max-width:700px){
+  .cart-item .cart-item-bottom{right:20px!important;}
+}
