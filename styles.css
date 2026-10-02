@@ -2091,3 +2091,34 @@ body.category-menu-open{
     font-size:19px!important;
   }
 }
+
+/* 9.8.32 — Alineación del total del resumen
+   El importe queda pegado al margen derecho interno del cuadro,
+   y la línea divisoria respeta exactamente ese mismo margen. */
+.cart-head .cart-summary-divider{
+  width:100%!important;
+  align-self:stretch!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+.cart-head .cart-summary-total{
+  width:100%!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.cart-head .cart-summary-total strong{
+  margin-left:auto!important;
+  text-align:right!important;
+}
+
+@media(max-width:700px){
+  .cart-head .cart-summary-divider{
+    width:100%!important;
+  }
+  .cart-head .cart-summary-total{
+    width:100%!important;
+  }
+  .cart-head .cart-summary-total strong{
+    margin-left:auto!important;
+  }
+}
