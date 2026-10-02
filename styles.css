@@ -2776,3 +2776,11 @@ body.cart-open-lock{
     min-height:27px!important;
   }
 }
+
+/* v9.8.87 — quitar únicamente el óvalo exterior; conservar los círculos de - y + */
+.cart-item .qty{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
