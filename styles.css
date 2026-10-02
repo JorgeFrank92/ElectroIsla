@@ -269,7 +269,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--logo-blue)}
 /* v9.6.2 — Logo real de ElectroIsla 360 y paleta extraída del logo */
 .brand-logo{width:170px;height:78px;object-fit:contain;object-position:left center}
 .topbar{height:88px}
-@media(max-width:700px){.topbar{height:82px}.brand-logo{width:145px;height:72px}}
+@media(max-width:700px){.topbar{height:82px}.brand-logo{width:145px;height:72px;transform:translateY(6px)}}
 
 /* v9.6.5 — portada responsive sin espacio vacío */
 .store-banner{height:auto !important;min-height:0 !important;padding:0 !important;}
@@ -736,92 +736,507 @@ body.category-menu-open{
 
 
 /* =========================================================
-   ElectroIsla 9.8.23 — CABECERA + BLOQUE "TU PEDIDO"
-   Basado en los archivos actuales del proyecto.
-   La imagen electroisla-header-final.png es la cabecera aprobada.
+   ElectroIsla 9.8.4 — ajuste tipográfico móvil
+   Referencia: captura Eglis enviada por el usuario.
+   Objetivo: reducir tamaños y peso para aproximar proporciones.
    ========================================================= */
 
-.cart-panel{
-  background:#f7f9fc!important;
-  overflow:hidden!important;
+@media(max-width:700px){
+
+  /* Encabezado/hero: más contenido y menos dominante */
+  .store-banner-copy h1{
+    font-size:26px !important;
+    line-height:1.12 !important;
+    letter-spacing:-.7px !important;
+  }
+  .store-banner-copy p{
+    font-size:16px !important;
+    line-height:1.35 !important;
+  }
+
+  /* Barra de navegación */
+  .icon-btn{
+    flex-basis:46px !important;
+    width:46px !important;
+    height:46px !important;
+    border-radius:12px !important;
+    font-size:24px !important;
+  }
+  .category-tabs{
+    gap:18px !important;
+  }
+  .category-tabs .filter{
+    font-size:15px !important;
+    font-weight:800 !important;
+    padding:10px 2px !important;
+  }
+
+  /* Título de sección */
+  .catalog-heading{
+    margin:6px 0 14px !important;
+  }
+  .catalog-heading h2{
+    font-size:24px !important;
+    line-height:1.15 !important;
+    letter-spacing:-.3px !important;
+  }
+  .catalog-heading span{
+    font-size:12px !important;
+  }
+
+  /* Productos: proporciones más cercanas a Eglis */
+  .shop-product{
+    grid-template-columns:minmax(0,1fr) 126px !important;
+    gap:14px !important;
+    padding:17px 0 !important;
+  }
+
+  .shop-product h3{
+    font-size:16px !important;
+    line-height:1.22 !important;
+    font-weight:600 !important;
+    letter-spacing:-.1px !important;
+    margin:0 0 5px !important;
+  }
+
+  .shop-product p{
+    font-size:12px !important;
+    line-height:1.32 !important;
+    margin:0 0 8px !important;
+    color:#8d9298 !important;
+  }
+
+  .shop-product .price{
+    font-size:16px !important;
+    line-height:1.15 !important;
+    font-weight:800 !important;
+    margin:0 !important;
+  }
+
+  .shop-product .price small{
+    font-size:10px !important;
+  }
+
+  .shop-product .product-img{
+    width:126px !important;
+    height:116px !important;
+    border-radius:12px !important;
+  }
+
+  /* Botón +: más pequeño como en Eglis */
+  .add-circle{
+    width:31px !important;
+    height:31px !important;
+    right:0 !important;
+    bottom:0 !important;
+    border-radius:9px !important;
+    font-size:22px !important;
+    line-height:1 !important;
+    box-shadow:0 3px 8px rgba(0,0,0,.10) !important;
+  }
+
+  /* Menú lateral */
+  .category-menu-item{
+    font-size:16px !important;
+    min-height:58px !important;
+  }
 }
 
-.cart-brand-header{
-  flex:0 0 auto!important;
-  width:100%!important;
-  height:auto!important;
-  margin:0!important;
-  padding:0!important;
-  background:#fff!important;
-  overflow:hidden!important;
-  line-height:0!important;
-  display:block!important;
+/* En pantallas grandes también mantener una escala contenida */
+@media(min-width:701px){
+  .shop-product h3{font-size:18px !important}
+  .shop-product p{font-size:13px !important}
+  .shop-product .price{font-size:18px !important}
 }
 
-.cart-brand-header img{
-  display:block!important;
-  width:100%!important;
-  height:auto!important;
-  max-width:none!important;
-  margin:0!important;
-  padding:0!important;
-  border:0!important;
+/* =========================================================
+   ElectroIsla 9.8.5 — botón Añadir producto
+   Inspirado en la proporción visual de Eglis
+   ========================================================= */
+.add-circle{
+  width:34px !important;
+  height:34px !important;
+  right:4px !important;
+  bottom:4px !important;
+  border-radius:9px !important;
+  border:0 !important;
+  background:#59c500 !important;
+  color:#fff !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  font-size:25px !important;
+  font-weight:400 !important;
+  line-height:1 !important;
+  font-family:Arial,sans-serif !important;
+  box-shadow:0 3px 9px rgba(0,0,0,.14) !important;
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease !important;
+  z-index:2 !important;
+}
+.add-circle:hover{
+  background:#4fb300 !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 5px 12px rgba(0,0,0,.17) !important;
+}
+.add-circle:active{
+  transform:scale(.94) !important;
+  box-shadow:0 2px 6px rgba(0,0,0,.12) !important;
+}
+@media(max-width:700px){
+  .add-circle{
+    width:34px !important;
+    height:34px !important;
+    right:4px !important;
+    bottom:4px !important;
+    border-radius:9px !important;
+    font-size:23px !important;
+  }
+}
+
+/* ElectroIsla 9.8.7 — animación inspirada en la referencia Eglis.
+   No se modifican colores. */
+@keyframes electroisla-add-bounce{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.12)}
+  60%{transform:scale(.95)}
+  82%{transform:scale(1.04)}
+  100%{transform:scale(1)}
+}
+@keyframes electroisla-total-pop{
+  0%{opacity:.55;transform:translateY(5px) scale(.98)}
+  55%{opacity:1;transform:translateY(-1px) scale(1.015)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* En Eglis, al añadir un producto, "Ver mi pedido" entra
+   inmediatamente desde abajo, con un movimiento corto y fluido. */
+.sticky-order{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(105%);
+  transition:
+    transform .26s cubic-bezier(.22,.61,.36,1),
+    opacity .16s ease,
+    visibility 0s linear .26s;
+  will-change:transform,opacity;
+}
+.sticky-order.visible{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  transition:
+    transform .26s cubic-bezier(.22,.61,.36,1),
+    opacity .14s ease,
+    visibility 0s;
+}
+.sticky-order.electroisla-order-update .sticky-order-info strong{
+  animation:electroisla-total-pop .28s cubic-bezier(.22,.61,.36,1);
+}
+.add-circle.electroisla-bounce{
+  animation:electroisla-add-bounce .36s cubic-bezier(.22,.61,.36,1);
+}
+.shop-topbar .cart-btn b.electroisla-pop,
+#cartCount.electroisla-pop,
+#cartTopTotal.electroisla-pop,
+#cartTotal.electroisla-pop,
+.cart-head-total strong.electroisla-pop{
+  animation:electroisla-total-pop .28s cubic-bezier(.22,.61,.36,1);
+}
+@media(prefers-reduced-motion:reduce){
+  .sticky-order{transition:none!important}
+  .sticky-order.electroisla-order-update .sticky-order-info strong,
+  .add-circle.electroisla-bounce,
+  .shop-topbar .cart-btn b.electroisla-pop,
+  #cartCount.electroisla-pop,
+  #cartTopTotal.electroisla-pop,
+  #cartTotal.electroisla-pop,
+  .cart-head-total strong.electroisla-pop{animation:none!important}
+}
+
+/* ElectroIsla 9.8.8 — conservar colores de la versión anterior.
+   Solo se restablece el azul; no se modifica la animación. */
+.add-circle,
+.sticky-order-btn{
+  background:#074899 !important;
+  color:#fff !important;
+}
+.add-circle:hover,
+.sticky-order-btn:hover{
+  background:#072b79 !important;
+}
+
+/* ElectroIsla 9.8.9 — ajuste fino de animación y color de botones */
+.sticky-order{
+  transition:
+    transform .05s cubic-bezier(.22,.61,.36,1),
+    opacity .05s ease,
+    visibility 0s linear .05s !important;
+}
+.sticky-order.visible{
+  transition:
+    transform .05s cubic-bezier(.22,.61,.36,1),
+    opacity .05s ease,
+    visibility 0s !important;
+}
+
+/* Rebote del total un poco más marcado */
+@keyframes electroisla-total-pop-strong{
+  0%{opacity:.55;transform:translateY(7px) scale(.96)}
+  35%{opacity:1;transform:translateY(-3px) scale(1.07)}
+  62%{transform:translateY(1px) scale(.98)}
+  82%{transform:translateY(-1px) scale(1.035)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.sticky-order.electroisla-order-update .sticky-order-info strong,
+#cartCount.electroisla-pop,
+#cartTopTotal.electroisla-pop,
+#cartTotal.electroisla-pop,
+.cart-head-total strong.electroisla-pop{
+  animation:electroisla-total-pop-strong .42s cubic-bezier(.22,.61,.36,1) !important;
+}
+
+/* Azul oficial definido por ElectroIsla */
+.add-circle,
+.sticky-order-btn{
+  background:var(--accent)!important;
+  color:#fff!important;
+}
+.add-circle:hover,
+.sticky-order-btn:hover{
+  background:var(--accent2)!important;
+}
+
+
+/* ElectroIsla 9.8.9 CORREGIDA — solo corrige los rebotes.
+   No modifica tamaño, posición ni colores de los botones. */
+@keyframes electroisla-cart-count-bounce{
+  0%{opacity:.55;transform:translateY(4px) scale(.90)}
+  35%{opacity:1;transform:translateY(-2px) scale(1.16)}
+  60%{transform:translateY(1px) scale(.96)}
+  82%{transform:translateY(-1px) scale(1.05)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.electroisla-cart-bounce{
+  display:inline-block;
+  animation:electroisla-cart-count-bounce .42s cubic-bezier(.22,.61,.36,1)!important;
+}
+/* Carrito vacío: no mostrar el número hasta que haya productos. */
+.shop-topbar .cart-btn b.cart-count-hidden{
+  display:none!important;
+}
+@keyframes electroisla-product-count-bounce{
+  0%{opacity:.55;transform:translateY(7px) scale(.96)}
+  35%{opacity:1;transform:translateY(-3px) scale(1.07)}
+  62%{transform:translateY(1px) scale(.98)}
+  82%{transform:translateY(-1px) scale(1.035)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+[data-sticky-count-number].electroisla-product-count-bounce{
+  display:inline-block;
+  animation:electroisla-product-count-bounce .42s cubic-bezier(.22,.61,.36,1)!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .electroisla-cart-bounce,[data-sticky-count-number].electroisla-product-count-bounce{animation:none!important}
+}
+
+/* Botón añadir: cuadrado inicialmente; al tener cantidad pasa a circular */
+.add-circle.has-qty{
+  border-radius:50% !important;
+}
+
+/* ElectroIsla — botón seleccionado con cantidad
+   Al pasar a redondo, el fondo cambia a blanco degradado y
+   el número adopta el azul oficial de ElectroIsla. */
+.add-circle.has-qty{
+  background:linear-gradient(145deg,#ffffff 0%,#f7f9fc 48%,#e2e7ee 100%) !important;
+  color:var(--accent) !important;
+  border-radius:50% !important;
+  box-shadow:0 3px 10px rgba(0,0,0,.16),inset 0 1px 1px rgba(255,255,255,.95) !important;
+}
+.add-circle.has-qty:hover{
+  background:linear-gradient(145deg,#ffffff 0%,#f3f6fa 48%,#dce3eb 100%) !important;
+  color:var(--accent) !important;
+}
+
+/* v9.8.9 — Logo circular tamaño anterior con aro naranja ElectroIsla */
+.brand-logo{
+  width:92px!important;
+  height:92px!important;
   object-fit:contain!important;
+  object-position:center!important;
+  border:4px solid #ff8500!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  padding:0!important;
+  display:block!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.18)!important;
+  position:relative;
+  z-index:2;
 }
+@media(max-width:700px){
+  .topbar{height:88px!important;align-items:center!important;overflow:visible!important;position:relative!important;z-index:25!important;}
+  .brand{align-self:center!important;position:relative!important;z-index:26!important;}
+  .brand-logo{
+    width:96px!important;
+    height:96px!important;
+    border-width:4px!important;
+  }
+}
+
+/* 9.8.9 — Cabecera/portada reconstruida tomando exactamente la referencia aprobada */
+.reference-topbar{
+  height:0!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  position:relative!important;
+  display:block!important;
+  z-index:40!important;
+  background:transparent!important;
+}
+.reference-brand{position:absolute;left:3.5%;top:0;width:22%;height:150px;display:block;z-index:42}
+.reference-cart{
+  position:absolute!important;
+  right:4.5%;top:36px;width:58px!important;height:58px!important;
+  min-width:58px!important;padding:0!important;margin:0!important;
+  background:transparent!important;color:#fff!important;border:0!important;
+  z-index:43;display:flex!important;align-items:center;justify-content:center;gap:0!important;
+}
+.reference-cart .cart-icon{width:43px;height:43px;stroke:#fff!important;stroke-width:1.8!important}
+.reference-cart b{position:absolute!important;right:-3px;top:-2px;background:var(--logo-blue)!important;color:#fff!important;border-radius:999px!important;font-size:12px!important;line-height:1;padding:4px 7px!important}
+.reference-store-hero{margin:0!important;padding:0!important;background:#fff!important}
+.reference-visual{width:100%;overflow:hidden;position:relative;background:#074899}
+.reference-top-image,.reference-banner,.reference-features{width:100%;line-height:0}
+.reference-top-image img,.reference-banner img,.reference-features img{display:block;width:100%;height:auto;max-width:none}
+.reference-top-image{position:relative;z-index:1}
+.reference-banner{position:relative;z-index:2;margin-top:-1px}
+.reference-features{position:relative;z-index:3;margin-top:-1px}
+.reference-features img{width:100%}
+.reference-store-hero .store-info{position:relative;z-index:4;background:var(--logo-blue-pale)!important;padding:22px 7%!important}
+@media(max-width:700px){
+  .reference-brand{left:4%;height:120px;width:28%;}
+  .reference-cart{right:3.5%;top:25px;width:50px!important;height:50px!important;min-width:50px!important}
+  .reference-cart .cart-icon{width:36px;height:36px}
+  .reference-cart b{font-size:11px!important;padding:4px 6px!important}
+}
+
+
+/* 9.8.14 — Evitar que la barra fija tape el último producto en móvil. */
+.shop-catalog{padding-bottom:180px!important;}
+@media(max-width:700px){
+  .shop-catalog{padding-bottom:190px!important;}
+}
+
+/* Evita duplicar el carrito que ya viene integrado en electroisla-top-v2.png */
+.reference-cart .cart-icon{display:none!important;}
+.reference-cart{background:transparent!important;color:transparent!important;}
+.reference-cart b{color:#fff!important;}
+
+/* 9.8.16 — CABECERA LIMPIA: una sola imagen compuesta; sin logo/portada/carrito duplicados. */
+.reference-topbar{
+  position:absolute!important;
+  left:0!important;top:0!important;
+  width:100%!important;height:0!important;min-height:0!important;
+  margin:0!important;padding:0!important;border:0!important;
+  background:transparent!important;
+  z-index:100!important;
+  pointer-events:none!important;
+}
+.reference-brand{display:none!important}
+.reference-composite{width:100%;line-height:0;overflow:hidden;position:relative;background:#074899}
+.reference-composite img{display:block;width:100%;height:auto;max-width:none}
+.reference-cart{
+  pointer-events:auto!important;
+  position:absolute!important;
+  right:3.5%!important;
+  top:12px!important;
+  width:58px!important;height:58px!important;min-width:58px!important;
+  margin:0!important;padding:0!important;
+  border:0!important;background:transparent!important;color:transparent!important;
+  box-shadow:none!important;display:block!important;z-index:101!important;
+}
+.reference-cart .cart-icon{display:none!important}
+.reference-cart .reference-cart-hit{display:block!important;width:100%;height:100%;}
+.reference-cart b{
+  position:absolute!important;
+  right:-7px!important;
+  top:-7px!important;
+  min-width:27px!important;height:27px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:3px 6px!important;
+  border-radius:999px!important;
+  background:#fff!important;
+  color:var(--logo-blue)!important;
+  border:2px solid var(--logo-blue)!important;
+  font-size:12px!important;font-weight:900!important;line-height:1!important;
+  z-index:102!important;
+  box-shadow:0 2px 7px rgba(0,0,0,.18)!important;
+}
+@media(max-width:700px){
+  .reference-cart{right:3.2%!important;top:9px!important;width:50px!important;height:50px!important;min-width:50px!important}
+  .reference-cart b{right:-6px!important;top:-6px!important;min-width:25px!important;height:25px!important;font-size:11px!important}
+}
+
+/* =========================================================
+   v9.8.19 — BLOQUE "TU PEDIDO" DEBAJO DE LA CABECERA
+   Basado directamente en la referencia suministrada.
+   La cabecera ElectroIsla queda intacta.
+   ========================================================= */
 
 .cart-head{
   flex:0 0 auto!important;
+  min-height:360px!important;
   height:auto!important;
-  min-height:0!important;
   display:grid!important;
-  grid-template-columns:minmax(0,1fr) minmax(340px,36%)!important;
+  grid-template-columns:minmax(0,1fr) minmax(360px,35%)!important;
   align-items:start!important;
-  gap:40px!important;
-  padding:26px 4% 34px!important;
+  gap:46px!important;
+  padding:26px 3.8% 42px!important;
   background:#fff!important;
   border-bottom:0!important;
   box-shadow:none!important;
 }
 
-.cart-head-main{min-width:0!important}
+.cart-head-main{
+  min-width:0;
+}
 
 .cart-back{
   display:inline-flex!important;
   align-items:center!important;
-  gap:14px!important;
-  margin:0 0 34px!important;
-  padding:0!important;
+  gap:20px!important;
   border:0!important;
   background:transparent!important;
-  color:#10488f!important;
+  color:var(--logo-blue)!important;
+  padding:0!important;
+  margin:0 0 42px!important;
   font-size:22px!important;
   font-weight:800!important;
+  line-height:1!important;
 }
 
-.cart-back:hover{background:transparent!important;color:#10488f!important}
+.cart-back:hover{
+  color:var(--logo-blue-dark)!important;
+  background:transparent!important;
+}
 
 .cart-back-icon{
-  width:52px!important;
-  height:52px!important;
+  width:58px!important;
+  height:58px!important;
   border-radius:50%!important;
   display:grid!important;
   place-items:center!important;
-  background:#edf4fc!important;
-  color:#10488f!important;
-}
-
-.cart-back-icon svg{
-  width:38px!important;
-  height:38px!important;
-  fill:none!important;
-  stroke:currentColor!important;
-  stroke-width:3.2!important;
-  stroke-linecap:round!important;
-  stroke-linejoin:round!important;
+  background:#edf3fb!important;
+  color:var(--logo-blue)!important;
+  font-size:48px!important;
+  font-weight:400!important;
+  line-height:.75!important;
+  padding-bottom:7px!important;
 }
 
 .cart-title-block h1{
-  margin:0 0 14px!important;
+  margin:0 0 18px!important;
   color:#123b80!important;
   font-size:clamp(48px,5vw,76px)!important;
   line-height:.98!important;
@@ -832,7 +1247,7 @@ body.category-menu-open{
 .cart-title-block p{
   margin:0!important;
   max-width:850px!important;
-  color:#63748d!important;
+  color:#617491!important;
   font-size:clamp(19px,2vw,28px)!important;
   line-height:1.35!important;
   font-weight:500!important;
@@ -840,12 +1255,13 @@ body.category-menu-open{
 
 .cart-head-summary{
   width:100%!important;
-  min-height:285px!important;
-  padding:34px 34px 28px!important;
+  min-height:292px!important;
   margin:0!important;
+  padding:38px 36px 30px!important;
   border-radius:28px!important;
   background:#edf4fc!important;
   color:#123b80!important;
+  box-shadow:none!important;
   display:flex!important;
   flex-direction:column!important;
   justify-content:flex-start!important;
@@ -854,41 +1270,32 @@ body.category-menu-open{
 .cart-summary-products{
   display:flex!important;
   align-items:flex-start!important;
-  gap:22px!important;
+  gap:24px!important;
 }
 
 .cart-summary-icon{
+  width:58px!important;
   flex:0 0 58px!important;
-  width:58px!important;
-  height:58px!important;
-  display:block!important;
+  font-size:49px!important;
+  line-height:1!important;
+  filter:none!important;
 }
 
-.cart-summary-icon svg{
-  width:58px!important;
-  height:58px!important;
-  fill:none!important;
-  stroke:#123b80!important;
-  stroke-width:3!important;
-  stroke-linecap:round!important;
-  stroke-linejoin:round!important;
-}
-
-.cart-summary-products>div{
+.cart-summary-products > div{
   display:flex!important;
   flex-direction:column!important;
   gap:5px!important;
 }
 
 .cart-summary-label{
-  color:#2c466e!important;
+  color:#243f69!important;
   font-size:24px!important;
   line-height:1.15!important;
   font-weight:500!important;
 }
 
 .cart-summary-products strong{
-  color:#10488f!important;
+  color:var(--logo-blue)!important;
   font-size:25px!important;
   line-height:1.1!important;
   font-weight:800!important;
@@ -897,17 +1304,17 @@ body.category-menu-open{
 .cart-summary-divider{
   width:100%!important;
   height:2px!important;
-  margin:30px 0 25px!important;
   background:#d7e1ee!important;
+  margin:34px 0 27px!important;
 }
 
 .cart-summary-total{
   display:flex!important;
   align-items:center!important;
-  gap:38px!important;
+  gap:44px!important;
 }
 
-.cart-summary-total>span{
+.cart-summary-total > span{
   color:#123b80!important;
   font-size:24px!important;
   font-weight:900!important;
@@ -915,123 +1322,204 @@ body.category-menu-open{
 
 .cart-summary-total strong{
   color:#123b80!important;
-  font-size:48px!important;
+  font-size:51px!important;
   line-height:1!important;
   font-weight:900!important;
   white-space:nowrap!important;
 }
 
+/* El contenido de productos empieza después de este bloque, como en la referencia. */
 .cart-items{
-  flex:1 1 auto!important;
-  min-height:0!important;
-  background:#f7f9fc!important;
-  padding:10px 4% 0!important;
+  padding-top:12px!important;
 }
 
+/* Responsive: conserva la misma jerarquía en teléfonos sin tocar la cabecera. */
 @media(max-width:700px){
-  .cart-panel{
-    width:100%!important;
-    height:100dvh!important;
-    top:0!important;
-    bottom:auto!important;
-    border-radius:0!important;
-    display:flex!important;
-    flex-direction:column!important;
-    transform:translateY(105%)!important;
-  }
-  .cart-panel.open{transform:translateY(0)!important}
-
-  .cart-brand-header img{
-    width:100%!important;
-    height:auto!important;
-  }
-
   .cart-head{
+    min-height:0!important;
     grid-template-columns:1fr!important;
-    gap:24px!important;
-    padding:22px 27px 26px!important;
+    gap:28px!important;
+    padding:22px 27px 30px!important;
   }
 
   .cart-back{
-    margin-bottom:24px!important;
+    margin-bottom:28px!important;
     font-size:21px!important;
+    gap:14px!important;
   }
 
   .cart-back-icon{
-    width:50px!important;
-    height:50px!important;
+    width:52px!important;
+    height:52px!important;
+    font-size:43px!important;
   }
 
   .cart-title-block h1{
     font-size:48px!important;
     letter-spacing:-1.8px!important;
-    margin-bottom:10px!important;
+    margin-bottom:12px!important;
   }
 
   .cart-title-block p{
     font-size:20px!important;
-    line-height:1.30!important;
+    line-height:1.35!important;
   }
 
   .cart-head-summary{
     min-height:0!important;
-    padding:24px 24px 23px!important;
+    padding:26px 25px 25px!important;
     border-radius:24px!important;
   }
 
   .cart-summary-icon{
+    width:48px!important;
     flex-basis:48px!important;
-    width:48px!important;
-    height:48px!important;
+    font-size:40px!important;
   }
 
-  .cart-summary-icon svg{
-    width:48px!important;
-    height:48px!important;
+  .cart-summary-label{
+    font-size:19px!important;
   }
 
-  .cart-summary-label{font-size:19px!important}
-  .cart-summary-products strong{font-size:22px!important}
+  .cart-summary-products strong{
+    font-size:22px!important;
+  }
 
   .cart-summary-divider{
-    margin:22px 0 18px!important;
+    margin:24px 0 20px!important;
+  }
+
+  .cart-summary-total{
+    gap:24px!important;
+    justify-content:flex-start!important;
+  }
+
+  .cart-summary-total > span{
+    font-size:21px!important;
+  }
+
+  .cart-summary-total strong{
+    font-size:34px!important;
+  }
+
+  .cart-items{
+    padding-top:16px!important;
+  }
+}
+
+
+
+/* v9.8.20 — Iconos lineales de la referencia */
+.cart-back-icon svg{
+  width:40px!important;
+  height:40px!important;
+  display:block!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:3.2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+
+.cart-summary-icon svg{
+  width:58px!important;
+  height:58px!important;
+  display:block!important;
+  fill:none!important;
+  stroke:var(--logo-blue-dark)!important;
+  stroke-width:3!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+
+@media(max-width:700px){
+  .cart-back-icon svg{width:36px!important;height:36px!important}
+  .cart-summary-icon svg{width:48px!important;height:48px!important}
+}
+
+
+/* v9.8.21 — ajuste fino móvil según la referencia */
+@media(max-width:700px){
+  .cart-head{
+    gap:20px!important;
+    padding:18px 27px 22px!important;
+  }
+
+  .cart-back{
+    margin-bottom:24px!important;
+  }
+
+  .cart-title-block h1{
+    margin-bottom:9px!important;
+  }
+
+  .cart-title-block p{
+    font-size:19px!important;
+    line-height:1.3!important;
+  }
+
+  .cart-head-summary{
+    padding:22px 24px 22px!important;
+    border-radius:24px!important;
+  }
+
+  .cart-summary-products{
+    gap:20px!important;
+  }
+
+  .cart-summary-products strong{
+    font-size:21px!important;
+  }
+
+  .cart-summary-divider{
+    margin:20px 0 17px!important;
   }
 
   .cart-summary-total{
     gap:20px!important;
   }
 
-  .cart-summary-total>span{font-size:21px!important}
-  .cart-summary-total strong{font-size:32px!important}
+  .cart-summary-total > span{
+    font-size:20px!important;
+  }
+
+  .cart-summary-total strong{
+    font-size:31px!important;
+  }
 
   .cart-items{
-    padding:10px 27px 0!important;
+    padding-top:6px!important;
   }
 }
 
-/* 9.8.24 — Cabecera del pedido: imagen de referencia EXACTA proporcionada por el usuario */
+
+/* v9.8.25 — Cabecera exclusiva de "Tu pedido". La portada de inicio no se reutiliza aquí. */
 .cart-brand-header{
   width:100%!important;
-  height:auto!important;
-  aspect-ratio:1536 / 312!important;
+  flex:0 0 auto!important;
   overflow:hidden!important;
   background:#fff!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:0!important;
 }
 .cart-brand-header img{
   display:block!important;
   width:100%!important;
-  height:100%!important;
+  height:auto!important;
   max-width:none!important;
-  object-fit:fill!important;
-  object-position:center center!important;
   margin:0!important;
   padding:0!important;
   border:0!important;
+  object-fit:contain!important;
 }
 @media(max-width:700px){
   .cart-brand-header{
     width:100%!important;
     height:auto!important;
-    aspect-ratio:1536 / 312!important;
+  }
+  .cart-brand-header img{
+    width:100%!important;
+    height:auto!important;
   }
 }
