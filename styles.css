@@ -1888,3 +1888,75 @@ body.category-menu-open{
   .cart-head .cart-summary-total-label{font-size:14px!important;}
   .cart-head .cart-summary-total{font-size:23px!important;}
 }
+
+/* 9.8.30 — Tu pedido: tipografía más pequeña + carrito minimalista */
+.cart-head{
+  padding:12px 18px 12px!important;
+  gap:8px!important;
+}
+.cart-head .cart-back{
+  font-size:14px!important;
+}
+.cart-head h1{
+  font-size:24px!important;
+  line-height:1.05!important;
+  margin:1px 0 2px!important;
+}
+.cart-head .cart-warning{
+  font-size:12px!important;
+  line-height:1.2!important;
+}
+.cart-head .cart-summary{
+  padding:9px 12px!important;
+  border-radius:14px!important;
+}
+.cart-head .cart-summary-title{
+  font-size:12px!important;
+}
+.cart-head .cart-summary-count{
+  font-size:14px!important;
+}
+.cart-head .cart-summary-total-label{
+  font-size:12px!important;
+}
+.cart-head .cart-summary-total{
+  font-size:20px!important;
+}
+
+/* Carrito del resumen: pequeño, fino y sin aspecto pesado */
+.cart-head .cart-summary svg,
+.cart-head .cart-summary .cart-icon,
+.cart-head .cart-summary .icon-cart{
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  stroke-width:1.6!important;
+}
+.cart-head .cart-summary .cart-icon path,
+.cart-head .cart-summary .cart-icon circle,
+.cart-head .cart-summary svg path,
+.cart-head .cart-summary svg circle{
+  stroke-width:1.6!important;
+}
+
+@media(max-width:700px){
+  .cart-head{
+    padding:10px 14px 10px!important;
+    gap:7px!important;
+  }
+  .cart-head .cart-back{font-size:13px!important;}
+  .cart-head h1{font-size:22px!important;}
+  .cart-head .cart-warning{font-size:11px!important;}
+  .cart-head .cart-summary{padding:8px 10px!important;border-radius:13px!important;}
+  .cart-head .cart-summary-title{font-size:11px!important;}
+  .cart-head .cart-summary-count{font-size:13px!important;}
+  .cart-head .cart-summary-total-label{font-size:11px!important;}
+  .cart-head .cart-summary-total{font-size:18px!important;}
+  .cart-head .cart-summary svg,
+  .cart-head .cart-summary .cart-icon,
+  .cart-head .cart-summary .icon-cart{
+    width:24px!important;
+    height:24px!important;
+    min-width:24px!important;
+  }
+}
