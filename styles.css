@@ -1526,7 +1526,7 @@ body.category-menu-open{
 
 
 /* =========================================================
-   v9.8.26 — SOLO BLOQUE SUPERIOR DE "TU PEDIDO"
+   v9.8.27 — SOLO BLOQUE SUPERIOR DE "TU PEDIDO"
    Referencia: regreso debajo de la cabecera, contenido a la
    izquierda y resumen del pedido a la derecha.
    No modifica portada, productos ni funcionamiento.
@@ -1646,6 +1646,68 @@ body.category-menu-open{
   .cart-summary-total strong{
     font-size:25px!important;
     white-space:normal!important;
+    line-height:1.05!important;
+  }
+}
+
+/* v9.8.27 — Reducir considerablemente la tipografía de la cabecera de Tu pedido.
+   Solo afecta este bloque; no modifica portada, productos ni funcionamiento. */
+@media(max-width:700px){
+  .cart-back{
+    font-size:15px!important;
+    margin-bottom:14px!important;
+  }
+  .cart-back-icon{
+    width:40px!important;
+    height:40px!important;
+    flex-basis:40px!important;
+  }
+  .cart-back-icon svg{
+    width:28px!important;
+    height:28px!important;
+  }
+  .cart-title-block h1{
+    font-size:30px!important;
+    line-height:1.05!important;
+    letter-spacing:-.8px!important;
+    margin-bottom:8px!important;
+  }
+  .cart-title-block p{
+    font-size:14px!important;
+    line-height:1.25!important;
+  }
+  .cart-head-summary{
+    padding:14px 12px 14px!important;
+    border-radius:18px!important;
+  }
+  .cart-summary-products{
+    gap:7px!important;
+  }
+  .cart-summary-icon,
+  .cart-summary-icon svg{
+    width:30px!important;
+    height:30px!important;
+  }
+  .cart-summary-icon{flex-basis:30px!important;}
+  .cart-summary-label{
+    font-size:12px!important;
+    line-height:1.1!important;
+  }
+  .cart-summary-products strong{
+    font-size:14px!important;
+    line-height:1.1!important;
+  }
+  .cart-summary-divider{
+    margin:11px 0 10px!important;
+  }
+  .cart-summary-total{
+    gap:5px!important;
+  }
+  .cart-summary-total > span{
+    font-size:13px!important;
+  }
+  .cart-summary-total strong{
+    font-size:21px!important;
     line-height:1.05!important;
   }
 }
