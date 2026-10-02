@@ -2350,3 +2350,26 @@ body.category-menu-open{
 /* v9.8.43 — Carrito y contador eliminados de la pantalla principal.
    El carrito interno de "Tu pedido" permanece intacto. */
 .reference-topbar .reference-cart{display:none!important;}
+
+/* v9.8.44 — Pantalla principal: sin carrito superior y cantidades pequeñas, limpias y centradas. */
+.reference-topbar .reference-cart,
+.shop-topbar .cart-btn{
+  display:none!important;
+}
+
+.add-circle.has-qty{
+  display:grid!important;
+  place-items:center!important;
+  text-align:center!important;
+  font-size:14px!important;
+  font-weight:700!important;
+  line-height:1!important;
+  padding:0!important;
+}
+
+@media(max-width:700px){
+  .add-circle.has-qty{
+    font-size:14px!important;
+    line-height:1!important;
+  }
+}
