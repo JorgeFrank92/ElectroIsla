@@ -2373,3 +2373,16 @@ body.category-menu-open{
     line-height:1!important;
   }
 }
+
+/* v9.8.45 — Cantidades aún más finas y discretas, manteniendo el centrado. */
+.add-circle.has-qty{
+  font-size:12px!important;
+  font-weight:500!important;
+  line-height:1!important;
+}
+@media(max-width:700px){
+  .add-circle.has-qty{
+    font-size:12px!important;
+    font-weight:500!important;
+  }
+}
