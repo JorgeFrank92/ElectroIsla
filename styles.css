@@ -2616,3 +2616,6 @@ body.cart-open-lock{
     margin-left:-24px!important;
   }
 }
+
+/* v9.8.73 — categoría a 4px de la foto */
+.cart-item .cart-item-category{margin-left:4px!important;}
