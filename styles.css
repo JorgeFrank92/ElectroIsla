@@ -2821,3 +2821,24 @@ body.cart-open-lock{
   .cart-item .qty::before{top:2px!important;}
   .cart-item .qty::after{bottom:2px!important;}
 }
+
+/* v9.8.90 — eliminar las líneas de unión; conservar únicamente los círculos de − y + */
+@media(max-width:700px){
+  .cart-item .qty::before,
+  .cart-item .qty::after{
+    display:none!important;
+    content:none!important;
+  }
+}
+
+/* v9.8.91 — círculos de − y + en el mismo azul de la categoría */
+@media(max-width:700px){
+  .cart-item .qty button,
+  .cart-item .qty button:hover,
+  .cart-item .qty button:active,
+  .cart-item .qty button:focus{
+    border-color:var(--logo-blue)!important;
+    color:var(--logo-blue)!important;
+    background:transparent!important;
+  }
+}
