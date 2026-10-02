@@ -2680,3 +2680,43 @@ body.cart-open-lock{
   margin:0!important;
   line-height:31px!important;
 }
+
+/* v9.8.80 — óvalo único para los controles, con el contador centrado */
+.cart-item .qty{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-width:88px!important;
+  height:35px!important;
+  padding:1px 6px!important;
+  box-sizing:border-box!important;
+  border:1px solid #777!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.cart-item .qty button,
+.cart-item .qty button:hover,
+.cart-item .qty button:active,
+.cart-item .qty button:focus{
+  width:28px!important;
+  height:31px!important;
+  min-width:28px!important;
+  min-height:31px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  line-height:1!important;
+}
+.cart-item .qty b{
+  min-width:16px!important;
+  margin:0!important;
+  text-align:center!important;
+}
