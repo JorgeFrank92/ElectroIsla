@@ -2567,3 +2567,6 @@ body.cart-open-lock{
 .cart-item .cart-item-description{font-size:15px!important;line-height:1!important;font-weight:400!important}
 .cart-item .cart-item-category{font-size:15px!important;line-height:1!important;font-weight:400!important}
 .cart-item .cart-item-price{font-size:20px!important;line-height:1!important;font-weight:500!important}
+
+/* v9.8.58 — SOLO nombre del producto: 18px, grosor 500 */
+.cart-item .cart-item-top > strong{font-size:18px!important;font-weight:500!important;line-height:1!important;display:block!important;}
