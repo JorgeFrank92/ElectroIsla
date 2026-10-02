@@ -379,7 +379,7 @@ function renderCart(){
        <div class="cart-item-category" style="font-size:9px!important;line-height:1!important;font-weight:400!important;margin:0!important;padding:3px 9px!important">${esc(p.category||"")}</div>
        <div class="cart-item-price" style="font-size:12px!important;line-height:1!important;font-weight:500!important;margin-top:14px!important;padding:0!important">${money(unitPrice,cur)}</div>
        <div class="cart-item-bottom">
-         <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
+         <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b style="font-size:18px!important;line-height:1!important;font-weight:800!important;display:block!important">${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
        </div>
      </div>
    </div>`;
