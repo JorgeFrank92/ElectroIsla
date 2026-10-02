@@ -2515,7 +2515,7 @@ body.cart-open-lock{
   margin-top:14px!important;
   padding:0!important;
   color:var(--logo-blue-dark)!important;
-  font-size:20px!important;
+  font-size:12px!important;
   line-height:1!important;
   font-weight:500!important;
 }
@@ -2527,7 +2527,7 @@ body.cart-open-lock{
   .cart-item-top strong{font-size:18px!important}
   .cart-item-description{font-size:15px!important}
   .cart-item-category{font-size:15px!important}
-  .cart-item-price{font-size:20px!important;margin-top:14px!important}
+  .cart-item-price{font-size:12px!important;margin-top:14px!important}
 }
 
 /* v9.8.56 — tamaños EXACTOS solicitados para las letras de los productos en Tu pedido */
@@ -2551,7 +2551,7 @@ body.cart-open-lock{
   padding:3px 9px!important;
 }
 .cart-item .cart-item-main .cart-item-price{
-  font-size:20px!important;
+  font-size:12px!important;
   line-height:1!important;
   font-weight:500!important;
   margin-top:14px!important;
@@ -2566,7 +2566,7 @@ body.cart-open-lock{
 .cart-item .cart-item-top strong{font-size:18px!important;line-height:1!important;font-weight:500!important}
 .cart-item .cart-item-description{font-size:15px!important;line-height:1!important;font-weight:400!important}
 .cart-item .cart-item-category{font-size:15px!important;line-height:1!important;font-weight:400!important}
-.cart-item .cart-item-price{font-size:20px!important;line-height:1!important;font-weight:500!important}
+.cart-item .cart-item-price{font-size:12px!important;line-height:1!important;font-weight:500!important}
 
 /* v9.8.58 — SOLO nombre del producto: 18px, grosor 500 */
 .cart-item .cart-item-top > strong{font-size:18px!important;font-weight:500!important;line-height:1!important;display:block!important;}
