@@ -1939,3 +1939,224 @@ body.category-menu-open{
     padding:8px 12px!important;
   }
 }
+
+/* ==========================================================
+   9.8.32 — Corrección final comparando captura real vs referencia
+   Prioridad: composición móvil de la pantalla "Tu pedido".
+   ========================================================== */
+
+.cart-panel{background:#fff!important}
+
+/* CABECERA: más baja y limpia; el azul termina en una sola sonrisa naranja. */
+.cart-brand-strip{
+  flex:0 0 205px!important;
+  height:205px!important;
+  min-height:205px!important;
+  background:#fff!important;
+}
+.cart-brand-wave{
+  height:205px!important;
+}
+.cart-brand-blue{fill:#0b4ea2!important}
+.cart-brand-orange-line{
+  stroke:#ff7a00!important;
+  stroke-width:7!important;
+}
+.cart-brand-logo{
+  left:28px!important;
+  top:8px!important;
+  width:150px!important;
+  height:150px!important;
+  border:6px solid #ff7a00!important;
+  filter:drop-shadow(0 4px 7px rgba(0,0,0,.12))!important;
+}
+.cart-brand-copy{
+  right:28px!important;
+  top:57px!important;
+  max-width:48%!important;
+}
+.cart-brand-copy strong{
+  font-size:23px!important;
+  line-height:1.08!important;
+}
+.cart-brand-copy strong:after{
+  width:70%!important;
+  height:4px!important;
+  margin-top:7px!important;
+  background:#ff7a00!important;
+}
+
+/* CABECERA DEL PEDIDO: Regresar como en la referencia, sin pastilla gigante. */
+.cart-head{
+  min-height:225px!important;
+  height:225px!important;
+  padding:18px 28px 20px!important;
+  grid-template-columns:minmax(190px,1fr) minmax(250px,350px)!important;
+  grid-template-areas:"main total"!important;
+  gap:20px!important;
+  align-items:start!important;
+}
+.cart-back{
+  position:absolute!important;
+  left:28px!important;
+  top:22px!important;
+  min-width:0!important;
+  width:auto!important;
+  height:54px!important;
+  padding:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  font-size:18px!important;
+}
+.cart-back-icon{
+  width:54px!important;
+  height:54px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  background:#edf4fc!important;
+  font-size:31px!important;
+}
+.cart-head-main{
+  grid-area:main!important;
+  padding-top:82px!important;
+}
+.cart-head-main h2{font-size:clamp(42px,5vw,60px)!important}
+.cart-head-main p:last-child{font-size:18px!important;margin-top:10px!important}
+.cart-head-total{grid-area:total!important;align-self:start!important;margin-top:0!important}
+
+/* PRODUCTOS: una fila horizontal, como en la referencia. */
+.cart-items{
+  padding:0 28px 145px!important;
+  background:#fff!important;
+}
+.cart-item{
+  grid-template-columns:140px minmax(0,1fr) 180px!important;
+  gap:24px!important;
+  min-height:180px!important;
+  padding:18px 20px!important;
+  margin-bottom:18px!important;
+  border:1px solid #dce5ef!important;
+  border-radius:20px!important;
+  background:#fff!important;
+}
+.cart-thumb-wrap,.cart-thumb{width:140px!important;height:140px!important}
+.cart-item-main{min-height:140px!important;justify-content:center!important}
+.cart-item-main .cart-product-heading strong{font-size:22px!important}
+.cart-item-actions{
+  align-self:stretch!important;
+  justify-content:center!important;
+}
+
+/* BARRA FINAL: dos columnas y sin corte del total. */
+.cart-service-bar{
+  min-height:112px!important;
+  padding:14px 28px max(14px,env(safe-area-inset-bottom))!important;
+  grid-template-columns:minmax(0,1fr) minmax(330px,1fr)!important;
+  grid-template-areas:"total button"!important;
+  gap:28px!important;
+}
+.cart-final-row strong{font-size:40px!important;white-space:nowrap!important}
+.cart-previous-btn{min-height:66px!important;font-size:20px!important}
+
+@media(max-width:850px){
+  .cart-brand-strip{flex-basis:205px!important;height:205px!important;min-height:205px!important}
+  .cart-brand-logo{left:26px!important;top:8px!important;width:150px!important;height:150px!important}
+  .cart-brand-copy{right:24px!important;top:58px!important;max-width:47%!important}
+  .cart-brand-copy strong{font-size:22px!important}
+
+  .cart-head{
+    min-height:215px!important;height:215px!important;
+    padding:18px 28px!important;
+    grid-template-columns:minmax(0,1fr) 285px!important;
+    grid-template-areas:"main total"!important;
+    gap:18px!important;
+  }
+  .cart-back{left:28px!important;top:18px!important;font-size:17px!important}
+  .cart-back-icon{width:50px!important;height:50px!important;font-size:29px!important}
+  .cart-head-main{padding-top:82px!important}
+  .cart-head-main h2{font-size:48px!important}
+  .cart-head-main p:last-child{font-size:16px!important}
+  .cart-head-total{min-width:285px!important;padding:16px 18px!important;min-height:128px!important}
+
+  .cart-items{padding:0 28px 135px!important}
+  .cart-item{
+    grid-template-columns:140px minmax(0,1fr) 150px!important;
+    gap:18px!important;
+    min-height:175px!important;
+    padding:16px!important;
+  }
+  .cart-thumb-wrap,.cart-thumb{width:140px!important;height:140px!important}
+  .cart-item-main .cart-product-heading strong{font-size:20px!important}
+  .cart-item-actions{gap:9px!important}
+  .cart-remove{width:46px!important;height:46px!important}
+  .cart-item .qty button{width:40px!important;height:40px!important}
+
+  .cart-service-bar{
+    min-height:105px!important;
+    padding:12px 28px max(12px,env(safe-area-inset-bottom))!important;
+    grid-template-columns:minmax(0,1fr) minmax(300px,1fr)!important;
+    gap:20px!important;
+  }
+  .cart-final-row strong{font-size:36px!important}
+  .cart-previous-btn{min-height:60px!important;font-size:19px!important}
+}
+
+@media(max-width:700px){
+  /* Mantener la composición horizontal de la referencia incluso en móvil. */
+  .cart-brand-strip{flex-basis:190px!important;height:190px!important;min-height:190px!important}
+  .cart-brand-wave{height:190px!important}
+  .cart-brand-logo{left:24px!important;top:8px!important;width:138px!important;height:138px!important;border-width:6px!important}
+  .cart-brand-copy{right:20px!important;top:56px!important;max-width:48%!important}
+  .cart-brand-copy strong{font-size:20px!important}
+
+  .cart-head{
+    min-height:225px!important;height:225px!important;
+    padding:18px 20px!important;
+    grid-template-columns:minmax(0,1fr) 260px!important;
+    gap:12px!important;
+  }
+  .cart-back{left:26px!important;top:20px!important;font-size:17px!important}
+  .cart-back-icon{width:50px!important;height:50px!important}
+  .cart-head-main{padding-top:92px!important}
+  .cart-head-main h2{font-size:42px!important;line-height:1!important}
+  .cart-head-main p:last-child{font-size:15px!important;line-height:1.25!important;margin-top:9px!important}
+  .cart-head-total{min-width:260px!important;padding:13px 14px!important;min-height:118px!important;border-radius:18px!important}
+  .cart-summary-icon{width:40px!important;height:40px!important;font-size:22px!important}
+  .cart-head-total span{font-size:11px!important}
+  .cart-head-total strong{font-size:17px!important}
+  .cart-head-total b{font-size:25px!important}
+
+  .cart-items{padding:0 20px 125px!important}
+  .cart-item{
+    grid-template-columns:125px minmax(0,1fr) 125px!important;
+    gap:10px!important;
+    min-height:160px!important;
+    padding:14px!important;
+    margin-bottom:16px!important;
+    border-radius:18px!important;
+  }
+  .cart-thumb-wrap,.cart-thumb{width:125px!important;height:125px!important}
+  .cart-item-main{min-height:125px!important}
+  .cart-item-main .cart-product-heading strong{font-size:17px!important;line-height:1.15!important}
+  .cart-category{font-size:10px!important;padding:5px 8px!important}
+  .cart-unit-price{font-size:13px!important}
+  .cart-item-actions{gap:7px!important}
+  .cart-remove{width:40px!important;height:40px!important;border-radius:12px!important}
+  .cart-item .qty{padding:2px!important}
+  .cart-item .qty button{width:32px!important;height:32px!important;font-size:21px!important}
+  .cart-item .qty b{min-width:22px!important;font-size:15px!important}
+  .cart-line-total{font-size:13px!important}
+
+  .cart-service-bar{
+    min-height:100px!important;
+    padding:10px 20px max(10px,env(safe-area-inset-bottom))!important;
+    grid-template-columns:minmax(0,1fr) 300px!important;
+    gap:10px!important;
+  }
+  .cart-final-row span{font-size:14px!important}
+  .cart-final-row strong{font-size:29px!important}
+  .cart-previous-btn{min-height:58px!important;font-size:17px!important;border-radius:15px!important}
+}
