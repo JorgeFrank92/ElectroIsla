@@ -2406,3 +2406,13 @@ body.category-menu-open{
     line-height:.8!important;
   }
 }
+
+/* 9.8.47 — Barra de categorías: al deslizar, queda pegada al borde superior real de la pantalla. */
+.shop-toolbar{
+  top:0!important;
+}
+@media(max-width:700px){
+  .shop-toolbar{
+    top:0!important;
+  }
+}
