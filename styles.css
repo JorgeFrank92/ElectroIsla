@@ -2345,3 +2345,8 @@ body.category-menu-open{
     font-size:18px!important;
   }
 }
+
+
+/* v9.8.43 — Carrito y contador eliminados de la pantalla principal.
+   El carrito interno de "Tu pedido" permanece intacto. */
+.reference-topbar .reference-cart{display:none!important;}
