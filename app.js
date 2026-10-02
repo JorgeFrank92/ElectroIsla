@@ -375,8 +375,9 @@ function renderCart(){
      <div class="cart-thumb-wrap">${img}</div>
      <div class="cart-item-main">
        <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">🗑️</button></div>
-       <small>${money(unitPrice,cur)} c/u</small>
-       <div class="cart-line-total">Total: ${money(lineTotal,cur)}</div>
+       <div class="cart-item-description">${esc(p.description||"")}</div>
+       <div class="cart-item-category">${esc(p.category||"")}</div>
+       <div class="cart-item-price">${money(unitPrice,cur)}</div>
        <div class="cart-item-bottom">
          <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
        </div>

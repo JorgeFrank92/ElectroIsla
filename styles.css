@@ -2472,3 +2472,60 @@ body.cart-open-lock{
 @media(max-width:700px){
  .cart-item .cart-thumb-wrap{transform:translateX(-21px)!important}
 }
+
+
+/* v9.8.54 — Tipografía y jerarquía de productos seleccionados en "Tu pedido" */
+.cart-item-main{
+  padding-left:3px;
+}
+.cart-item-top{
+  align-items:flex-start;
+}
+.cart-item-top strong{
+  font-size:18px!important;
+  line-height:1!important;
+  font-weight:500!important;
+  margin:0!important;
+}
+.cart-item-description{
+  display:block;
+  margin:0!important;
+  padding:0!important;
+  font-size:15px!important;
+  line-height:1!important;
+  font-weight:400!important;
+  color:#111!important;
+}
+.cart-item-category{
+  display:inline-block;
+  width:max-content;
+  max-width:100%;
+  margin:0!important;
+  padding:3px 9px!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,#f5f9ff 0%,#e7f0fb 100%)!important;
+  color:var(--logo-blue)!important;
+  font-size:15px!important;
+  line-height:1!important;
+  font-weight:400!important;
+  white-space:nowrap;
+}
+.cart-item-price{
+  display:block;
+  margin-top:14px!important;
+  padding:0!important;
+  color:var(--logo-blue-dark)!important;
+  font-size:20px!important;
+  line-height:1!important;
+  font-weight:500!important;
+}
+.cart-item-bottom{
+  margin-top:0!important;
+}
+@media(max-width:700px){
+  .cart-item-main{padding-left:3px}
+  .cart-item-top strong{font-size:18px!important}
+  .cart-item-description{font-size:15px!important}
+  .cart-item-category{font-size:15px!important}
+  .cart-item-price{font-size:20px!important;margin-top:14px!important}
+}
