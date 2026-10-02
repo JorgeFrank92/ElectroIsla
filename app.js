@@ -338,15 +338,21 @@ function renderCart(){
    return `<article class="cart-item">
      <div class="cart-thumb-wrap">${img}</div>
      <div class="cart-item-main">
-       <div class="cart-item-top"><div class="cart-product-heading"><strong>${esc(p.name)}</strong>${category}</div><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}" title="Eliminar">🗑️</button></div>
+       <div class="cart-product-heading"><strong>${esc(p.name)}</strong>${category}</div>
        <small class="cart-unit-price">${money(unitPrice,cur)} c/u</small>
-       <div class="cart-item-bottom">
-         <strong class="cart-line-total">Subtotal: ${money(lineTotal,cur)}</strong>
-         <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
-       </div>
+     </div>
+     <div class="cart-item-actions">
+       <button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}" title="Eliminar">
+         <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+       </button>
+       <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b>${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
+       <strong class="cart-line-total">Subtotal: ${money(lineTotal,cur)}</strong>
      </div>
    </article>`;
- }).join(""):`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
+ }).join("")+`<div class="cart-delivery-note cart-delivery-inline">
+   <span class="delivery-icon" aria-hidden="true"><svg viewBox="0 0 48 32" width="38" height="28" aria-hidden="true"><path d="M2 4h27v19H2zM29 12h9l7 7v4H29z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="12" cy="25" r="4" fill="#fff" stroke="currentColor" stroke-width="2.4"/><circle cx="37" cy="25" r="4" fill="#fff" stroke="currentColor" stroke-width="2.4"/><path d="M34 12v7h9" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></span>
+   <span><strong>Los precios pueden variar según la zona de entrega.</strong><br><span class="delivery-subtext">Puedes ver el costo final en el siguiente paso.</span></span>
+ </div>`:`<div class="cart-empty"><div>🛍️</div><strong>Tu pedido está vacío</strong><span>Agrega productos para comenzar.</span></div>`;
  const cartTotal=document.getElementById("cartTotal");
  if(cartTotal)cartTotal.textContent=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
  const topTotal=document.getElementById("cartTopTotal");
