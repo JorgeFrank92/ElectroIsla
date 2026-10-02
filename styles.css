@@ -2842,3 +2842,18 @@ body.cart-open-lock{
     background:transparent!important;
   }
 }
+
+
+/* v9.8.92 — azul exacto de la categoría aplicado directamente a los círculos +/- */
+@media(max-width:700px){
+  .cart-item .qty > button,
+  .cart-item .qty > button:hover,
+  .cart-item .qty > button:active,
+  .cart-item .qty > button:focus{
+    border:2px solid #074899!important;
+    border-radius:50%!important;
+    color:#074899!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+}
