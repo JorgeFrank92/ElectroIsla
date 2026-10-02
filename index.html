@@ -3,13 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="electroisla-version" content="9.8.32-tu-pedido-comparacion">
+  <meta name="electroisla-version" content="9.8.17-cabecera-pedido">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=9.8.32-tu-pedido-comparacion">
+  <link rel="stylesheet" href="styles.css?v=9.8.17-cabecera-pedido">
 </head>
 <body>
 <header class="reference-topbar shop-topbar" aria-label="ElectroIsla 360">
+  <button id="cartBtn" class="cart-btn reference-cart" aria-label="Ver mi Pedido" title="Ver mi Pedido">
+    <span class="reference-cart-hit" aria-hidden="true"></span>
+    <b id="cartCount">0</b>
+  </button>
 </header>
 <main>
   <section class="store-hero reference-store-hero">
@@ -45,36 +49,17 @@
 </div>
 
 <div id="cartOverlay" class="overlay hidden"></div>
-<aside id="cart" class="cart-panel" aria-label="Tu pedido">
-  <div class="cart-brand-strip" aria-hidden="true">
-    <svg class="cart-brand-wave" viewBox="0 0 1000 220" preserveAspectRatio="none">
-      <path class="cart-brand-blue" d="M0 0H1000V106 Q500 214 0 106Z"></path>
-      <path class="cart-brand-orange-line" d="M0 106 Q500 214 1000 106"></path>
-    </svg>
-    <img src="electroisla-logo-circular.png" alt="" class="cart-brand-logo">
-    <div class="cart-brand-copy">
-      <strong>Tu hogar, nuestra prioridad</strong>
-      <span>ElectroIsla 360</span>
-    </div>
+<aside id="cart" class="cart-panel">
+  <div class="cart-brand-header" aria-label="ElectroIsla 360">
+    <img src="cart-header-reference.png?v=1" alt="ElectroIsla 360 - Tu hogar, nuestra prioridad">
   </div>
   <div class="cart-head">
-    <button id="closeCart" class="cart-back" aria-label="Regresar">
-      <span class="cart-back-icon" aria-hidden="true">←</span><span>Regresar</span>
-    </button>
-    <div class="cart-head-main">
-      <h2>Tu pedido</h2>
-      <p>Revisa los productos de tu carrito antes de continuar.</p>
-    </div>
-    <div class="cart-head-total">
-      <div class="cart-summary-top"><span class="cart-summary-icon" aria-hidden="true">🛒</span><div><span>Total de productos</span>
-      <strong id="cartTopCount">0 artículos</strong></div></div><div class="cart-summary-divider" aria-hidden="true"></div><small>Total</small>
-      <b id="cartTopTotal">USD 0.00</b>
-    </div>
+    <button id="closeCart" class="cart-back" aria-label="Volver">← <span>Atrás</span></button>
+    <div class="cart-head-total"><span>Su carrito</span><strong id="cartTopTotal">US$ 0.00</strong></div>
   </div>
   <div id="cartItems" class="cart-items"></div>
   <div class="cart-service-bar">
-    <div class="cart-final-row"><span>Total</span><strong id="cartTotal">USD 0.00</strong></div>
-    <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido <span aria-hidden="true">→</span></button>
+    <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido</button>
   </div>
 </aside>
 
@@ -144,7 +129,7 @@
 <footer><strong>ElectroIsla</strong><span>Alimentos + Electrodomésticos</span><span>WhatsApp: +53 52017110</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js?v=4"></script>
-<script src="app.js?v=25"></script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js?v=9.8.19-sin-contador",{updateViaCache:"none"}).catch(()=>{}));}</script>
+<script src="app.js?v=23"></script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js?v=9.8.15-visual",{updateViaCache:"none"}).catch(()=>{}));}</script>
 </body>
 </html>
