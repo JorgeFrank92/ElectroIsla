@@ -2784,3 +2784,26 @@ body.cart-open-lock{
   background:transparent!important;
   box-shadow:none!important;
 }
+
+/* v9.8.88 — unir los círculos de - y + con un solo trazo limpio */
+@media(max-width:700px){
+  .cart-item .qty{
+    position:relative!important;
+    gap:2px!important;
+  }
+  .cart-item .qty::before,
+  .cart-item .qty::after{
+    content:"";
+    position:absolute;
+    left:15px;
+    right:15px;
+    height:1px;
+    background:#777;
+    z-index:0;
+    pointer-events:none;
+  }
+  .cart-item .qty::before{top:0;}
+  .cart-item .qty::after{bottom:0;}
+  .cart-item .qty button,
+  .cart-item .qty b{position:relative!important;z-index:1!important;}
+}
