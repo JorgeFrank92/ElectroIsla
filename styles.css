@@ -3655,3 +3655,9 @@ body.cart-open-lock{
     margin-right:0!important;
   }
 }
+
+/* v9.8.134 — nombre y precio de productos en azul oscuro ElectroIsla */
+.shop-product .product-info h3,
+.shop-product .product-info .price{
+  color:#074899!important;
+}
