@@ -337,7 +337,7 @@ function renderCart(){
    return `<div class="cart-item">
      <div class="cart-thumb-wrap">${img}</div>
      <div class="cart-item-main">
-       <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}">🗑️</button></div>
+       <div class="cart-item-top"><strong>${esc(p.name)}</strong><button class="cart-remove-minimal" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 8v11m4-11v11m4-11v11M5 8h14m-9-3h4l1 3H9l1-3Zm-4 3 1 13h10l1-13" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
        <small>${money(unitPrice,cur)} c/u</small>
        <div class="cart-line-total">Total: ${money(lineTotal,cur)}</div>
        <div class="cart-item-bottom">
