@@ -3458,3 +3458,34 @@ body.cart-open-lock{
     margin:0!important;
   }
 }
+
+/* v9.8.124 — tipografía de productos en la página principal */
+.shop-product h3{
+  font-size:16px!important;
+  font-weight:600!important;
+}
+.shop-product p{
+  font-size:13px!important;
+}
+.shop-product .tag{
+  font-size:14px!important;
+}
+.shop-product .price{
+  font-size:17px!important;
+  font-weight:600!important;
+}
+@media(max-width:700px){
+  .shop-product h3{font-size:16px!important;font-weight:600!important;}
+  .shop-product p{font-size:13px!important;}
+  .shop-product .tag{font-size:14px!important;}
+  .shop-product .price{font-size:17px!important;font-weight:600!important;}
+}
+
+
+/* v9.8.125 — referencia final de tipografía de productos de la página principal */
+@media(max-width:700px){
+  .shop-product h3{font-size:16px!important;font-weight:600!important;}
+  .shop-product p{font-size:13px!important;font-weight:400!important;}
+  .shop-product .tag{font-size:14px!important;font-weight:400!important;}
+  .shop-product .price{font-size:17px!important;font-weight:600!important;}
+}
