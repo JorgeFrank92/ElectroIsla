@@ -6,7 +6,7 @@
   <meta name="electroisla-version" content="9.8.44">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=9.8.114">
+  <link rel="stylesheet" href="styles.css?v=9.8.115">
 </head>
 <body>
 <header class="reference-topbar shop-topbar" aria-label="ElectroIsla 360">
@@ -82,6 +82,15 @@
   </div>
   <div id="cartItems" class="cart-items"></div>
   <div class="cart-service-bar">
+    <div class="cart-delivery-note" role="note" aria-label="Información sobre el precio de entrega">
+      <span class="cart-delivery-note-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false"><path d="M5 10h25v22H5zM30 18h7l6 7v7H30zM11 37a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm27 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M30 25h11"/></svg>
+      </span>
+      <div class="cart-delivery-note-copy">
+        <strong>Los precios pueden variar según la zona de entrega.</strong>
+        <span>Puedes ver el costo final en el siguiente paso.</span>
+      </div>
+    </div>
     <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido</button>
   </div>
 </aside>
@@ -152,7 +161,7 @@
 <footer><strong>ElectroIsla</strong><span>Alimentos + Electrodomésticos</span><span>WhatsApp: +53 52017110</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js?v=4"></script>
-<script src="app.js?v=3534323032"></script>
+<script src="app.js?v=42"></script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js?v=9.8.15-visual",{updateViaCache:"none"}).catch(()=>{}));}</script>
 </body>
 </html>

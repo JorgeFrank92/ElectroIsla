@@ -3221,3 +3221,68 @@ body.cart-open-lock{
   .cart-item .cart-item-category{font-size:12px!important;}
   .cart-item .cart-item-price{font-size:15px!important;}
 }
+
+/* v9.8.115 — aviso limpio de costo de entrega encima del botón continuar */
+.cart-delivery-note{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  box-sizing:border-box;
+  margin:0 0 10px 0;
+  padding:12px 14px;
+  border:1px solid #dce9f7;
+  border-radius:14px;
+  background:linear-gradient(135deg,#f3f8ff 0%,#e8f2ff 100%);
+}
+.cart-delivery-note-icon{
+  flex:0 0 38px;
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  color:var(--logo-blue);
+}
+.cart-delivery-note-icon svg{
+  width:38px;
+  height:38px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.cart-delivery-note-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.cart-delivery-note-copy strong{
+  color:var(--logo-blue-dark);
+  font-size:13px;
+  line-height:1.25;
+  font-weight:700;
+}
+.cart-delivery-note-copy span{
+  color:var(--logo-blue);
+  font-size:12px;
+  line-height:1.25;
+  font-weight:400;
+}
+@media(max-width:700px){
+  .cart-delivery-note{
+    gap:11px;
+    margin-bottom:9px;
+    padding:10px 12px;
+    border-radius:12px;
+  }
+  .cart-delivery-note-icon{
+    flex-basis:32px;
+    width:32px;
+    height:32px;
+  }
+  .cart-delivery-note-icon svg{width:32px;height:32px;}
+  .cart-delivery-note-copy strong{font-size:12px;line-height:1.25;}
+  .cart-delivery-note-copy span{font-size:11px;line-height:1.25;}
+}
