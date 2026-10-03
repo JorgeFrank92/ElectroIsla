@@ -3661,3 +3661,6 @@ body.cart-open-lock{
 .shop-product .product-info .price{
   color:#074899!important;
 }
+
+/* v9.8.135 — nombre del producto con grosor 600 */
+.shop-product .product-info h3{font-weight:600!important;}
