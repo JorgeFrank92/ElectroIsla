@@ -3714,3 +3714,11 @@ body.cart-open-lock{
     white-space:nowrap!important;
   }
 }
+
+/* v9.8.139 — eliminar la categoría que aparece encima del nombre en la página principal */
+@media(max-width:700px){
+  .shop-product .product-info > .tag,
+  .shop-product .product-info .tag{
+    display:none!important;
+  }
+}
