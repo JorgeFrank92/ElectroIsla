@@ -3173,3 +3173,15 @@ body.cart-open-lock{
     border-radius:7px!important;
   }
 }
+
+/* v9.8.109 — foto completamente dentro del rectángulo del producto */
+@media(max-width:700px){
+  .cart-item .cart-thumb-wrap{
+    transform:none!important;
+    margin-left:0!important;
+  }
+  .cart-item .cart-thumb{
+    display:block!important;
+    box-sizing:border-box!important;
+  }
+}
