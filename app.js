@@ -381,7 +381,7 @@ function renderCart(){
        <div class="cart-item-bottom">
          <div class="qty"><button onclick="change('${esc(p.id)}',-1)" aria-label="Disminuir">−</button><b style="font-size:11px!important;line-height:1!important;font-weight:800!important;display:block!important">${i.qty}</b><button onclick="change('${esc(p.id)}',1)" aria-label="Aumentar">+</button></div>
          <button class="cart-remove-minimal" onclick="removeFromCart('${esc(p.id)}')" aria-label="Eliminar ${esc(p.name)}" title="Eliminar producto">
-           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 7.5h11M9 7.5V5.5h6v2M8 9l.8 10h6.4L16 9M10 11.5v5.5M14 11.5v5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7.5h14M8.5 7.5V5.8c0-.8.6-1.3 1.4-1.3h4.2c.8 0 1.4.5 1.4 1.3v1.7M7.2 8.5l.9 10.3c.1.8.7 1.2 1.5 1.2h4.8c.8 0 1.4-.4 1.5-1.2l.9-10.3M10 11v5.5M14 11v5.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
          </button>
        </div>
      </div>
