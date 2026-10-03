@@ -391,7 +391,10 @@ function renderCart(){
  const cartTotal=document.getElementById("cartTotal");
  if(cartTotal)cartTotal.innerHTML=cart.length?(usdTotal>0?money(usdTotal,"USD"):"USD 0.00"):"USD 0.00";
  const topTotal=document.getElementById("cartTopTotal");
- if(topTotal)topTotal.textContent=`$${usdTotal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})} USD`;
+ const bottomTotal=document.getElementById("cartBottomTotal");
+ const totalText=`$${usdTotal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})} USD`;
+ if(topTotal)topTotal.textContent=totalText;
+ if(bottomTotal)bottomTotal.textContent=totalText;
  const topCount=document.getElementById("cartTopCount");
  if(topCount){
    const totalItems=cart.reduce((s,i)=>s+i.qty,0);

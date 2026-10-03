@@ -6,7 +6,7 @@
   <meta name="electroisla-version" content="9.8.44">
   <title>ElectroIsla | Alimentos y Electrodomésticos</title>
   <meta name="description" content="ElectroIsla: alimentos y electrodomésticos. Compra y solicita tu pedido por WhatsApp.">
-  <link rel="stylesheet" href="styles.css?v=9.8.120">
+  <link rel="stylesheet" href="styles.css?v=9.8.121">
 </head>
 <body>
 <header class="reference-topbar shop-topbar" aria-label="ElectroIsla 360">
@@ -91,7 +91,11 @@
     </div>
   </div>
   <div class="cart-service-bar">
-    <button id="checkoutBtn" class="btn primary full cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido</button>
+    <div class="cart-bottom-total" aria-label="Total del pedido">
+      <span>Total</span>
+      <strong id="cartBottomTotal">$0.00 USD</strong>
+    </div>
+    <button id="checkoutBtn" class="btn primary cart-previous-btn" aria-label="Continuar con el pedido">Continuar con el pedido <span class="cart-previous-arrow" aria-hidden="true">→</span></button>
   </div>
 </aside>
 
