@@ -3323,3 +3323,7 @@ body.cart-open-lock{
 @media(max-width:700px){
   .cart-delivery-note-icon svg{width:32px!important;height:32px!important;}
 }
+
+/* v9.8.118 — camión de referencia, líneas finas naranja ElectroIsla */
+.cart-delivery-note-icon svg{width:40px!important;height:32px!important;stroke-width:1.6!important;}
+@media(max-width:700px){.cart-delivery-note-icon svg{width:36px!important;height:30px!important;stroke-width:1.55!important;}}
