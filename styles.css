@@ -3192,3 +3192,13 @@ body.cart-open-lock{
     transform:translateX(-8px)!important;
   }
 }
+
+/* v9.8.111 — separación exacta de 4px entre la foto y todo el contenido del producto */
+@media(max-width:700px){
+  .cart-item .cart-item-main{
+    margin-left:-18px!important;
+  }
+  .cart-item .cart-item-category{
+    margin-left:0!important;
+  }
+}
