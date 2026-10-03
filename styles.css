@@ -3698,3 +3698,13 @@ button:active{
 /* ElectroIsla — corrección interacción botón Regresar */
 .cart-head .cart-back{position:relative!important;z-index:100!important;pointer-events:auto!important;cursor:pointer!important;}
 .cart-head .cart-back *{pointer-events:none!important;}
+
+
+/* ElectroIsla — categoría/unidad junto al precio */
+.shop-product .price small{
+  color:#ff7600 !important;
+  background:#fff1e8 !important;
+  border-radius:999px !important;
+  padding:3px 8px !important;
+  font-weight:600 !important;
+}
