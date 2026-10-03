@@ -3029,3 +3029,62 @@ body.cart-open-lock{
     stroke-width:1.45!important;
   }
 }
+
+/* v9.8.102 — controles de cantidad con diseño tipo cápsula de la referencia */
+@media(max-width:700px){
+  .cart-item .qty{
+    width:210px!important;
+    height:58px!important;
+    display:grid!important;
+    grid-template-columns:58px 1fr 58px!important;
+    align-items:center!important;
+    justify-items:center!important;
+    gap:0!important;
+    padding:0!important;
+    margin:0!important;
+    border:1px solid #dbe8f8!important;
+    border-radius:30px!important;
+    background:#fff!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+  .cart-item .qty button{
+    width:58px!important;
+    height:56px!important;
+    min-width:58px!important;
+    min-height:56px!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:29px!important;
+    background:#f4f8ff!important;
+    color:#074899!important;
+    font-size:30px!important;
+    font-weight:400!important;
+    line-height:56px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    box-shadow:none!important;
+  }
+  .cart-item .qty b{
+    min-width:0!important;
+    width:auto!important;
+    margin:0!important;
+    padding:0!important;
+    color:#074899!important;
+    font-size:18px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    text-align:center!important;
+  }
+  .cart-item .qty button:hover,
+  .cart-item .qty button:active,
+  .cart-item .qty button:focus{
+    background:#f4f8ff!important;
+    color:#074899!important;
+    border:0!important;
+    box-shadow:none!important;
+    outline:none!important;
+  }
+}
