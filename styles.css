@@ -3286,3 +3286,26 @@ body.cart-open-lock{
   .cart-delivery-note-copy strong{font-size:12px;line-height:1.25;}
   .cart-delivery-note-copy span{font-size:11px;line-height:1.25;}
 }
+
+
+/* v9.8.116 — aviso de entrega independiente del cuadro del botón continuar */
+.cart-delivery-note{
+  position:absolute!important;
+  left:27px!important;
+  right:27px!important;
+  bottom:88px!important;
+  width:auto!important;
+  margin:0!important;
+  z-index:6!important;
+  box-sizing:border-box!important;
+}
+.cart-service-bar{
+  z-index:5!important;
+}
+@media(max-width:700px){
+  .cart-delivery-note{
+    left:27px!important;
+    right:27px!important;
+    bottom:91px!important;
+  }
+}
