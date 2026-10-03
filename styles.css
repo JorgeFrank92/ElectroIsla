@@ -2979,3 +2979,10 @@ body.cart-open-lock{
     outline:none!important;
   }
 }
+
+
+/* v9.8.99 — papelera roja más definida y nítida */
+@media(max-width:700px){
+  .cart-item .cart-remove-minimal svg{width:20px!important;height:20px!important;}
+  .cart-item .cart-remove-minimal{color:#d71920!important;}
+}
