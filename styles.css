@@ -3489,3 +3489,11 @@ body.cart-open-lock{
   .shop-product .tag{font-size:14px!important;font-weight:400!important;}
   .shop-product .price{font-size:17px!important;font-weight:600!important;}
 }
+
+/* v9.8.126 — tipografía de productos de la página principal */
+@media(max-width:700px){
+  .shop-product h3{font-size:15px!important;font-weight:500!important;}
+  .shop-product p{font-size:12px!important;font-weight:400!important;}
+  .shop-product .tag{font-size:13px!important;font-weight:400!important;}
+  .shop-product .price{font-size:15px!important;font-weight:500!important;}
+}
