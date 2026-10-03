@@ -3613,3 +3613,10 @@ body.cart-open-lock{
 .cart-previous-arrow{
   color:#f58220 !important;
 }
+
+/* ElectroIsla — unidad de medida: solo estilo visual */
+.shop-product .price small{
+  background:#fff1e8 !important;
+  color:#ff7600 !important;
+  border-radius:999px !important;
+}
