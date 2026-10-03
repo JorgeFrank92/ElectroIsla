@@ -3684,14 +3684,12 @@ button:active{
   transform-origin:center;
 }
 
-/* ElectroIsla — categoría/unidad junto al precio: solo estilo visual */
-.shop-product .price small{
+/* ElectroIsla — botón Añadir: naranja muy claro */
+.add-circle:not(.has-qty){
   background:#fff1e8 !important;
   color:#f58220 !important;
-  border-radius:999px !important;
-  box-shadow:none !important;
-  padding:3px 8px !important;
-  display:inline-block !important;
-  line-height:1 !important;
-  vertical-align:middle !important;
+}
+.add-circle:not(.has-qty):hover{
+  background:#ffe7d6 !important;
+  color:#f58220 !important;
 }
