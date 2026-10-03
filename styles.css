@@ -3131,3 +3131,16 @@ body.cart-open-lock{
     margin:0!important;
   }
 }
+
+
+/* v9.8.105 — línea fina entre nombre y descripción del producto */
+@media(max-width:700px){
+  .cart-item .cart-item-name-divider{
+    display:block!important;
+    width:100%!important;
+    height:1px!important;
+    margin:4px 0 4px 0!important;
+    padding:0!important;
+    background:#e5eaf1!important;
+  }
+}

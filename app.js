@@ -375,6 +375,7 @@ function renderCart(){
      <div class="cart-thumb-wrap">${img}</div>
      <div class="cart-item-main">
        <div class="cart-item-top"><strong style="font-size:11px!important;line-height:1!important;font-weight:600!important;display:block!important">${esc(p.name)}</strong></div>
+       <div class="cart-item-name-divider" aria-hidden="true"></div>
        <div class="cart-item-description" style="font-size:8.5px!important;line-height:1!important;font-weight:400!important;margin:0!important;padding:0!important;">${esc(p.description||"")}</div>
        <div class="cart-item-category" style="font-size:9px!important;line-height:1!important;font-weight:400!important;margin:0!important;padding:3px 9px!important">${esc(p.category||"")}</div>
        <div class="cart-item-price" style="font-size:12px!important;line-height:1!important;font-weight:600!important;margin-top:14px!important;padding:0!important">${money(unitPrice,cur)}</div>
