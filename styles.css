@@ -3555,3 +3555,13 @@ body.cart-open-lock{
   }
   .shop-product{column-gap:4px!important;}
 }
+
+
+/* v9.8.130 — página principal: texto alineado al extremo derecho, a 5px del borde */
+@media(max-width:700px){
+  .shop-product .product-info{
+    text-align:right!important;
+    padding-right:5px!important;
+    box-sizing:border-box!important;
+  }
+}
