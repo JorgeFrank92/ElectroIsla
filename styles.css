@@ -3614,9 +3614,9 @@ body.cart-open-lock{
   color:#f58220 !important;
 }
 
-/* ElectroIsla — medidas solicitadas para productos en Ver mi pedido */
+
+/* ElectroIsla — tamaños reales de elementos en Ver mi pedido */
 .cart-item .cart-item-top > strong{font-size:11px!important;line-height:1!important;font-weight:600!important;}
-.cart-item .cart-item-description{font-size:8.5px!important;line-height:1!important;font-weight:400!important;}
-.cart-item .cart-item-category{font-size:9px!important;line-height:1!important;font-weight:400!important;}
-.cart-item .cart-item-price,.cart-item .cart-line-total{font-size:12px!important;line-height:1!important;font-weight:600!important;}
-.cart-back span{font-size:18px!important;}
+.cart-item .cart-item-main > small{font-size:8.5px!important;line-height:1!important;font-weight:400!important;}
+.cart-item .cart-line-total{font-size:12px!important;line-height:1!important;font-weight:600!important;}
+.cart-item .qty b{font-size:12px!important;line-height:1!important;font-weight:600!important;}
