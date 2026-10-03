@@ -3640,3 +3640,20 @@ button:focus-visible{
   outline:none !important;
   box-shadow:none !important;
 }
+
+
+/* ElectroIsla — eliminar también el resaltado azul táctil del navegador */
+button,
+a,
+input,
+select,
+textarea{
+  -webkit-tap-highlight-color: transparent !important;
+  tap-highlight-color: transparent !important;
+}
+
+button:focus,
+button:focus-visible,
+button:active{
+  outline: none !important;
+}
