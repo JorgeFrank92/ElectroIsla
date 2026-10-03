@@ -3333,3 +3333,18 @@ body.cart-open-lock{
 .cart-delivery-note-icon{color:#f58220!important;display:flex!important;align-items:center!important;justify-content:center!important;}
 .cart-delivery-note-icon svg{width:40px!important;height:32px!important;display:block!important;fill:none!important;stroke:#f58220!important;stroke-width:1.45!important;stroke-linecap:round!important;stroke-linejoin:round!important;}
 @media(max-width:700px){.cart-delivery-note-icon svg{width:36px!important;height:30px!important;stroke-width:1.4!important;}}
+
+
+/* v9.8.120 — reemplazar el camión anterior por la imagen de referencia del usuario */
+.cart-delivery-note-icon img{
+  width:40px!important;
+  height:32px!important;
+  display:block!important;
+  object-fit:contain!important;
+}
+@media(max-width:700px){
+  .cart-delivery-note-icon img{
+    width:36px!important;
+    height:30px!important;
+  }
+}
