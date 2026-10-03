@@ -3664,3 +3664,53 @@ body.cart-open-lock{
 
 /* v9.8.135 — nombre del producto con grosor 600 */
 .shop-product .product-info h3{font-weight:600!important;}
+
+/* v9.8.136 — unidad/categoría de medida: óvalo naranja ElectroIsla, suave */
+.shop-product .tag{
+  display:inline-block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  padding:3px 9px!important;
+  margin:0 0 7px 0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#f58220!important;
+  color:#fff!important;
+  font-size:13px!important;
+  line-height:1!important;
+  font-weight:400!important;
+  text-transform:none!important;
+}
+
+/* v9.8.137 — unidad de medida junto al precio, inspirada en la referencia */
+.shop-product .price small{
+  display:inline-block!important;
+  margin-left:5px!important;
+  padding:3px 8px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#fff0e6!important;
+  color:#ca6223!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-weight:500!important;
+  vertical-align:middle!important;
+  white-space:nowrap!important;
+}
+
+/* v9.8.138 — categoría del producto en "Tu pedido": mismo óvalo suave naranja de la referencia */
+@media(max-width:700px){
+  .cart-item .cart-item-category{
+    display:inline-block!important;
+    width:max-content!important;
+    max-width:100%!important;
+    padding:3px 8px!important;
+    border:0!important;
+    border-radius:999px!important;
+    background:#fff0e6!important;
+    color:#ca6223!important;
+    font-weight:400!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+}
