@@ -3214,10 +3214,10 @@ body.cart-open-lock{
 }
 
 
-/* v9.8.113 — aumentar 1px las letras de nombre, descripción, categoría y precio */
+/* v9.8.114 — aumentar 2px más las letras de nombre, descripción, categoría y precio */
 @media(max-width:700px){
-  .cart-item .cart-item-top > strong{font-size:12px!important;}
-  .cart-item .cart-item-description{font-size:9.5px!important;}
-  .cart-item .cart-item-category{font-size:10px!important;}
-  .cart-item .cart-item-price{font-size:13px!important;}
+  .cart-item .cart-item-top > strong{font-size:14px!important;}
+  .cart-item .cart-item-description{font-size:11.5px!important;}
+  .cart-item .cart-item-category{font-size:12px!important;}
+  .cart-item .cart-item-price{font-size:15px!important;}
 }
