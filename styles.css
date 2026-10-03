@@ -3565,3 +3565,19 @@ body.cart-open-lock{
     box-sizing:border-box!important;
   }
 }
+
+/* v9.8.131 — corrección real: alinear el texto de los productos a la derecha con 5px del borde */
+.shop-product .product-info{
+  text-align:right!important;
+  padding-right:5px!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+}
+@media(max-width:700px){
+  .shop-product .product-info{
+    text-align:right!important;
+    padding-right:5px!important;
+    width:100%!important;
+  }
+}
