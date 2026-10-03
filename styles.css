@@ -2883,3 +2883,18 @@ body.cart-open-lock{
     color:#074899!important;
   }
 }
+
+
+/* v9.8.96 — nuevo icono minimalista rojo para eliminar el producto; conserva removeFromCart() */
+@media(max-width:700px){
+  .cart-item .cart-item-bottom{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:12px!important;}
+  .cart-item .cart-remove-minimal{
+    width:22px!important;height:22px!important;
+    margin:0!important;padding:0!important;
+    border:0!important;background:transparent!important;
+    color:#d32f2f!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    cursor:pointer!important;box-shadow:none!important;
+  }
+  .cart-item .cart-remove-minimal svg{width:18px!important;height:18px!important;display:block!important;}
+}
