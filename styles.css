@@ -2871,3 +2871,15 @@ body.cart-open-lock{
     box-shadow:none!important;
   }
 }
+
+/* v9.8.94 — fondo azul claro de los círculos +/- igual al fondo de la tarjeta de totales */
+@media(max-width:700px){
+  .cart-item .qty > button,
+  .cart-item .qty > button:hover,
+  .cart-item .qty > button:active,
+  .cart-item .qty > button:focus{
+    border-color:#eaf3ff!important;
+    background:#eaf3ff!important;
+    color:#074899!important;
+  }
+}
