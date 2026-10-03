@@ -3202,3 +3202,13 @@ body.cart-open-lock{
     margin-left:0!important;
   }
 }
+
+/* v9.8.112 — bajar 3px nombre, descripción, categoría y precio */
+@media(max-width:700px){
+  .cart-item .cart-item-top,
+  .cart-item .cart-item-description,
+  .cart-item .cart-item-category,
+  .cart-item .cart-item-price{
+    transform:translateY(3px)!important;
+  }
+}
