@@ -3693,3 +3693,8 @@ button:active{
   background:#ffe7d6 !important;
   color:#f58220 !important;
 }
+
+
+/* ElectroIsla — corrección interacción botón Regresar */
+.cart-head .cart-back{position:relative!important;z-index:100!important;pointer-events:auto!important;cursor:pointer!important;}
+.cart-head .cart-back *{pointer-events:none!important;}
