@@ -3185,3 +3185,10 @@ body.cart-open-lock{
     box-sizing:border-box!important;
   }
 }
+
+/* v9.8.110 — mover ligeramente la foto a la izquierda dentro del rectángulo, dejando libre el texto */
+@media(max-width:700px){
+  .cart-item .cart-thumb-wrap{
+    transform:translateX(-8px)!important;
+  }
+}
