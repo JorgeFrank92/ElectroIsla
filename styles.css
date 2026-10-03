@@ -3497,3 +3497,13 @@ body.cart-open-lock{
   .shop-product .tag{font-size:13px!important;font-weight:400!important;}
   .shop-product .price{font-size:15px!important;font-weight:500!important;}
 }
+
+/* v9.8.127 — productos de la página principal: foto a la izquierda y textos a 4px */
+.shop-product{grid-template-columns:150px minmax(0,1fr)!important;gap:4px!important;}
+.shop-product .product-media{grid-column:1;grid-row:1;}
+.shop-product .product-info{grid-column:2;grid-row:1;text-align:left;min-width:0;}
+@media(max-width:700px){
+  .shop-product{grid-template-columns:128px minmax(0,1fr)!important;gap:4px!important;}
+  .shop-product .product-media{grid-column:1;grid-row:1;}
+  .shop-product .product-info{grid-column:2;grid-row:1;}
+}
