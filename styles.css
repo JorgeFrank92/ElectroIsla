@@ -3657,29 +3657,3 @@ button:focus-visible,
 button:active{
   outline: none !important;
 }
-
-/* ElectroIsla — efecto de rebote para "Ver mi pedido" */
-@keyframes electroisla-order-bounce{
-  0%,100%{transform:scale(1)}
-  20%{transform:scale(.94)}
-  45%{transform:scale(1.05)}
-  65%{transform:scale(.98)}
-  82%{transform:scale(1.02)}
-}
-.sticky-order-btn:active{
-  animation:electroisla-order-bounce .42s ease-out;
-  transform-origin:center;
-}
-
-/* ElectroIsla — efecto de rebote para el botón "Regresar" en Tu pedido */
-@keyframes electroisla-back-bounce{
-  0%,100%{transform:scale(1)}
-  20%{transform:scale(.94)}
-  45%{transform:scale(1.05)}
-  65%{transform:scale(.98)}
-  82%{transform:scale(1.02)}
-}
-.cart-back:active{
-  animation:electroisla-back-bounce .42s ease-out;
-  transform-origin:center;
-}
