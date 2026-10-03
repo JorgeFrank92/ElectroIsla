@@ -3149,3 +3149,14 @@ body.cart-open-lock{
 @media(max-width:700px){
   .cart-item{border-bottom:0!important;}
 }
+
+/* v9.8.107 — cada producto dentro de un rectángulo fino y ligeramente redondeado */
+@media(max-width:700px){
+  .cart-item{
+    border:1px solid #dfe5ec!important;
+    border-radius:8px!important;
+    margin:0 0 10px 0!important;
+    padding:15px 12px 19px 12px!important;
+    box-sizing:border-box!important;
+  }
+}
