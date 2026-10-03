@@ -3327,3 +3327,9 @@ body.cart-open-lock{
 /* v9.8.118 — camión de referencia, líneas finas naranja ElectroIsla */
 .cart-delivery-note-icon svg{width:40px!important;height:32px!important;stroke-width:1.6!important;}
 @media(max-width:700px){.cart-delivery-note-icon svg{width:36px!important;height:30px!important;stroke-width:1.55!important;}}
+
+
+/* v9.8.119 — camión de referencia exacto, naranja ElectroIsla y líneas finas */
+.cart-delivery-note-icon{color:#f58220!important;display:flex!important;align-items:center!important;justify-content:center!important;}
+.cart-delivery-note-icon svg{width:40px!important;height:32px!important;display:block!important;fill:none!important;stroke:#f58220!important;stroke-width:1.45!important;stroke-linecap:round!important;stroke-linejoin:round!important;}
+@media(max-width:700px){.cart-delivery-note-icon svg{width:36px!important;height:30px!important;stroke-width:1.4!important;}}
