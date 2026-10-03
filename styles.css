@@ -3022,3 +3022,10 @@ body.cart-open-lock{
     outline:none!important;
   }
 }
+
+/* v9.8.101 — icono de papelera más fino y limpio */
+@media(max-width:700px){
+  .cart-item .cart-remove-minimal svg path{
+    stroke-width:1.45!important;
+  }
+}
