@@ -3160,3 +3160,16 @@ body.cart-open-lock{
     box-sizing:border-box!important;
   }
 }
+
+/* v9.8.108 — tarjetas más anchas y compactas verticalmente */
+@media(max-width:700px){
+  .cart-item{
+    margin-left:-23px!important;
+    margin-right:-23px!important;
+    margin-top:0!important;
+    margin-bottom:8px!important;
+    padding-top:10px!important;
+    padding-bottom:13px!important;
+    border-radius:7px!important;
+  }
+}
