@@ -3683,3 +3683,15 @@ button:active{
   animation:electroisla-back-bounce .42s ease-out;
   transform-origin:center;
 }
+
+/* ElectroIsla — categoría/unidad junto al precio: solo estilo visual */
+.shop-product .price small{
+  background:#fff1e8 !important;
+  color:#f58220 !important;
+  border-radius:999px !important;
+  box-shadow:none !important;
+  padding:3px 8px !important;
+  display:inline-block !important;
+  line-height:1 !important;
+  vertical-align:middle !important;
+}
