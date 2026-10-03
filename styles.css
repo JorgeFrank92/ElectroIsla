@@ -3536,3 +3536,22 @@ body.cart-open-lock{
     grid-row:1!important;
   }
 }
+
+/* v9.8.129 — página principal: textos pegados al margen izquierdo de la foto, con 4px */
+.shop-product .product-info{
+  text-align:right!important;
+  padding:0!important;
+  margin:0!important;
+  justify-self:stretch!important;
+}
+.shop-product{
+  column-gap:4px!important;
+}
+@media(max-width:700px){
+  .shop-product .product-info{
+    text-align:right!important;
+    padding:0!important;
+    margin:0!important;
+  }
+  .shop-product{column-gap:4px!important;}
+}
