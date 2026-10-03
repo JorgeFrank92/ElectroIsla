@@ -3088,3 +3088,46 @@ body.cart-open-lock{
     outline:none!important;
   }
 }
+
+/* v9.8.103 — controles compactos: 12px y justo a la izquierda de la papelera */
+@media(max-width:700px){
+  .cart-item .cart-item-bottom{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:6px!important;
+  }
+  .cart-item .qty{
+    width:100px!important;
+    height:30px!important;
+    grid-template-columns:30px 1fr 30px!important;
+    border-radius:16px!important;
+    border:1px solid #dbe8f8!important;
+    background:#fff!important;
+    overflow:hidden!important;
+  }
+  .cart-item .qty button{
+    width:30px!important;
+    height:28px!important;
+    min-width:30px!important;
+    min-height:28px!important;
+    border-radius:15px!important;
+    background:#f4f8ff!important;
+    color:#074899!important;
+    font-size:12px!important;
+    font-weight:500!important;
+    line-height:28px!important;
+  }
+  .cart-item .qty b{
+    font-size:12px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    color:#074899!important;
+  }
+  .cart-item .cart-remove-minimal{
+    flex:0 0 34px!important;
+    width:34px!important;
+    height:34px!important;
+    margin:0!important;
+  }
+}
