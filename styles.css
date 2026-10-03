@@ -3422,3 +3422,39 @@ body.cart-open-lock{
   }
   .cart-previous-arrow{font-size:25px}
 }
+
+
+/* v9.8.123 — flecha de Regresar centrada, naranja ElectroIsla y de trazo fino */
+.cart-head .cart-back-icon{
+  color:var(--logo-orange)!important;
+  background:#edf3fb!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+.cart-head .cart-back-icon svg{
+  width:26px!important;
+  height:26px!important;
+  display:block!important;
+  margin:0!important;
+}
+.cart-head .cart-back-icon svg path{
+  fill:none!important;
+  stroke:var(--logo-orange)!important;
+  stroke-width:2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+@media(max-width:700px){
+  .cart-head .cart-back-icon{
+    display:grid!important;
+    place-items:center!important;
+    padding:0!important;
+  }
+  .cart-head .cart-back-icon svg{
+    width:24px!important;
+    height:24px!important;
+    margin:0!important;
+  }
+}
