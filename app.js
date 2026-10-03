@@ -374,7 +374,7 @@ renderCategoryTabs();
 document.getElementById("shopSearchBtn")?.addEventListener("click",()=>{const w=document.getElementById("searchWrap");w.classList.toggle("hidden");if(!w.classList.contains("hidden"))document.getElementById("productSearch")?.focus()});
 document.getElementById("shopMenuBtn")?.addEventListener("click",openCategoryMenu);
 document.getElementById("productSearch")?.addEventListener("input",()=>render(currentFilter));
-document.getElementById("cartBtn").onclick=openCart;document.getElementById("closeCart")?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();closeCart()});document.getElementById("cartOverlay").onclick=closeCart;document.getElementById("checkoutBtn").onclick=openCheckout;document.getElementById("closeModal").onclick=()=>document.getElementById("checkoutModal").classList.add("hidden");
+document.getElementById("cartBtn")?.addEventListener("click",openCart);document.getElementById("closeCart")?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();closeCart()});document.getElementById("cartOverlay")?.addEventListener("click",closeCart);document.getElementById("checkoutBtn")?.addEventListener("click",openCheckout);document.getElementById("closeModal")?.addEventListener("click",()=>document.getElementById("checkoutModal")?.classList.add("hidden"));
 function showThankYou(){
  const modal=document.getElementById("thankYouModal");
  if(!modal)return;
